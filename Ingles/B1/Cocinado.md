@@ -1,4 +1,4 @@
-##Métodos de Cocción (Cooking Methods)
+## Métodos de Cocción (Cooking Methods)
 
 Baked - Horneado (beɪkt)
 
@@ -12,7 +12,7 @@ Roast - Asado (roʊst)
 
 Steamed - Al vapor (stiːmd)
 
-##Phrasal Verbs Relacionados con la Comida (Food-Related Phrasal Verbs)
+## Phrasal Verbs Relacionados con la Comida (Food-Related Phrasal Verbs)
 
 Eat out - Comer fuera (iːt aʊt)
 
