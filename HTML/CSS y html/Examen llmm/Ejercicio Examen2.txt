@@ -1,0 +1,12 @@
+Ejercicio 2
+<listaproductos xsi:noNamespaceSchemaLocation="tu_esquema.xsd">
+    <articulo>
+        <codigo>AB12</codigo>
+        <descripcion autor="Autor 1">Descripción del artículo 1</descripcion>
+    </articulo>
+    <articulo>
+        <codigo>CD34</codigo>
+        <descripcion autor="Autor 2">Descripción del artículo 2</descripcion>
+    </articulo>
+*Aquí se puede poner mas de un articulo*
+</listaproductos>

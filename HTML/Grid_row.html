@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Grid_row</title>
+    <style>
+        body {
+            background-color: antiquewhite;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #b1{
+            /*grid column nos permite desde que línea de
+            las columnas hasta que otra llegará el
+            seleccionado también se puede usar span*/
+            grid-row: 5/4;
+            background-color: dodgerblue;
+        }
+        #b2{
+            /*grid column nos permite desde que línea de
+            las columnas hasta que otra llegará el
+            seleccionado también se puede usar span*/
+            grid-row: 1/ span 3;
+            background-color:crimson
+        }
+        #b4{
+            /*grid column nos permite desde que línea de
+            las columnas hasta que otra llegará el 
+            seleccionado también se puede usar span*/
+            grid-row: 4/2;
+            background-color:mediumorchid
+        }
+        .grid-layout {
+            display: grid;
+            /*grid template columns nos permiten decidir
+            cuantas queremos y como de grandes ya sean por
+            px, porcentajes, etc*/
+            grid-template-columns: auto auto auto ;
+            /*grid template row nos permiten decidir
+            cuantas queremos y como de grandes ya sean por
+            px, porcentajes, etc*/
+            grid-template-rows: auto auto auto auto ;
+            
+            width: 80%;
+            margin:  0 auto;
+            padding: 20px;
+            background-color: lightgreen;
+            border: 1px solid;
+        }
+
+        .box {
+            border: 4px solid black;
+            background-color: lightgray;
+            margin: 10px;
+            text-align: center;
+            line-height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-layout">
+        <div id="b1" class="box">box 1</div>
+        <div id="b2" class="box">box 2</div>
+        <div class="box">box 3</div>
+        <div id="b4" class="box">box 4</div>
+        <div class="box">box 5</div>
+        <div class="box">box 6</div>
+        <div class="box">box 7</div>
+        <div class="box">box 8</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+Ejercicio4
+<!ELEMENT referencia (libro, editorial?, encuadernacion, ISBN?)>
+<!ATTLIST referencia
+          idioma (español | ingles) #REQUIRED>
+<!ELEMENT libro (#PCDATA)>
+<!ELEMENT editorial (#PCDATA)>
+<!ELEMENT encuadernacion (#PCDATA)>
+<!ELEMENT ISBN (#PCDATA)>

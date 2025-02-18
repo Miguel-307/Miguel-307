@@ -1,0 +1,26 @@
+body {
+    margin: 50px;
+    background-image: url('valorant-1200-1.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+a{
+color:white;  
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color:rgb(255, 255, 255);
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border: 2px solid #ddd;
+}
+th {
+    background-color: #000000;
+}
+form{
+    color:rgb(255, 255, 255);
+}

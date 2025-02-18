@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Overflow</title>
+<style>
+body{
+    background-color: white;
+    text-align: center;
+    margin: 0;
+}
+#caja1{
+    background-color: gray;
+    width: 1000px;
+    height: 700px;
+    border: 1px solid;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin-left: 500px
+    
+
+}
+#caja2{
+  width:200px;
+  height: 165px;
+  background-color:green;
+  overflow: visible;  
+  margin-left: 10px; 
+  
+}
+#caja3{
+  width:200px;
+  height: 130px;
+  background-color:red;
+  overflow: hidden; 
+  margin-left: 500px;
+}
+#caja4{
+  width:200px;
+  height: 130px;
+  background-color:yellow;
+  overflow: scroll;
+  margin-left: 10px;
+
+}
+
+</style>
+</head>
+    <div id="caja1">
+    <div id=caja2>
+    <p>En esta caja de color verde, a la propiedad overflow, le hemos puesto el valor visible, 
+        de forma que todo aquello que salga fuera de la caja será visto. No pasa lo mismo con la caja roja, puesto que a la propiedad overflow le hemos puesto el valor oculto y todo lo que salga de la caja no se verá.</p>
+    </div>
+    <div id=caja3>
+      <p>Parte del texto de esta caja no puede leerse, puesto que hemos puesto a la propiedad overflow el valor oculto, de forma que todo aquello que quede fuera de la caja estará oculto y no podrá verse completamente </p>
+    </div>
+    <div id=caja4>
+      <p>En esta caja de color amarillo, a la propiedad overflow le hemos puesto el valor auto, de forma que saldrá una barra de desplazamiento cuando el contenido de la caja no quepa en la
+        En esta caja de color amarillo, a la propiedad overflow le hemos puesto el valor auto, de forma que saldrá una barra de desplazamiento cuando el contenido de la caja no quepa en la </p>
+    </div>
+  </div> 
+</body>
+</html>

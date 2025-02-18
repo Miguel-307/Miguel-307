@@ -1,0 +1,213 @@
+*{
+    margin: 0 auto;
+}
+body{
+    background: radial-gradient(rgb(255, 192, 203),rgb(255, 255, 255));
+}
+.cuerpo{
+    background-color: rgba(255, 255, 255, 0.548);
+    width: 80%;
+    box-shadow: 0px 0px 5px black;
+    height: auto;
+}
+
+.cuerpo2{
+    background-color: rgba(17, 218, 181, 0.548);
+    width: 80%;
+    box-shadow: 0px 0px 5px black;
+    height: ;
+}
+#pag2{
+    background-image: url(./images/chirigota.jpeg);
+    background-repeat:round;
+}
+.menu{
+    display: flex;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+}
+.menu a{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+    flex: 1;
+    padding: 10px;
+    background-color: gray;
+    box-shadow: 0px 0px 1px black;
+}
+.menu a:hover{
+    background-color: black;
+    box-shadow: 0px 0px 2px yellow;
+}
+.menu a:visited{
+    color: yellow;
+}
+aside{
+    height: 100%;
+}
+section{
+    border: 1px rgba(128, 128, 128, 0.308) solid;
+    height: max-content;
+    margin: 20px;
+}
+
+section p{
+    margin-left: 20px;
+    width: 80%;
+    margin-bottom: 20px;
+}
+section p::first-letter{
+    font-weight: bold;
+    font-size: 2em;
+}
+h1{
+    font-weight: bold;
+    color: darkcyan;
+    text-align: center;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+   
+}
+h3{
+    margin: 10px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+form{
+    margin: auto;
+    margin-top: 20px;
+    width: 300px;
+    border-radius: 2%;
+    padding: 2%;
+    background: pink;
+}
+#regist{
+    background-color: #009ADC;
+    color: #ffffff;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+#nombre, #apellidos, #usuario, #contrasena, #fechaNacimiento{
+    width: 97%;
+    padding: 3px;
+    margin-top: 8px;
+}
+#regist:active{
+    background-color: #770077;
+}
+form input:required{
+    border: red dotted 2px;
+}
+#tabla1 th,td{
+    border:dashed 1px rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8em;
+    padding: 10px;
+    text-align: center;
+}
+#tabla1 th{
+    background-color: #00a183;
+    color: white;
+    font-style: italic;
+    font-size: 0.8em;
+}
+#tabla1 td:nth-child(even){
+    font-style: italic;
+    background-color: rgb(145, 213, 243);
+}
+#tabla1 td:nth-child(odd){
+    font-weight: bold;
+    background-color: rgb(5, 103, 110);
+}
+#tabla1 tr:nth-child(1) td:nth-child(2){
+    color:red;
+    font-weight: bold;
+}
+#tabla1{
+    margin-top: 20px;
+    border-collapse: collapse;
+    border-radius: 10%;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Crea tres columnas de igual ancho */
+    gap: 10px; /* Espacio entre las imágenes */
+  }
+  
+  .image {
+    width: 100%; /* Para asegurar que la imagen ocupe todo el espacio del contenedor */
+  }
+  
+  .image img {
+    width: 100%; /* Para que la imagen ocupe todo el ancho del contenedor */
+    height: 600px; /* Para mantener la proporción de la imagen */
+  }
+
+  .principal{
+    align-items: center;
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente dentro del contenedor */
+    align-items: center; /* Centra la imagen verticalmente dentro del contenedor */
+  }
+
+
+  .grid-container2{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Crea dos columnas de igual ancho */
+    gap: 20px; /* Espacio entre los videos */
+  }
+  .contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .trozo {
+    padding: 20px;
+    border: 2px solid black;
+    margin: 10px;
+    text-align: center;
+  }
+  
+  .horizontal {
+    flex-basis: 100%; /* Ocupa toda la anchura disponible */
+  }
+  
+  .vertical {
+    flex-basis: 100px; /* Anchura fija */
+  }
+  
+  .diagonal {
+    flex-basis: 50%; /* Ocupa la mitad de la anchura disponible */
+    transform: rotate(-45deg); /* Rotación de 45 grados */
+  }
+  #principal {
+    display: flex;
+
+    box-sizing: border-box;
+    height: 100vh;
+    flex-direction: column;
+    flex-wrap: wrap;
+    column-gap: 10px;
+}
+.box {
+    font-size: 40px;
+    text-align: center;
+    text-shadow: 4px 4px 0 rgba(0, 0, 0, .1);
+    color: azure;
+    
+}
+#abs1{background-color: brown;height:25%;}
+#abs2{background-color: aqua;height:25%}
+#abs3{background-color: pink;height: 25%;}
+#abs4{background-color: darkgoldenrod;height: 25%;overflow: scroll; overflow: hidden}
+#abs5{background-color: palegoldenrod;height: 25%;}
+#abs6{background-color: greenyellow;height: 75%;}
+#abs7{background-color: slateblue;height: 50%;}
+#abs8{background-color: rgb(42, 165, 73);height: 50%;}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo Flexbox wrap</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .contenedor {
+            /*El reverse en cualquier propiedad flex
+            organiza las cajas alrevés */
+            display: flex;
+            /*El wrap hace que cuando no quepa un box
+            se desplaze hacía abajo, así pudiendo
+            mantener un tamaño en vez de mantenerlo
+            de forma que quepa */
+            flex-wrap: wrap;
+            background-color: rgb(66, 7, 98);
+        }
+
+        .columna {
+            padding: 20px;
+            text-align: center;
+            width: 150px;
+            font-size: 30px;
+            margin: 15px;
+        }
+
+        .columna1 {
+            background-color: #3498db;
+        color: #fff;
+        }
+
+        .columna2 {
+            background-color: #2ecc71;
+            color: #fff;
+        }
+
+        .columna3 {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+
+        .columna4 {
+            background-color: #f39c12;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="columna columna1">Columna 1</div>
+        <div class="columna columna2">Columna 2</div>
+        <div class="columna columna3">Columna 3</div>
+        <div class="columna columna4">Columna 4</div>
+        <div class="columna columna1">Columna 5</div>
+        <div class="columna columna2">Columna 6</div>
+        <div class="columna columna3">Columna 7</div>
+        <div class="columna columna4">Columna 8</div>
+    </div>
+</body>
+</html>
