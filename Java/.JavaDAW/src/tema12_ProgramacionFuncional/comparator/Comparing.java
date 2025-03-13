@@ -17,6 +17,7 @@ public class Comparing {
 		list.add(new Vehicle("5930POI", 2, "negro"));
 		list.sort(Comparator.comparing(Vehicle::getColour));
 		list.forEach(System.out::println);
+		
 
 	}
 

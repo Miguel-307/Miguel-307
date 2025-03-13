@@ -4,7 +4,7 @@ import java.util.function.BinaryOperator;
 
 public class ShowBinaryOperator{
 
-	public Integer calculate(Integer value1,Integer value2,BinaryOperator<Integer> binaryOperation) {
+	public Integer calculate(int value1,int value2,BinaryOperator<Integer> binaryOperation) {
 		return binaryOperation.apply(value1,value2);
 	}
 
