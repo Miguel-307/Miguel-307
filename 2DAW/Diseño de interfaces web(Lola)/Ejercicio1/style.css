@@ -1,0 +1,40 @@
+
+body {
+    display: flex;
+    justify-content: center; 
+    margin: 0;
+    padding: 20px;
+     text-align: center;   
+}
+
+
+.tarjeta {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    max-width: 500px;
+    width: 100%;
+    padding: 20px;
+}
+
+
+h1 {
+    background-color: red;
+    color: white;
+    padding: 10px;        
+    border-radius: 8px;
+    margin-bottom: 20px;  
+}
+
+
+h2 {
+    background-color: blue;
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+    margin-top: 20px;   
+    
+}
+
+    
+

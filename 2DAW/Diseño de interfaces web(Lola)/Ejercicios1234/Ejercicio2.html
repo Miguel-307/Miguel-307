@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ejercicio 2 (anidado)</title>
+<style>
+  html {
+     font-size: 20px; }   
+  body { 
+    font-size: 30px;
+     margin: 20px; } 
+
+  .box { padding: 10px; color: white; margin: 10px 0; }
+
+  .box.level1 {
+     background:#e67e22; 
+    font-size: 2em; } 
+  .box.level2 { 
+    background:#2980b9; 
+    font-size: 2em; } 
+  .box.level3 { 
+    background:#16a085; 
+    font-size: 2em; } 
+  .box.level4 { 
+    background:#c0392b; 
+    font-size: 2rem; } 
+
+  .box { border-radius:6px; }
+</style>
+</head>
+<body>
+  <div class="box level1">
+    Nombre 1 (padre)
+    <div class="box level2">
+      Nombre 2 (hijo)
+      <div class="box level3">
+        Nombre 3 (nieto)
+        <div class="box level4">
+          Nombre 4 (bisnieto - usa 2rem)
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
