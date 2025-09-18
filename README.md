@@ -27,9 +27,9 @@ Si deseas hablar sobre oportunidades, compartir conocimientos o simplemente cone
 
 ---
 ### Paginas web Hechas por mi
-[Airsat](Airsat.es)
+[Airsat](http://airsat.es/)
 
-[thebraveryrestaurant](thebraveryrestaurant.es)
+[thebraveryrestaurant](http://thebraveryrestaurant.es/)
 
 #thebraveryrestaurant.es .
 
