@@ -26,5 +26,7 @@ Si deseas hablar sobre oportunidades, compartir conocimientos o simplemente cone
 ![](https://github-contributor-stats.vercel.app/api?username=Miguel-307&limit=5&theme=dark&combine_all_yearly_contributions=true)
 
 ---
-
+### Paginas web Hevhas por mi
+Airsat.es 
+thebraveryrestaurant.es 
 "La programación es como el arte: siempre puedes mejorar y siempre hay algo nuevo por aprender." - Miguel.
