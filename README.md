@@ -27,6 +27,7 @@ Si deseas hablar sobre oportunidades, compartir conocimientos o simplemente cone
 
 ---
 ### Paginas web Hevhas por mi
-Airsat.es 
-thebraveryrestaurant.es 
+#Airsat.es 
+#thebraveryrestaurant.es 
+---
 "La programación es como el arte: siempre puedes mejorar y siempre hay algo nuevo por aprender." - Miguel.
