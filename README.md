@@ -27,7 +27,9 @@ Si deseas hablar sobre oportunidades, compartir conocimientos o simplemente cone
 
 ---
 ### Paginas web Hechas por mi
-#Airsat.es .
+[Airsat](Airsat.es)
+[thebraveryrestaurant](thebraveryrestaurant.es)
+
 #thebraveryrestaurant.es .
 
 "La programación es como el arte: siempre puedes mejorar y siempre hay algo nuevo por aprender." - Miguel.
