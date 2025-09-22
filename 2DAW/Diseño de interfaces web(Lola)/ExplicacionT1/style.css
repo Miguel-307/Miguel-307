@@ -1,0 +1,41 @@
+div.articulo {
+  margin: 2rem;
+  padding: 1rem;
+  background-color: #EEE;
+}
+div.articulo h2 {
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid #CCC;
+}
+div.articulo p {
+  margin-bottom: .5rem;
+  text-indent: 2rem;
+}
+span.grande {
+  font-size: 2rem;
+}
+/* Tamaño de letra el doble de grande del tamaño heredado del padre */
+   /*  h1 {
+  font-size: 200%;}
+
+*/
+
+/*La gran ventaja de la función calc() es que nos 
+permite mezclar distintos tipos de unidades para realizar cálculos complejos. Veamos algunos ejemplos:
+div {
+   font-size: calc(3em + 5px);
+   padding: calc(1vmax + -1vmin);
+   transform: rotate(calc(1turn - 32deg));
+   background: hsl(180, calc(2*25%), 65%);
+   line-height: calc(8/3);
+   width: calc(23vmin - 2*3rem);
+}
+   */
+
+
+
+/*colores 
+  color: black; 
+  color: currentColor:
+   que hace referencia al color actual del elemento, ya sea porque haya 
+   sido establecido explícitamente o porque haya sido heredado de su padre.

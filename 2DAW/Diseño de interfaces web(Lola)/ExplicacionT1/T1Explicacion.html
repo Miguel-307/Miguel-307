@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--Si pones ! te sale un html por defecto-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Define una descripción de la página web y autor-->
+    <meta name="Miguel" content="descripcion">
+    <title>Document</title><!--Este es el titulo de la pagina web-->
+    <!-- Refresca el documento cada 30 segundos -->
+<meta http-equiv="refresh" content="30" />
+<!-- Activa los modos de compatibilidad de Internet Explorer -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- Establece que la ventana de renderizado del navegador (viewport) tenga
+     el ancho del dispositivo en el que se ejecuta y no se haga zoom -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!--define la relación entre nuestro documento y un recurso externo a él-->
+<link rel="stylesheet" href="style.css" />
+<!--para enlazar-->
+<script src="js/codigo.js"></script>
+</head>
+<body>
+    <!-- para asignar metainformación-->
+    <base href="http://www.w3schools.com/images/" target="_blank" />
+    <p>Este es un párrafo con <a>un enlace</a></p>
+
+<!--Para insertar código JavaScript,tanto dentro del <body> como dentro del <head>-->
+    <script>
+  alert("Un mensaje de prueba");
+</script>
+
+<script>
+  document.write("Hola Mundo!")
+</script>
+<!--Cuando la pagina web no soporta javascript-->
+<noscript>
+  <p>Bienvenido a Mi Sitio</p>
+  <p>La página que estás viendo requiere para su funcionamiento el uso de JavaScript.
+Si lo has deshabilitado intencionadamente, por favor vuelve a activarlo.</p>
+</noscript>
+<!--utilizacion de los div-->
+<div class="articulo">
+  <h2>Título del artículo</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum reprehenderit reiciendis illum sapiente aspernatur facere aut ea eum delectus nobis pariatur nisi, sit dicta at consequuntur laudantium modi obcaecati quia!. Lorem ipsum dolor sit amet, consectetur adipisicing elit. <span class="grande">Quisquam</span> tempore ipsum iure distinctio voluptatum perspiciatis, ipsam adipisci repellendus eveniet magnam voluptas odio sint, asperiores vel, dolorum est quibusdam officia explicabo.</p>
+  <p>Numquam iusto, quaerat suscipit vel voluptatibus quam molestias, quod officiis debitis dolores ipsa minima delectus voluptates, at molestiae nobis laboriosam eos iste sequi. Odio expedita neque officiis vitae? Laudantium, nemo.</p>
+</div>
+
+</body>
+</html>
