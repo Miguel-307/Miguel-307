@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actividad – Evaluar notas</title>
+</head>
+<body>
+    <h1>Evaluar notas</h1>
+    <p>Abre la consola del navegador (F12) para ver el resultado.</p>
+
+    <script>
+      
+        let lista = prompt("Introduce las 3 notas separadas por punto y coma (;):");  
+        let valores = lista.split(";");
+        let n1 = parseFloat(valores[0]);
+        let n2 = parseFloat(valores[1]);
+        let n3 = parseFloat(valores[2]);
+        let promedio = (n1 + n2 + n3) / 3;
+        let resultado = "";
+        if (promedio >= 5) {
+            resultado = "aprobado";
+        } else {
+            resultado = "suspenso";
+        }
+        console.log(
+            `%cEl alumno tiene una media de ${promedio.toFixed(2)} y está ${resultado}.`
+        );
+    </script>
+</body>
+</html>

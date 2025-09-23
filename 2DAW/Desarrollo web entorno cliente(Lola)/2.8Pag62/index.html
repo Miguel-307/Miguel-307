@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actividad 2.8 – Estructura if</title>
+</head>
+<body>
+    <h1>Clasificación por edad</h1>
+    <p>Abre la consola del navegador (F12) para ver el resultado.</p>
+
+    <script>
+
+        let nombre = prompt("Introduce tu nombre:");
+        let edad = parseInt(prompt("Introduce tu edad:"), 10);
+
+        let franja = "";
+
+  
+        if (edad <= 12) {
+            franja = "Niño";
+        } else if (edad >= 13 && edad <= 17) {
+            franja = "Adolescente";
+        } else if (edad >= 18 && edad <= 64) {
+            franja = "Trabajador";
+        } else if (edad >= 65) {
+            franja = "Jubilado";
+        }
+
+        
+        console.log(
+            `%c${nombre} tiene ${edad} años y por tanto es ${franja}.`,
+            
+        );
+    </script>
+</body>
+</html>
