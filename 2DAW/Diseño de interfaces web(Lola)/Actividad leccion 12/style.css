@@ -1,0 +1,122 @@
+/* ===== ESTILOS GENERALES ===== */
+body {
+    background-color: #CCCCCC;
+    width: 90vw;                  /* 90% del viewport */
+    min-width: 300px;
+    border: 1px solid #FFFFFF;
+    font-family: "Geneva, Arial, Helvetica, sans-serif";
+    margin: 0 auto;   
+	font-weight: bold;            /* Centrar el body */
+}
+
+/* ===== HEADER PRINCIPAL ===== */
+body > header {
+    background-color: #7DA2A9;
+    width: 90vw;
+    min-width: 300px;
+    padding-top: 20px;            /* Relleno superior */
+    text-align: center;
+}
+
+/* Quitar márgenes de títulos por defecto */
+body > header h1,
+body > header h2,
+body > header h3 {
+    margin: 0;
+}
+
+/* h1 tamaño proporcional al ancho del viewport */
+body > header h1 {
+    font-size: 5vw;
+}
+
+/* h2 con relleno */
+body > header h2 {
+    padding: 10px;
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.container {
+    display: flex;                /* Nav – Section – Aside en fila */
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+	background-color: white;
+}
+
+/* NAV */
+nav {
+    width: 25%;
+    box-sizing: border-box;
+    padding: 10px;
+	color:#7DA2A9;
+}
+
+nav h3 {
+    margin: 15px;
+	text-align: center;
+}
+
+nav a {
+    display: block;
+    margin: 30px 0;
+    text-decoration: none;
+    color:#7DA2A9;
+}
+
+
+section {
+    width: 50%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+
+article {
+    margin: 10px;
+    padding: 10px;
+    
+    border-radius: 10px;
+    background-color: #f7f7f7;
+}
+
+article > header {
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #7DA2A9;
+    color: #fff;
+    text-align: center;
+}
+
+article > footer {
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #7DA2A9;
+    color: #fff;
+    text-align: center;
+}
+
+
+aside {
+    width: 25%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+aside h3,
+aside p {
+    margin: 15px;
+}
+aside h3{
+	color:#7DA2A9;
+	text-align: center;
+}
+
+.container > footer {
+    width: 100%;
+    padding: 15px;
+    background-color: #7DA2A9;
+    color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
