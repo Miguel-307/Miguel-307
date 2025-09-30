@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mapa de DNI y Nombres</title>
+</head>
+<body>
+  <h1>Mapa de Personas</h1>
+  <pre id="salida"></pre> 
+
+  <script>
+   
+    const personas = new Map();
+
+   
+    personas.set("12345678A", "Ana");
+    personas.set("23456789B", "Luis");
+    personas.set("34567890C", "María");
+    personas.set("45678901D", "Pedro");
+    personas.set("56789012E", "Lucía");
+    personas.set("67890123F", "Carlos");
+    personas.set("78901234G", "Marta");
+    personas.set("89012345H", "David");
+    personas.set("90123456J", "Elena");
+    personas.set("01234567K", "Pablo");
+
+
+    function mostrarPersonas() {
+      let texto = "";
+      personas.forEach((nombre, dni) => {
+        texto += `DNI: ${dni} - Nombre: ${nombre}\n`;
+      });
+      document.getElementById("salida").textContent = texto;
+    }
+
+    
+    mostrarPersonas();
+
+
+    const terceraClave = Array.from(personas.keys())[2];
+    personas.set(terceraClave, "María Modificada");
+
+
+    setTimeout(() => { 
+      document.getElementById("salida").textContent += 
+        "\n--- Después de la modificación ---\n";
+      mostrarPersonas();
+    }, 2000);
+  </script>
+</body>
+</html>

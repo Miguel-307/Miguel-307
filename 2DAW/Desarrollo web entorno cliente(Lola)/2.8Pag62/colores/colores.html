@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Array de Colores</title>
+</head>
+<body>
+<h1>Colores disponibles</h1>
+<div id="lista"></div>
+
+<script>
+
+  const colores = [
+    "E Naranja: #F39C12",
+    "Lima: #C0F312",
+    "M Turquesa: #12F3E5",
+    "m Rosa: #F312AF",
+    "M Rojo: #F31212"
+  ];
+
+
+  const contenedor = document.getElementById("lista");
+
+  for (let i = 0; i < colores.length; i++) {
+    const p = document.createElement("p");
+    p.textContent = colores[i];
+    contenedor.appendChild(p);
+  }
+</script>
+
+</body>
+</html>

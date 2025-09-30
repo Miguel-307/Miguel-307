@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Números pares de un array</title>
+</head>
+<body>
+<h1>Números pares del array</h1>
+<div id="resultado"></div>
+
+<script>
+  const MAX = 100;               
+  const numeros = [];            
+
+ 
+  for (let i = 0; i < 100; i++) {
+    numeros.push(Math.floor(Math.random() * (MAX + 1)));
+  }
+
+  const pares = numeros.filter(num => num % 2 === 0);
+
+
+  const contenedor = document.getElementById("resultado");
+  const lista = document.createElement("ul");
+
+  pares.forEach(num => {
+    const li = document.createElement("li");
+    li.textContent = num;
+    lista.appendChild(li);
+  });
+
+  contenedor.appendChild(lista);
+</script>
+
+</body>
+</html>
