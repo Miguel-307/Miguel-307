@@ -1,0 +1,36 @@
+    * {
+      box-sizing: border-box;
+    }
+        body {
+      width: 80%;
+      margin: auto;
+          text-align: left;
+    padding : 20px;
+    }
+
+
+.contenedor{
+    border:1px solid #000;
+    width:80%;
+      padding: 20px;
+}
+.cabezera{
+    border-radius:1em solid #000;
+}
+.buscaador{}
+.logo{
+width: 20%;
+}
+.buscador{
+width: 80%;
+}
+.clear{}
+.menu{}
+.menu_principal{}
+.lateral{}
+.noticias{}
+.publicidad{}
+.contenido{}
+.articulo{}
+.secundario{}
+.pie{}

@@ -1,0 +1,50 @@
+
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      width: 80%;
+      margin: auto;
+          text-align: center;
+    padding : 20px;
+    }
+
+    header, footer {
+      border: 1px solid black;
+      padding: 20px;
+  
+    }
+    nav, main, aside {
+      min-height: 300px;
+
+    }
+    nav {
+      float: left;
+      width: 20%;
+      border: 1px solid blue;
+      padding: 20px;
+        border-top: 1px solid orange;
+    }
+
+    main {
+      float: left;
+      width: 60%;
+      border: 1px solid green;
+      padding: 20px;
+        border-top: 1px solid orange;
+    }
+
+    aside {
+      float: left;
+      width: 20%;
+      border: 1px solid blue;
+      padding: 20px;
+        border-top: 2px solid orange;
+      
+    }
+
+    footer {
+      clear: both;
+      border: 1px solid black;
+      padding: 20px;
+    }
