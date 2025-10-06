@@ -1,0 +1,47 @@
+/* Fondo general */
+body {
+  background-color: #3c3434; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Contenedor principal */
+div {
+  background-color: white;
+  padding: 40px; 
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cajas individuales */
+p {
+  background-color: gray;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 20px;
+  padding: 30px 40px; 
+  margin: 0 2px; 
+}
+
+/* Colores de texto */
+p:nth-child(1) {
+  color: #f5b5b5; 
+}
+
+p:nth-child(2) {
+  color: #a9d8f5; 
+}
+
+p:nth-child(3) {
+  color: #f2a3b8; 
+}
+
+p:nth-child(4) {
+  color: #8df58d; 
+}
