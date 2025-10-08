@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h1>Página de tareas 📚</h1>
+        <button id="changeDecisionBtn" style="display: none;">⚙️ Configurar Cookies</button>
+    </nav>
+    <div class="container">
+        <form id="task-form" class="task-input">
+            <input type="text" id="taskInput" placeholder="Escribe tu tarea..." disabled>
+            <button id="addTaskBtn" disabled>➕ Agregar</button>
+        </form>
+        
+        <ul id="taskList" class="task-list"></ul>
+
+        <div class="cookie-notice" id="cookieNotice">
+            <div class="cookie-content">
+                <h3>🍪 Uso de Cookies</h3>
+                <p>Utilizamos cookies para almacenar tus tareas localmente. ¿Aceptas su uso?</p>
+            </div>
+            <div class="cookie-buttons">
+                <button id="acceptCookiesBtn">Aceptar</button>
+                <button id="rejectCookiesBtn">Rechazar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+#ejercicio1{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+    #ejercicio1{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    /* Estilos para la tabla */
+    #tablaDatos {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+    #tablaDatos thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    #tablaDatos th,
+    #tablaDatos td {
+        padding: 12px 15px;
+    }
+
+    #tablaDatos tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+    #tablaDatos tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+
+    #tablaDatos tbody tr:last-of-type {
+        border-bottom: 2px solid #009879;
+    }
+
+    #tablaDatos tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+    #productosFiltrados,
+    #productosPaginaMostrar {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    #productosFiltrados div,
+    #productosPaginaMostrar div {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+    }
+
+    #productosFiltrados div:hover,
+    #productosPaginaMostrar div:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #productosFiltrados p,
+    #productosPaginaMostrar p {
+        margin: 0.5rem 0;
+        padding: 0.25rem 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    /* Estilos para los botones de paginación */
+    #ejercicio5 {
+        text-align: center;
+        padding: 1rem;
+    }
+
+    #before,
+    #after {
+        background-color: #009879;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin: 0.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    #before:hover,
+    #after:hover {
+        background-color: #007c63;
+    }
+
+    /* Estilos para el buscador */
+    #ejercicio4 form {
+        margin: 1rem;
+        text-align: center;
+    }
+
+    #busqueda {
+        width: 100%;
+        max-width: 400px;
+        padding: 0.5rem;
+        border: 2px solid #009879;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    #busqueda:focus {
+        outline: none;
+        border-color: #007c63;
+        box-shadow: 0 0 5px rgba(0, 152, 121, 0.3);
+    }

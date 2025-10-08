@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listado de Tareas</title>
+</head>
+
+<body>
+    <input type="text" id="taskInput" placeholder="Nueva tarea" />
+    <button id="addTask">Agregar Tarea</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        const taskInput = document.getElementById("taskInput");
+        const addTaskButton = document.getElementById("addTask");
+        const taskList = document.getElementById("taskList");
+
+        // Función para verificar si ya existe una tarea en la lista
+        function isDuplicateTask(taskText) {
+            const tasks = document.querySelectorAll('#taskList li');
+            for (const task of tasks) {
+                if (task.textContent === taskText) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        // Para optimizar el manejo de eventos, se puede agregar un único evento delegado al elemento ul que contiene las tareas. Esto evita  asignar un EventListener a cada elemento <li> individualmente y mejora el rendimiento en listas grandes.:
+        // Delegación de eventos en el <ul>
+
+        addTaskButton.addEventListener("click", () => {
+            const taskText = taskInput.value.trim();
+            if (taskText === "") {
+                alert("No se puede agregar una tarea vacía");
+                return;
+            }
+            if (isDuplicateTask(taskText)) {
+                alert('La tarea ya existe en la lista');
+                return;
+            }
+
+            const li = document.createElement("li");
+            li.textContent = taskText;
+            li.addEventListener("click", () => li.remove()); //quito si maneja el padre    
+            taskList.appendChild(li);
+            taskInput.value = "";
+        });
+      
+      
+        // taskList.addEventListener('click', (event) => {
+        //     if (event.target.tagName === 'LI') {
+        //         event.target.remove(); // Eliminar tarea al hacer clic
+        //     }
+        // });
+
+    </script>
+</body>
+
+</html>
