@@ -3,7 +3,7 @@
     </head>
     <body>
         <h1>Definicion  </h1>
-       <?php
+<?php
 $num1=1;
 $num2=2;
 $decimal=2.1;
