@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calcula el Seguro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input:focus,
+        select:focus,
+        button:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.85em;
+            margin: -10px 0 10px;
+        }
+
+        .success {
+            color: green;
+            font-size: 1em;
+            text-align: center;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            font-size: 1em;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Calcula el precio de tu seguro</h1>
+    <form id="insuranceForm">
+        <label for="name">Nombre y Apellidos:</label>
+        <input type="text" id="name" name="name" placeholder="Juan Pérez">
+        <span class="error" id="nameError"></span>
+
+        <label for="postalCode">Código Postal:</label>
+        <input type="text" id="postalCode" name="postalCode" placeholder="28001">
+        <span class="error" id="postalCodeError"></span>
+
+        <label for="age">Edad del Conductor:</label>
+        <input type="number" id="age" name="age" placeholder="18-99">
+        <span class="error" id="ageError"></span>
+
+        <label for="brand">Marca del Coche:</label>
+        <select id="brand" name="brand">
+            <option value="">Selecciona una marca</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Honda">Honda</option>
+            <option value="Ford">Ford</option>
+        </select>
+        <span class="error" id="brandError"></span>
+
+        <label for="years">Años de Antigüedad del Coche:</label>
+        <input type="number" id="years" name="years" placeholder="0 o más">
+        <span class="error" id="yearsError"></span>
+
+        <label for="licensePlate">Placa de Vehículo:</label>
+        <input type="text" id="licensePlate" name="licensePlate" placeholder="1234 ABC">
+        <span class="error" id="licensePlateError"></span>
+
+        <button type="button" id="calculate">Calcular precio</button>
+    </form>
+
+    <p class="success" id="result"></p>
+
+<script>
+    //Funcion para calcular la rebaja del seguro
+    function yearsSale(edadCoche){
+        let rebaja = 0;
+        for(e = 1;e <= edadCoche; e++){
+            rebaja += 20
+        }
+        //si es mayor de 200 devolvemos 200 porque es el máximo
+        if(rebaja > 200){
+            return 200;
+        }
+        //sino pues devolvemos la rebaja
+        else{
+            return rebaja;
+        }
+    }
+    //Si la persona es menor de 25 le aumentamos el precio
+    function yearsHuman(edadPersona){
+        let aumentoPrecio = 0
+        if(edadPersona < 25) {
+            aumentoPrecio = 200
+        }
+         
+        return aumentoPrecio
+    }
+    //Inicializamos variables y
+    // obtenemos los elementos del DOM
+    let nombrePersona = "";
+    let precioBase = 500;
+    let edadPersona;
+    let edadCoche;
+    const resultado = document.getElementById("result");
+    const form = document.getElementById("insuranceForm");
+    const botonSubmit = document.getElementById("calculate");
+    // Configuracion para las validar los inputs
+    const fields = [
+        { id: "name", regex: /^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+ ([a-zA-ZÁÉÍÓÚáéíóúñÑ]+)*$/, errorMsg: "Nombre no válido", errorId: "nameError" },
+        { id: "postalCode", regex: /^([0-9]){5}$/, errorMsg: "Código postal erróneo", errorId: "postalCodeError" },
+        { id: "age", regex: /^[0-9]{2}$/, errorMsg: "edad errónea", errorId: "ageError" },
+        { id: "brand", regex: /^.{1,}$/, errorMsg: "marca vacía", errorId: "brandError" },
+        { id: "years", regex: /^[\d]+/, errorMsg: "Antigüedad errónea", errorId: "yearsError" },
+        { id: "licensePlate",regex: /^[0-9]{4}\s?[a-zA-Z]{3}$/ , errorMsg: "Matrícula errónea", errorId: "licensePlateError" },
+       
+    ];
+
+    botonSubmit.addEventListener("click", (e) => {
+        //Prevenimos que se actualice
+        e.preventDefault();
+        let valid = true;
+        fields.forEach((field) => {
+            //por cada campo obtenemos su id
+            const input = document.getElementById(field.id);
+            const valorInput = input.value;
+            //Obtenemos los datos para el mensaje final
+            if(field.id == "name"){
+                nombrePersona = valorInput;
+            }
+            //Obtenemos los datos para el mensaje final
+            if(field.id == "age"){
+                edadPersona = valorInput;
+            }
+            //Obtenemos los datos para el mensaje final
+            if(field.id == "years"){
+                edadCoche = valorInput;
+            }
+            //Por cada campo hacemos el test del regex
+            if (!field.regex.test(input.value)) {
+                //Obtenemos el id de ese problema y su contenido será el error puesto para ello
+                const problema = document.getElementById(field.errorId);
+                problema.textContent = field.errorMsg; 
+                //Confirmamos que no es valido
+                valid = false;
+                //Nos aseguramos de quitar el texto del resultado si ponemos algo mal
+                resultado.textContent = "";
+            }
+        });
+
+        if (valid) {
+            //Si todo está bien quitamos los textos de error
+            fields.forEach((field) => {
+                const problema = document.getElementById(field.errorId);
+                problema.textContent = ""; 
+                
+            });
+            //Calculamos el precio final
+            let aumentoPersona = yearsHuman(edadPersona);
+            let descuento = yearsSale(edadCoche);
+            let precioFinal = (precioBase + aumentoPersona) - descuento;
+            resultado.textContent = `Estimado/a ${nombrePersona}, el precio final de tu seguro es de ${precioFinal}`;
+            
+        }
+    });
+
+
+
+</script>
+</body>
+
+</html>

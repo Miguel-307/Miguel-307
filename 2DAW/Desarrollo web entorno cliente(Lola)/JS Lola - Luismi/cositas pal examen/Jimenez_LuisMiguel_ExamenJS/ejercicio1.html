@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listado de Tareas</title>
+</head>
+
+<body>
+    <input type="text" id="taskInput" placeholder="Nueva tarea" />
+    <button id="addTask">Agregar Tarea</button>
+    <ul id="taskList"></ul>
+<script>
+    //Obtenemos elementos del DOM por el id
+   const taskInput = document.getElementById("taskInput");
+   const addTask = document.getElementById("addTask");
+   const taskList = document.getElementById("taskList");
+   const tareas = [];
+
+   function actualizarListado(){
+    //Cada vez que se añade o borra una nueva tarea limpiamos el listado
+    taskList.innerHTML = "";
+    tareas.forEach((tarea, index) =>{
+        //Creamos el elemento li
+        const li = document.createElement("li");
+        //Metemos el elemento p que es el texto de la tarea
+        const texto = document.createElement("p");
+        texto.textContent = tarea;
+        //Creamos el botón de borrar
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "eliminar";
+        deleteButton.dataset.index = index;
+        //Creamos el evento que elimina la tarea
+        deleteButton.addEventListener("click", () =>{
+            let eliminar = deleteButton.dataset.index;
+            tareas.splice(eliminar, 1);
+    
+            actualizarListado();
+        });
+        //Añadimos el texto y boton al elemento
+        li.appendChild(texto);
+        li.appendChild(deleteButton);
+        //añadimos el elemento a la lista
+        taskList.appendChild(li);
+    });
+
+   }
+
+   //Creamos el evento que se efectua al pulsar el boton de añadir tarea
+   addTask.addEventListener("click", () => {
+        const nuevaTarea = taskInput.value;
+        let TareaExistente = tareas.find(tarea => tarea == nuevaTarea);
+        //Si no hay tarea se lo decimos al usuario
+        if(!nuevaTarea){
+            alert("El nombre no puede estar vacío");
+        }
+        //Si ya existe también
+        else if(TareaExistente){
+            alert("Esta tarea ya existe")
+        }
+        //Si hay una nueva tarea no existente la añadimos y actualizamos el listado
+        else{
+            //Metemos la tarea al array
+            tareas.push(nuevaTarea);
+            //Actualizamos el listado
+            actualizarListado();
+            //Limpiamos el input
+            taskInput.value = ""
+        }
+        
+    });
+
+</script>
+</body>
+</html>

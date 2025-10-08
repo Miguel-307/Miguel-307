@@ -1,0 +1,176 @@
+/* Estilos base */
+*{
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+header{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    background-color: #007bff;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+}
+
+img{
+    border-radius: 15px;
+}
+
+nav > *{
+    padding: 10px;
+}
+#abrir-menu, #cerrar-menu{
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    padding: 10px;
+    background-color: inherit;
+    display: none;
+}
+
+#abrir-menu:hover{
+    cursor: pointer;
+    background-color: #2e8bee;
+}
+
+nav a{
+    text-decoration: none;
+    color: black;
+}
+
+.centrado {
+    margin-top: 700px;
+    max-width: 930px;
+    width: 80%;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 10px;
+}
+
+/* Grid principal */
+.contact-form {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Configuración adaptable */
+}
+
+/* Grupo de campos */
+.group {
+    display: flex;
+    flex-direction: column;
+}
+
+.group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Botón de envío */
+.grid-col-span2 {
+    justify-self: center;
+    grid-column: span 2;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 780px) {
+    .contact-form {
+        grid-template-columns: 1fr; /* Fuerza una sola columna */
+        gap: 15px;
+    }
+    .grid-col-span2 {
+        grid-column: 1;
+        justify-self: center;
+    }
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 725px) {
+    nav {
+        display: none; /* El menú estará oculto por defecto */
+        width: 200px; /* Ajusta el ancho del menú */
+        background-color: black;
+        color: white;
+        position: absolute;
+        top: 0;
+        right: 0; /* Coloca el menú a la derecha */
+        height: 100vh; /* Ocupa toda la altura de la pantalla */
+        opacity: 0; /* El menú será invisible cuando esté oculto */
+    }
+
+    /* Muestra el botón de abrir menú */
+    #abrir-menu {
+        display: block;
+    }
+
+    /* Estilo para el botón de cerrar */
+    #cerrar-menu {
+        color: white;
+        cursor: pointer;
+        display: block;
+        position: fixed;
+        top: 0px;
+        right: 10px;
+    }
+
+    /* Menú visible: aparece con opacidad 1 */
+    nav.visible {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        opacity: 1; /* El menú será visible */
+    }
+
+    nav a {
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        display: block;
+        padding: 20px;
+        font-size: 1.2rem;
+    }
+
+    nav a:hover {
+        background-color: #444; /* Color al pasar el ratón */
+    }
+}
+
+
