@@ -1,39 +1,62 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Productos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Web Store</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    
-  </style>
 </head>
 <body>
-  <div class="container">
-    
-    <header id="header"></header>
+  <header>
+    <h1>Super Web Store</h1>
+    <p>Catálogo dinámico generado desde un objeto literal usando <code>innerHTML</code></p>
+  </header>
 
-    <div id="summary" class="summary" ></div>
+  <button id="ordenar">Ordenar por precio: asc</button>
 
-    <section id="productList" class="products" ></section>
-
-    <footer id="footer"></footer>
+  <div id="stats" class="stats">
+    <p><strong>Total ventas (últimos 6 meses):</strong><br>905 unidades</p>
+    <p><strong>Media mensual:</strong><br>150.83 unidades</p>
+    <p><strong>Mes con mayor venta:</strong><br>Mes 6 — 200 unidades</p>
+    <p><strong>Mes con menor venta:</strong><br>Mes 3 — 95 unidades</p>
+    <p><strong>Suma precios productos:</strong><br>€ 308.43</p>
   </div>
 
-  <script>   
-    const catalogo = {
-      tienda: "Super Web Store",
-      productos: [
-        { id: 1, nombre: "Auriculares Bluetooth X200", descripcion: "Auriculares inalámbricos con cancelación parcial de ruido.", precio: 49.99, disponible: true },
-        { id: 2, nombre: "Teclado mecánico TKL", descripcion: "Compacto, switches táctiles y retroiluminación RGB.", precio: 79.5, disponible: true },
-        { id: 3, nombre: "Ratón ergonómico Pro", descripcion: "Diseño vertical para reducir tensión en la muñeca.", precio: 39.0, disponible: false },
-        { id: 4, nombre: "Monitor 24\" 1080p", descripcion: "120Hz, panel IPS y soporte ajustable.", precio: 129.95, disponible: true },
-        { id: 5, nombre: "Cable USB-C 2m", descripcion: "Carga rápida y transferencia de datos.", precio: 9.99, disponible: true }
-      ],
-      ventasMensuales: [120, 150, 95, 180, 160, 200]
-    };
+  <div id="productos">
+    <div class="producto">
+      <h3>Cable USB-C 2m</h3>
+      <p class="descripcion">Carga rápida y transferencia de datos.</p>
+      <p class="precio">€ 9.99</p>
+      <p class="disponible">Disponible</p>
+    </div>
 
-  </script>
+    <div class="producto">
+      <h3>Ratón ergonómico Pro</h3>
+      <p class="descripcion">Diseño vertical para reducir tensión en la muñeca.</p>
+      <p class="precio">€ 39.00</p>
+      <p class="agotado">Agotado</p>
+    </div>
+
+    <div class="producto">
+      <h3>Auriculares Bluetooth X200</h3>
+      <p class="descripcion">Auriculares inalámbricos con cancelación parcial de ruido.</p>
+      <p class="precio">€ 49.99</p>
+      <p class="disponible">Disponible</p>
+    </div>
+
+    <div class="producto">
+      <h3>Teclado mecánico TKL</h3>
+      <p class="descripcion">Compacto, switches táctiles y retroiluminación RGB.</p>
+      <p class="precio">€ 79.50</p>
+      <p class="disponible">Disponible</p>
+    </div>
+
+    <div class="producto">
+      <h3>Monitor 24" 1080p</h3>
+      <p class="descripcion">120Hz, panel IPS y soporte ajustable.</p>
+      <p class="precio">€ 129.95</p>
+      <p class="disponible">Disponible</p>
+    </div>
+  </div>
 </body>
 </html>

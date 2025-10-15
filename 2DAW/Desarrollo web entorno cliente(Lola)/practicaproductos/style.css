@@ -1,0 +1,111 @@
+/* ======= ESTILOS GENERALES ======= */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f6f7fb;
+  margin: 0;
+  padding: 20px;
+  color: #222;
+}
+
+h1 {
+  font-size: 1.9em;
+  margin-bottom: 0.2em;
+}
+
+header p {
+  color: #666;
+  font-size: 0.9em;
+}
+
+code {
+  font-size: 0.8em;
+}
+
+/* ======= BOTÓN DE ORDENAR ======= */
+#ordenar {
+  float: right;
+  padding: 8px 14px;
+  font-size: 0.9em;
+  background-color: #f6f7fb;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: default; /* sin interacción */
+  color: #333;
+}
+
+/* ======= ESTADÍSTICAS ======= */
+.stats {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px 25px;
+  margin-top: 60px;
+  margin-bottom: 25px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.stats p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.stats span {
+  font-weight: normal;
+  color: #444;
+}
+
+/* ======= CONTENEDOR DE PRODUCTOS ======= */
+#productos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* ======= TARJETAS ======= */
+.producto {
+  background-color: #d6d6d6;
+  border-radius: 10px;
+  padding: 20px;
+  width: 230px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.producto h3 {
+  margin-top: 0;
+  color: #111;
+  font-size: 1.1em;
+}
+
+.producto p.descripcion {
+  color: #555;
+  font-size: 0.9em;
+  margin-bottom: 15px;
+}
+
+.producto p.precio {
+  font-weight: bold;
+  font-size: 1.05em;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.producto .disponible {
+  color: #148f2a;
+  font-weight: bold;
+}
+
+.producto .agotado {
+  color: #b44;
+  font-weight: bold;
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 700px) {
+  #productos {
+    flex-direction: column;
+    align-items: center;
+  }
+}
