@@ -1,0 +1,49 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #D8BFD8;
+    padding: 30px;
+    text-align: center;
+    margin: 0;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 40px;
+    color: #000000;
+}
+
+/* Enlace del título */
+.titulo-enlace {
+    text-decoration: none; /* Quita subrayado */
+    color: #000000;       /* Color igual que h1 */
+}
+
+.titulo-enlace:hover {
+    color: #660066; /* Morado más oscuro al pasar el ratón */
+}
+
+/* Botones de ejercicios */
+.botones {
+    margin-top: 20px;
+}
+
+.boton {
+    font-weight: bold;
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 20px;
+    background-color: #800080; /* Morado */
+    color: #ffffff;            /* Letras blancas para mejor contraste */
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.boton:hover {
+    background-color: #660066; /* Morado más oscuro al pasar el mouse */
+    transform: scale(1.05);
+}
