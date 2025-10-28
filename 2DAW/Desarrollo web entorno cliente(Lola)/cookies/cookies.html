@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicios 6.22 y 6.23 - Cookies</title>
+</head>
+<body>
+  <h1>Ejercicios 6.22 y 6.23 - Cookies en JavaScript</h1>
+
+  <!-- Botones para crear, ver y borrar cookies -->
+  <button onclick="crearCookies()">Crear cookies</button>
+  <button onclick="mostrarCookies()">Mostrar cookies</button>
+  <button onclick="borrarCookies()">Borrar cookies</button>
+
+  <p id="mensaje"></p>
+
+  <script>
+    /* ===========================================================
+       FUNCIONES GENERALES DE COOKIES (REUTILIZABLES)
+    =========================================================== */
+
+    // Crea una cookie con nombre, valor y tiempo en segundos
+    function setCookie(nombre, valor, segundos) {
+      const fecha = new Date();
+      fecha.setTime(fecha.getTime() + (segundos * 1000)); // Convertir a milisegundos
+      const expires = "expires=" + fecha.toUTCString();
+      document.cookie = nombre + "=" + valor + ";" + expires + ";path=/";
+    }
+
+    // Obtiene el valor de una cookie por su nombre
+    function getCookie(nombre) {
+      const name = nombre + "=";
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const partes = decodedCookie.split(';');
+      for (let i = 0; i < partes.length; i++) {
+        let c = partes[i].trim();
+        if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return null; // No existe
+    }
+
+    // Borra una cookie por su nombre
+    function deleteCookie(nombre) {
+      document.cookie = nombre + "=; max-age=0; path=/";
+    }
+
+    /* ===========================================================
+       EJERCICIO 6.22 - CREAR COOKIE CON NOMBRE Y EDAD
+    =========================================================== */
+
+    function crearCookies() {
+      const nombre = prompt("Introduce tu nombre:");
+      const edad = prompt("Introduce tu edad:");
+
+      // Caducan en 30 minutos (1800 segundos)
+      setCookie("nombre", nombre, 1800);
+      setCookie("edad", edad, 1800);
+
+      document.getElementById("mensaje").textContent =
+        "Cookies creadas correctamente ✅";
+    }
+
+    /* ===========================================================
+       EJERCICIO 6.23 - COMPROBAR CADA 15 SEGUNDOS (SIN BORRAR)
+    =========================================================== */
+
+    function comprobarCookies() {
+      const nombre = getCookie("nombre");
+      const edad = getCookie("edad");
+
+      if (nombre && edad) {
+        console.log(`Cookies activas → Nombre: ${nombre}, Edad: ${edad}`);
+      } else {
+        console.log("No hay cookies guardadas ❌");
+      }
+    }
+
+    // Llama cada 15 segundos (15000 ms)
+    setInterval(comprobarCookies, 15000);
+
+    /* ===========================================================
+       MOSTRAR MENSAJE AL RECARGAR LA PÁGINA
+    =========================================================== */
+
+    function mostrarCookies() {
+      const nombre = getCookie("nombre");
+      const edad = getCookie("edad");
+
+      if (nombre && edad) {
+        document.getElementById("mensaje").textContent =
+          `Bienvenido de nuevo ${nombre}, tienes ${edad} años 👋`;
+      } else {
+        document.getElementById("mensaje").textContent =
+          "No hay cookies almacenadas ❌";
+      }
+    }
+
+    // Mostrar mensaje automáticamente al cargar la página
+    window.onload = mostrarCookies;
+
+    /* ===========================================================
+       BORRAR COOKIES MANUALMENTE
+    =========================================================== */
+    function borrarCookies() {
+      deleteCookie("nombre");
+      deleteCookie("edad");
+      document.getElementById("mensaje").textContent =
+        "Cookies eliminadas manualmente ❌";
+    }
+
+  </script>
+</body>
+</html>
+

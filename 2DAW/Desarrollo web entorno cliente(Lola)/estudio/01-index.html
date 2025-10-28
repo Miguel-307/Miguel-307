@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>JS – Fundamentos + Prácticas (6.16–6.26) por funciones</title>
+  <style>
+    /* Estilos simples para ver todo ordenado */
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; line-height: 1.4; padding: 18px; max-width: 1100px; margin: auto; }
+    h1, h2 { margin-top: 28px; }
+    section { border: 1px solid #ddd; border-radius: 10px; padding: 16px; margin: 16px 0; background: #fafafa; }
+    button { padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; cursor: pointer; }
+    button:hover { background: #f2f2f2; }
+    code, pre { background: #f6f8fa; border: 1px solid #eaecef; border-radius: 6px; padding: 6px 8px; display: block; overflow: auto; }
+    table { border-collapse: collapse; margin-top: 8px; }
+    td, th { border: 1px solid #aaa; padding: 6px 8px; }
+    .panel { background: #fff; border: 1px solid #eaecef; border-radius: 8px; padding: 10px; }
+    .alto { height: 1400px; background: linear-gradient(to bottom, #f7f7f7, #eaeaea); }
+    .small { font-size: 0.95rem; color: #333; }
+    .ok { color: #0a7; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================
+       BLOQUE 0 — FUNDAMENTOS: VARIABLES, TIPOS, FUNCIONES, HOLA MUNDO
+       Esta sección no es un ejercicio; es una guía mínima interactiva.
+       Al pulsar los botones se invocan funciones que:
+         - Explican variables/tipos/const/let/var (inyectando texto).
+         - Muestran "Hola, mundo" en pantalla y en la consola.
+       ========================================================= -->
+  <section id="fundamentos">
+    <h1>Fundamentos rápidos de JavaScript (interactivo)</h1>
+
+    <!-- Botones que llaman a funciones. LAS FUNCIONES están en <script> al final. -->
+    <p>
+      <button onclick="holaMundo()">▶ Mostrar “Hola, mundo”</button>
+      <button onclick="explicarVariables()">▶ Explicar variables, tipos y funciones</button>
+      <button onclick="explicarFunciones()">▶ Explicar cómo funcionan las funciones</button>
+    </p>
+
+    <!-- Contenedor donde escribimos explicaciones con JS -->
+    <div id="salidaFundamentos" class="panel small"></div>
+  </section>
+
+  <!-- =========================================================
+       6.16 — Modificar el estilo de un párrafo por ID
+       Requisito: función modificarEstilo() cambia estilos por JS.
+       ========================================================= -->
+  <section id="e6_16">
+    <h2>6.16 — Modificar el estilo de un párrafo</h2>
+
+    <!-- El párrafo objetivo; su id es "párrafo" como pide el enunciado -->
+    <p id="párrafo">Este párrafo cambiará de estilo al pulsar el botón.</p>
+
+    <!-- Botón con manejador inline que llama a la función -->
+    <button onclick="modificarEstilo()">Cambiar estilo</button>
+  </section>
+
+  <!-- =========================================================
+       6.17 — Lista ordenada: devolver primera y última persona
+       Requisito: función mostrarPrimeraUltima() lee <ol> y alerta nombres.
+       ========================================================= -->
+  <section id="e6_17">
+    <h2>6.17 — Primera y última persona de una lista</h2>
+
+    <!-- Lista ordenada con varias personas -->
+    <ol id="personas">
+      <li>María</li>
+      <li>Juan</li>
+      <li>Lucía</li>
+      <li>Carlos</li>
+    </ol>
+
+    <!-- Botón que llama a la función que obtiene primer y último <li> -->
+    <button onclick="mostrarPrimeraUltima()">Mostrar primera y última</button>
+  </section>
+
+  <!-- =========================================================
+       6.18 — Añadir filas a una tabla usando createElement/appendChild
+       Requisito: función agregarFila() inventa valores y los añade.
+       ========================================================= -->
+  <section id="e6_18">
+    <h2>6.18 — Añadir filas a una tabla (createElement + appendChild)</h2>
+
+    <!-- Cabeceras de la tabla -->
+    <table id="miTabla">
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Ciudad</th>
+      </tr>
+    </table>
+
+    <!-- Al pulsar, se crea <tr><td>…</td>…</tr> y se añade a la tabla -->
+    <button onclick="agregarFila()">Agregar fila inventada</button>
+  </section>
+
+  <!-- =========================================================
+       6.19 — Contar cuántos p, a y span hay en un trozo de HTML
+       Requisito: función contarElementos() escribe en consola los totales.
+       ========================================================= -->
+  <section id="e6_19">
+    <h2>6.19 — Contar elementos &lt;p&gt;, &lt;a&gt; y &lt;span&gt;</h2>
+
+    <!-- Bloque con algunos elementos de prueba -->
+    <div id="contenido">
+      <p>Párrafo 1</p>
+      <p>Párrafo 2</p>
+      <a href="#">Enlace 1</a>
+      <span>Etiqueta span A</span>
+      <span>Etiqueta span B</span>
+      <a href="#">Enlace 2</a>
+    </div>
+
+    <!-- Al pulsar, mostramos los recuentos en la consola -->
+    <button onclick="contarElementos()">Contar y mostrar en consola</button>
+    <p class="small">Revisa la <span class="ok">consola</span> del navegador (F12 → Console).</p>
+  </section>
+
+  <!-- =========================================================
+       6.20 — Pedir ingredientes por prompt y añadir <li> a una <ul>
+       Requisito: función pedirIngredientes() repite hasta Cancelar.
+       ========================================================= -->
+  <section id="e6_20">
+    <h2>6.20 — Lista de ingredientes (prompt → &lt;ul&gt;)</h2>
+
+    <!-- La lista donde se añadirán <li> por cada ingrediente -->
+    <ul id="ingredientes"></ul>
+
+    <!-- Al pulsar, se abre un bucle de prompts hasta que el usuario cancele -->
+    <button onclick="pedirIngredientes()">Añadir ingredientes</button>
+  </section>
+
+  <!-- =========================================================
+       6.24 — Preguntar filas/columnas, generar tabla con números aleatorios,
+              y reportar totales en consola
+       Requisito: función generarTablaAleatoria() + logs a consola.
+       ========================================================= -->
+  <section id="e6_24">
+    <h2>6.24 — Generar tabla aleatoria y reportar filas/columnas</h2>
+
+    <!-- Contenedor donde inyectamos la tabla generada -->
+    <div id="tablaAleatoria" class="panel"></div>
+
+    <!-- Botón para lanzar la función generadora -->
+    <button onclick="generarTablaAleatoria()">Generar tabla aleatoria</button>
+    <p class="small">Los totales se muestran en la <span class="ok">consola</span>.</p>
+  </section>
+
+  <!-- =========================================================
+       6.25 — Tras la carga de la página, esperar 10 segundos y hacer scroll
+       Requisito: usar window.addEventListener("load", ...) + setTimeout(...)
+       NOTA: añadimos una caja alta para que haya “final de página”
+       ========================================================= -->
+  <section id="e6_25">
+    <h2>6.25 — Scroll automático al final (a los 10s tras cargar)</h2>
+
+    <!-- Este div alto simula una página con mucho contenido -->
+    <div class="alto"></div>
+
+    <!-- Sin botón: el scroll sucede automáticamente 10s después de load.
+         Ver implementación en el <script> final. -->
+    <p class="small">Se desplazará al final <em>automáticamente</em> 10 segundos después de cargar la página.</p>
+  </section>
+
+  <!-- =========================================================
+       6.26 — Lista desordenada de 10 elementos y opción de ordenarla
+       Requisito: función ordenarLista() pregunta con confirm() y ordena.
+       ========================================================= -->
+  <section id="e6_26">
+    <h2>6.26 — Ordenar alfabéticamente una lista desordenada</h2>
+
+    <!-- Lista inicial (10 elementos) -->
+    <ul id="listaDesordenada">
+      <li>Melón</li><li>Fresa</li><li>Manzana</li><li>Plátano</li><li>Pera</li>
+      <li>Kiwi</li><li>Uva</li><li>Cereza</li><li>Sandía</li><li>Mango</li>
+    </ul>
+
+    <!-- Al pulsar, se pregunta si se desea ordenar; si Aceptar → sort -->
+    <button onclick="ordenarLista()">Ordenar lista</button>
+  </section>
+
+  <!-- =========================================================
+       SCRIPT: TODAS LAS FUNCIONES
+       * Cada ejercicio está encapsulado en su propia función.
+       * Los comentarios dentro de JS aclaran qué hace cada paso.
+       ========================================================= -->
+  <script>
+    // ---------------------------------------------------------
+    // BLOQUE 0 — Fundamentos: "Hola, mundo" y explicaciones
+    // ---------------------------------------------------------
+
+    // Muestra "Hola, mundo" en pantalla y también en consola
+    function holaMundo() {
+      console.clear();
+      console.log("Hola, mundo (desde consola)");
+      const salida = document.getElementById("salidaFundamentos");
+      salida.innerHTML = "<p class='ok'>Hola, mundo</p><p>(También se ha impreso en la consola)</p>";
+    }
+
+    // Explica variables / tipos / const-let-var con texto inyectado
+    function explicarVariables() {
+      const salida = document.getElementById("salidaFundamentos");
+      salida.innerHTML = `
+        <h3>Variables, tipos y alcance</h3>
+        <ul>
+          <li><b>let</b> → variable cuyo valor puede cambiar y tiene <i>alcance de bloque</i>.</li>
+          <li><b>const</b> → su valor no cambia; también con <i>alcance de bloque</i>.</li>
+          <li><b>var</b> → forma antigua; <i>alcance de función</i>. Evítala salvo compatibilidad.</li>
+        </ul>
+        <p class="small">Tipos comunes: <code>string</code>, <code>number</code>, <code>boolean</code>, <code>array</code>, <code>object</code>, <code>null</code>, <code>undefined</code>.</p>
+        <pre><code>// Ejemplo:
+let nombre = "Miguel";       // string
+const PI = 3.1416;           // number (const)
+let activo = true;           // boolean
+let frutas = ["pera","uva"]; // array
+let persona = { nombre: "Ana", edad: 25 }; // object
+        </code></pre>
+      `;
+      console.log("Explicación de variables mostrada en pantalla.");
+    }
+
+    // Explica qué es una función y cómo se invoca
+    function explicarFunciones() {
+      const salida = document.getElementById("salidaFundamentos");
+      salida.innerHTML = `
+        <h3>¿Qué es una función?</h3>
+        <p>Una función es un conjunto de instrucciones reutilizable. La defines y la <b>llamas</b> por su nombre.</p>
+        <pre><code>// Declaración
+function saludar(nombre) {
+  return "Hola, " + nombre;
+}
+
+// Llamada
+const mensaje = saludar("Miguel"); // "Hola, Miguel"
+        </code></pre>
+      `;
+      console.log("Explicación de funciones mostrada en pantalla.");
+    }
+
+    // ---------------------------------------------------------
+    // 6.16 — Modificar el estilo de un párrafo por ID
+    // ---------------------------------------------------------
+    function modificarEstilo() {
+      // Obtiene el elemento por su id exacto "párrafo"
+      const p = document.getElementById("párrafo");
+      // Cambios de estilo directos mediante la propiedad .style
+      p.style.color = "blue";
+      p.style.fontSize = "20px";
+      p.style.fontWeight = "bold";
+      p.style.backgroundColor = "#eef6ff";
+    }
+
+    // ---------------------------------------------------------
+    // 6.17 — Mostrar la primera y la última persona de una <ol>
+    // ---------------------------------------------------------
+    function mostrarPrimeraUltima() {
+      // querySelectorAll devuelve una NodeList con todos los li bajo #personas
+      const lista = document.querySelectorAll("#personas li");
+      if (lista.length === 0) {
+        alert("La lista está vacía.");
+        return;
+      }
+      const primera = lista[0].textContent;
+      const ultima = lista[lista.length - 1].textContent;
+      alert(`Primera: ${primera}\nÚltima: ${ultima}`);
+    }
+
+    // ---------------------------------------------------------
+    // 6.18 — Agregar una fila inventada a una tabla
+    // ---------------------------------------------------------
+    function agregarFila() {
+      const tabla = document.getElementById("miTabla");
+
+      // Crea la fila y sus celdas usando createElement
+      const fila = document.createElement("tr");
+      const c1 = document.createElement("td");
+      const c2 = document.createElement("td");
+      const c3 = document.createElement("td");
+
+      // Asigna contenido de texto (textContent evita interpretar HTML)
+      c1.textContent = "Persona " + (tabla.rows.length);         // nombre inventado
+      c2.textContent = Math.floor(Math.random() * 50 + 20);      // edad 20–69
+      c3.textContent = "Ciudad " + (tabla.rows.length);          // ciudad inventada
+
+      // Inserta celdas en la fila, y la fila en la tabla
+      fila.appendChild(c1);
+      fila.appendChild(c2);
+      fila.appendChild(c3);
+      tabla.appendChild(fila);
+    }
+
+    // ---------------------------------------------------------
+    // 6.19 — Contar p, a y span y mostrarlo en la consola
+    // ---------------------------------------------------------
+    function contarElementos() {
+      const numP = document.getElementsByTagName("p").length;
+      const numA = document.getElementsByTagName("a").length;
+      const numSpan = document.getElementsByTagName("span").length;
+
+      console.log(`Párrafos: ${numP}`);
+      console.log(`Enlaces: ${numA}`);
+      console.log(`Spans: ${numSpan}`);
+      alert("Revisa la consola: se han mostrado los totales.");
+    }
+
+    // ---------------------------------------------------------
+    // 6.20 — Pedir ingredientes por prompt y añadir <li> a <ul>
+    // ---------------------------------------------------------
+    function pedirIngredientes() {
+      const lista = document.getElementById("ingredientes");
+      while (true) {
+        const ingr = prompt("Introduce un ingrediente (Cancelar para terminar):");
+        if (ingr === null) break;          // Cancelar → salir del bucle
+        if (!ingr.trim()) continue;        // Si está vacío, pide otro
+        const li = document.createElement("li");
+        li.textContent = ingr.trim();
+        lista.appendChild(li);
+      }
+    }
+
+    // ---------------------------------------------------------
+    // 6.24 — Generar tabla aleatoria y reportar filas/columnas
+    // ---------------------------------------------------------
+    function generarTablaAleatoria() {
+      // Pide filas/columnas y valida que sean números enteros > 0
+      const filas = parseInt(prompt("Número de filas:"));
+      const columnas = parseInt(prompt("Número de columnas:"));
+      if (Number.isNaN(filas) || Number.isNaN(columnas) || filas <= 0 || columnas <= 0) {
+        alert("Introduce números válidos (enteros > 0).");
+        return;
+      }
+
+      // Limpia el contenedor donde insertaremos la nueva tabla
+      const contenedor = document.getElementById("tablaAleatoria");
+      contenedor.innerHTML = "";
+
+      // Crea la tabla con números aleatorios 0–99
+      const tabla = document.createElement("table");
+      for (let i = 0; i < filas; i++) {
+        const tr = document.createElement("tr");
+        for (let j = 0; j < columnas; j++) {
+          const td = document.createElement("td");
+          td.textContent = Math.floor(Math.random() * 100);
+          tr.appendChild(td);
+        }
+        tabla.appendChild(tr);
+      }
+
+      // Inserta la tabla en el DOM
+      contenedor.appendChild(tabla);
+
+      // Reporta en consola los totales detectados
+      console.log(`Filas detectadas: ${filas}`);
+      console.log(`Columnas detectadas: ${columnas}`);
+      alert("Tabla generada. Revisa la consola para ver filas y columnas detectadas.");
+    }
+
+    // ---------------------------------------------------------
+    // 6.25 — Tras cargar la página, esperar 10s y hacer scroll
+    // ---------------------------------------------------------
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        console.log("Scroll al final de la página realizado (6.25).");
+      }, 10000); // 10,000 ms → 10 segundos
+    });
+
+    // ---------------------------------------------------------
+    // 6.26 — Ordenar alfabéticamente una lista desordenada
+    // ---------------------------------------------------------
+    function ordenarLista() {
+      const lista = document.getElementById("listaDesordenada");
+      // Convertimos HTMLCollection (children) a Array para usar sort()
+      const elementos = Array.from(lista.children);
+
+      if (confirm("¿Deseas ordenar la lista alfabéticamente?")) {
+        elementos.sort((a, b) => a.textContent.localeCompare(b.textContent, "es"));
+        // Vacía la lista y vuelve a añadir en el nuevo orden
+        lista.innerHTML = "";
+        elementos.forEach(el => lista.appendChild(el));
+      }
+    }
+  </script>
+</body>
+</html>

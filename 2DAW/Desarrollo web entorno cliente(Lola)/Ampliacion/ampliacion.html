@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Prácticas de JavaScript (Tema 6)</title>
+  <style>
+    #párrafo {
+      color: black;
+      font-size: 16px;
+    }
+    table, td, th {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>6.16 - Modificar estilo de un párrafo</h2>
+  <p id="párrafo">Este es un párrafo de ejemplo.</p>
+  <button onclick="modificarEstilo()">Cambiar estilo</button>
+
+  <hr>
+
+  <h2>6.17 - Primera y última persona de una lista</h2>
+  <ol id="personas">
+    <li>María</li>
+    <li>Juan</li>
+    <li>Lucía</li>
+    <li>Carlos</li>
+  </ol>
+  <button onclick="mostrarPrimeraUltima()">Mostrar primera y última</button>
+
+  <hr>
+
+  <h2>6.18 - Añadir filas a una tabla</h2>
+  <table id="miTabla">
+    <tr><th>Nombre</th><th>Edad</th><th>Ciudad</th></tr>
+  </table>
+  <button onclick="agregarFila()">Agregar fila</button>
+
+  <hr>
+
+  <h2>6.19 - Contar elementos p, a y span</h2>
+  <div id="contenido">
+    <p>Párrafo 1</p>
+    <p>Párrafo 2</p>
+    <a href="#">Enlace</a>
+    <span>Texto</span>
+    <span>Más texto</span>
+  </div>
+  <button onclick="contarElementos()">Contar elementos</button>
+
+  <hr>
+
+  <h2>6.20 - Lista de ingredientes</h2>
+  <ul id="ingredientes"></ul>
+  <button onclick="pedirIngredientes()">Añadir ingredientes</button>
+
+  <hr>
+
+  <h2>6.24 - Generar tabla aleatoria</h2>
+  <button onclick="generarTablaAleatoria()">Generar tabla</button>
+  <div id="tablaAleatoria"></div>
+
+  <hr>
+
+  <h2>6.25 - Scroll al final de la página</h2>
+  <p>(Desplazará la página automáticamente después de 10 segundos)</p>
+  <div style="height:1500px; background:linear-gradient(to bottom, #eee, #ccc);"></div>
+
+  <hr>
+
+  <h2>6.26 - Ordenar lista desordenada</h2>
+  <ul id="listaDesordenada">
+    <li>Melón</li>
+    <li>Fresa</li>
+    <li>Manzana</li>
+    <li>Plátano</li>
+    <li>Pera</li>
+    <li>Kiwi</li>
+    <li>Uva</li>
+    <li>Cereza</li>
+    <li>Sandía</li>
+    <li>Mango</li>
+  </ul>
+  <button onclick="ordenarLista()">Ordenar lista</button>
+
+  <script>
+    // 🟢 6.16 - Modificar estilo
+    function modificarEstilo() {
+      const p = document.getElementById("párrafo");
+      p.style.color = "blue";
+      p.style.fontSize = "20px";
+      p.style.fontWeight = "bold";
+      p.style.backgroundColor = "#f0f0f0";
+    }
+
+    // 🟢 6.17 - Mostrar primera y última persona
+    function mostrarPrimeraUltima() {
+      const lista = document.querySelectorAll("#personas li");
+      const primera = lista[0].textContent;
+      const ultima = lista[lista.length - 1].textContent;
+      alert(`Primera: ${primera}\nÚltima: ${ultima}`);
+    }
+
+    // 🟢 6.18 - Agregar fila a una tabla
+    function agregarFila() {
+      const tabla = document.getElementById("miTabla");
+      const fila = document.createElement("tr");
+
+      const c1 = document.createElement("td");
+      const c2 = document.createElement("td");
+      const c3 = document.createElement("td");
+
+      c1.textContent = "Persona " + (tabla.rows.length);
+      c2.textContent = Math.floor(Math.random() * 50 + 20);
+      c3.textContent = "Ciudad " + (tabla.rows.length);
+
+      fila.appendChild(c1);
+      fila.appendChild(c2);
+      fila.appendChild(c3);
+      tabla.appendChild(fila);
+    }
+
+    // 🟢 6.19 - Contar elementos p, a y span
+    function contarElementos() {
+      const numP = document.getElementsByTagName("p").length;
+      const numA = document.getElementsByTagName("a").length;
+      const numSpan = document.getElementsByTagName("span").length;
+
+      console.log(`Párrafos: ${numP}`);
+      console.log(`Enlaces: ${numA}`);
+      console.log(`Spans: ${numSpan}`);
+    }
+
+    // 🟢 6.20 - Lista de ingredientes
+    function pedirIngredientes() {
+      const lista = document.getElementById("ingredientes");
+      while (true) {
+        const ingr = prompt("Introduce un ingrediente (Cancelar para salir):");
+        if (ingr === null) break;
+        const li = document.createElement("li");
+        li.textContent = ingr;
+        lista.appendChild(li);
+      }
+    }
+
+    // 🟢 6.24 - Tabla aleatoria según filas y columnas
+    function generarTablaAleatoria() {
+      const filas = parseInt(prompt("Número de filas:"));
+      const columnas = parseInt(prompt("Número de columnas:"));
+      const contenedor = document.getElementById("tablaAleatoria");
+      contenedor.innerHTML = ""; // limpia antes
+
+      const tabla = document.createElement("table");
+      for (let i = 0; i < filas; i++) {
+        const tr = document.createElement("tr");
+        for (let j = 0; j < columnas; j++) {
+          const td = document.createElement("td");
+          td.textContent = Math.floor(Math.random() * 100);
+          tr.appendChild(td);
+        }
+        tabla.appendChild(tr);
+      }
+      contenedor.appendChild(tabla);
+      console.log(`Filas detectadas: ${filas}`);
+      console.log(`Columnas detectadas: ${columnas}`);
+    }
+
+    // 🟢 6.25 - Scroll automático tras carga
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+        console.log("Scroll al final de la página realizado.");
+      }, 10000);
+    });
+
+    // 🟢 6.26 - Ordenar lista desordenada
+    function ordenarLista() {
+      const lista = document.getElementById("listaDesordenada");
+      let elementos = Array.from(lista.children);
+      if (confirm("¿Deseas ordenar la lista alfabéticamente?")) {
+        elementos.sort((a, b) => a.textContent.localeCompare(b.textContent));
+        lista.innerHTML = "";
+        elementos.forEach(el => lista.appendChild(el));
+      }
+    }
+  </script>
+
+</body>
+</html>
