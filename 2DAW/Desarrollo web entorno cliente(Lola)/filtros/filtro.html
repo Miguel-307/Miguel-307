@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Productos — Tema 5</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* Estilos básicos de una web que encontre que me gustaron  */
+    :root{
+      --bg:#0e0e10; --card:#1e1e22; --text:#f5f6fa; --muted:#a0a0ab;
+      --accent:#00a8ff; --ring:#2a2a30;
+    }
+    body{margin:0; font-family:system-ui,Segoe UI,Roboto; background:var(--bg); color:var(--text);}
+    .wrap{max-width:1000px; margin:auto; padding:24px;}
+    h1{margin:0 0 16px; font-size:24px; color:var(--accent);}
+    .toolbar{display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:16px;}
+    .toolbar input[type="search"]{
+      flex:1 1 260px; padding:10px 12px; border-radius:10px; border:1px solid var(--ring); background:var(--card); color:var(--text); outline:none;
+    }
+    .toolbar button{
+      padding:10px 14px; border-radius:10px; border:1px solid var(--ring); background:var(--card); color:var(--text); cursor:pointer;
+    }
+    .toolbar .count{color:var(--muted); font-size:14px;}
+    .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px;}
+    .card{background:var(--card); border:1px solid var(--ring); border-radius:14px; padding:12px; display:flex; flex-direction:column; gap:8px;}
+    .card img{width:100%; height:140px; object-fit:cover; border-radius:10px; background:#222;}
+    .card h3{font-size:16px; margin:2px 0 0;}
+    .price{font-weight:700;}
+    .desc{color:var(--muted); font-size:13px;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Productos</h1>
+
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Buscar por nombre…" aria-label="Buscar productos por nombre">
+      <button id="sortBtn" type="button">Ordenar: Precio ↑</button>
+      <span id="count" class="count"></span>
+    </div>
+
+    <div id="products" class="grid" aria-live="polite"></div>
+  </div>
+
+  <script>
+
+    const productos = [
+      { id: 1, nombre: "Teclado Mecánico", precio: 49.99, imagen: "", descripcion: "Switches rojos." },
+      { id: 2, nombre: "Ratón Inalámbrico", precio: 19.90, imagen: "", descripcion: "1600 DPI." },
+      { id: 3, nombre: "Monitor 24\"", precio: 129.00, imagen: "", descripcion: "IPS 75Hz." },
+      { id: 4, nombre: "Auriculares", precio: 29.00, imagen: "", descripcion: "Cierre supraaural." },
+      { id: 5, nombre: "Webcam HD", precio: 22.50, imagen: "", descripcion: "1080p." },
+    ];
+
+
+    const state = {
+      sortAsc: true,
+      query: "",
+      data: productos.slice()
+    };
+
+
+    const $ = (sel) => document.querySelector(sel);
+    const container = $("#products");
+    const sortBtn = $("#sortBtn");
+    const searchInput = $("#search");
+    const countEl = $("#count");
+
+    const formatoPrecio = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" });
+
+    function limpiarNodo(node){
+      while (node.firstChild) node.removeChild(node.firstChild);
+    }
+
+    function normalizaTexto(s){
+      return (s ?? "").toString().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"");
+    }
+
+    function filtrarOrdenar(lista){
+      const q = normalizaTexto(state.query);
+      const filtrados = q
+        ? lista.filter(p => normalizaTexto(p.nombre).includes(q))
+        : lista.slice();
+
+      filtrados.sort((a,b) => state.sortAsc ? a.precio - b.precio : b.precio - a.precio);
+      return filtrados;
+    }
+
+    function crearCard(producto){
+      const card = document.createElement("article");
+      card.className = "card";
+
+      const img = document.createElement("img");
+      img.alt = producto.nombre;
+      img.src = producto.imagen || "https://via.placeholder.com/400x240?text=Producto";
+      card.appendChild(img);
+
+      const h3 = document.createElement("h3");
+      h3.textContent = producto.nombre;
+      card.appendChild(h3);
+
+      const price = document.createElement("p");
+      price.className = "price";
+      price.textContent = formatoPrecio.format(producto.precio);
+      card.appendChild(price);
+
+      if (producto.descripcion){
+        const desc = document.createElement("p");
+        desc.className = "desc";
+        desc.textContent = producto.descripcion;
+        card.appendChild(desc);
+      }
+
+      return card;
+    }
+
+    function render(){
+      const visibles = filtrarOrdenar(state.data);
+      limpiarNodo(container);
+      visibles.forEach(p => container.appendChild(crearCard(p)));
+      countEl.textContent = visibles.length === 1
+        ? "1 resultado"
+        : `${visibles.length} resultados`;
+      sortBtn.textContent = state.sortAsc ? "Ordenar: Precio ↑" : "Ordenar: Precio ↓";
+    }
+
+
+    sortBtn.addEventListener("click", () => {
+      state.sortAsc = !state.sortAsc;
+      render();
+    });
+
+    searchInput.addEventListener("input", (e) => {
+      state.query = e.target.value || "";
+      render();
+    });
+
+
+    render();
+
+
+  </script>
+</body>
+</html>
