@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="estilos1.css">
+</head>
+<body>
+ <header>
+    <div class="container nav">
+      <div class="brand">The Bravery</div>
+      <ul>
+        <li><a href="#carta">Carta</a></li>
+        <li><a href="#reservas">Reservas</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Cocina Mediterránea con Encanto</h1>
+    <p>Un rincón acogedor en Marbella donde el sabor se une al arte y la tradición.</p>
+    <button class="btn">Ver Carta</button>
+  </section>
+
+  <section id="carta">
+    <div class="container">
+      <div class="section-header">
+        <h2>Nuestra Carta</h2>
+        <p>Tapas, entrantes, pescados, carnes y ensaladas inspiradas en la cocina andaluza con toques de autor.</p>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <h3>Albóndiga confitada</h3>
+          <p>Jugosa y aromática con especias mediterráneas.</p>
+          <span class="price">4,90€</span>
+        </div>
+        <div class="menu-card">
+          <h3>Ensaladilla rusa</h3>
+          <p>Clásico de nuestra tierra con un toque de autor.</p>
+          <span class="price">5,80€</span>
+        </div>
+        <div class="menu-card">
+          <h3>Merluza a la parrilla</h3>
+          <p>Con patatas al romero y alioli suave.</p>
+          <span class="price">23,90€</span>
+        </div>
+        <div class="menu-card">
+          <h3>Entrecot de vaca vieja</h3>
+          <p>Selección premium de carne gallega madurada.</p>
+          <span class="price">24,90€</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reservas">
+    <div class="container">
+      <div class="section-header">
+        <h2>Reservas</h2>
+        <p>Selecciona fecha y hora para tu experiencia gastronómica.</p>
+      </div>
+      <form class="reserva">
+        <label>Fecha</label>
+        <input type="date" />
+        <label>Hora</label>
+        <select><option>13:00</option><option>14:00</option><option>20:00</option><option>21:00</option></select>
+        <label>Comensales</label>
+        <select><option>2</option><option>3</option><option>4</option><option>5+</option></select>
+        <label>Nombre</label>
+        <input type="text" placeholder="Tu nombre" />
+        <label>Teléfono</label>
+        <input type="tel" placeholder="Tu número" />
+        <button type="submit">Reservar mesa</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <div class="container">
+      <div class="section-header">
+        <h2>Galería</h2>
+        <p>Descubre nuestro ambiente mediterráneo con terraza y encanto local.</p>
+      </div>
+      <div class="galeria-grid">
+        <img src="https://images.unsplash.com/photo-1541542684-4a9c382e0b69?q=80&w=1200&auto=format&fit=crop" alt="Terraza del restaurante" />
+        <img src="https://images.unsplash.com/photo-1555992336-03a23c0f6de0?q=80&w=1200&auto=format&fit=crop" alt="Plato mediterráneo" />
+        <img src="https://images.unsplash.com/photo-1516685018646-549198525c1b?q=80&w=1200&auto=format&fit=crop" alt="Mesa decorada con flores" />
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 The Bravery · Av. del Mar, Marbella · Tel. +34 600 000 000</p>
+  </footer> 
+</body>
+</html>

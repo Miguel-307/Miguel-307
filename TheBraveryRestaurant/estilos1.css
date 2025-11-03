@@ -1,0 +1,109 @@
+/* ==== ESTILOS DEL HEADER / NAVEGADOR ==== */
+header {
+  background-image: url("imagenes/nav.png"); /* Cambia por tu imagen */
+  background-size: contain;        /* 🔹 Muestra la imagen entera */
+  background-position: center;     /* Centrada */
+  background-repeat: no-repeat;    /* Sin repetir */
+  background-color: #000;          /* Fondo negro detrás por si sobran bordes */
+  color: #fff;
+  position: relative;
+  z-index: 1000;
+  height: 400px;                   /* Ajusta según el tamaño de tu imagen */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Capa de superposición semitransparente */
+header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* Contenedor del menú */
+.container.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Marca principal */
+.brand {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #f8f8f8;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.brand:hover {
+  color: #d4af37; /* dorado elegante */
+}
+
+/* Lista de navegación */
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Enlaces del menú */
+.nav ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Subrayado animado */
+.nav ul li a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -5px;
+  background-color: #d4af37;
+  transition: width 0.3s ease;
+}
+
+.nav ul li a:hover::after {
+  width: 100%;
+}
+
+.nav ul li a:hover {
+  color: #d4af37;
+}
+
+/* Adaptable a pantallas pequeñas */
+@media (max-width: 768px) {
+  .container.nav {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .brand {
+    font-size: 1.6rem;
+  }
+}

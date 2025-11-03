@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mijesux — Plataforma modular para pymes</title>
+  <meta name="description" content="Mijesux: plataforma modular (stock, TPV, reservas, tienda online y analítica) para restaurantes, comercios y servicios. Rápida, segura y fácil de usar."/>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Ccircle cx='128' cy='128' r='120' fill='%2300a8ff'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-size='120' font-family='Arial' fill='white'%3EM%3C/text%3E%3C/svg%3E">
+  <style>
+    :root{
+      --bg:#0e0f12;
+      --card:#171a21;
+      --muted:#98a2b3;
+      --text:#f3f4f6;
+      --accent:#00a8ff;
+      --accent-2:#4cd2ff;
+      --ok:#22c55e;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --border: #232734;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --max: 1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(0,168,255,.18), transparent 60%),
+                  radial-gradient(800px 400px at 0% 20%, rgba(76,210,255,.10), transparent 60%),
+                  var(--bg);
+      line-height:1.6;
+      letter-spacing:.2px;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{color:var(--accent-2)}
+    .container{max-width:var(--max);margin:0 auto;padding:0 24px}
+    /* NAV */
+    header{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background: rgba(14,15,18,.65);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      height:72px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.3px
+    }
+    .logo{
+      width:36px;height:36px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:grid;place-items:center;box-shadow:var(--shadow)
+    }
+    .logo span{font-weight:800;color:#001018}
+    .nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0}
+    .nav a{padding:10px 12px;border-radius:10px;color:#e5e7eb}
+    .nav a:hover{background:rgba(255,255,255,.06)}
+    .cta{
+      padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(0,168,255,.2), rgba(0,168,255,.05));
+    }
+    .menu-btn{display:none;background:none;border:0;color:var(--text);font-size:22px}
+    @media (max-width:900px){
+      .nav ul{display:none}
+      .menu-btn{display:block}
+      .nav.open ul{
+        display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;
+        background:rgba(14,15,18,.98);padding:16px;border-bottom:1px solid var(--border);
+      }
+    }
+    /* HERO */
+    .hero{
+      padding:64px 0 24px;
+    }
+    .hero-grid{
+      display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;
+    }
+    @media (max-width:1000px){.hero-grid{grid-template-columns:1fr}}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:12px;color:#b8c2cc;background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.1);padding:6px 10px;border-radius:999px
+    }
+    h1{
+      font-size: clamp(28px, 4vw, 48px);
+      line-height:1.15;margin:16px 0 8px;
+    }
+    .lead{font-size: clamp(15px, 2.1vw, 19px);color:var(--muted);max-width:60ch}
+    .btns{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12);
+      background:#12151d;transition:.2s;cursor:pointer
+    }
+    .btn.primary{
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      color:#001018;font-weight:700;border:0;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    /* DASH MOCK */
+    .mock{
+      border:1px solid var(--border);border-radius:16px;background:linear-gradient(180deg,#10131a,#0c0f14);
+      box-shadow:var(--shadow);overflow:hidden
+    }
+    .mock .top{
+      height:44px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;padding:0 12px
+    }
+    .dot{width:10px;height:10px;border-radius:50%}
+    .dot.r{background:#ff5f56}.dot.y{background:#ffbd2e}.dot.g{background:#27c93f}
+    .mock-body{padding:16px}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    @media (max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+    .kpi{
+      background:#0f131a;border:1px solid var(--border);border-radius:12px;padding:14px
+    }
+    .kpi h4{margin:0 0 6px;font-size:13px;color:#cbd5e1}
+    .kpi .v{font-size:20px;font-weight:800}
+    .chart{
+      height:140px;margin-top:12px;border-radius:10px;border:1px dashed #2a3142;
+      display:grid;place-items:center;color:#6b7280;font-size:13px
+    }
+    /* FEATURES */
+    section{padding:64px 0;border-top:1px solid var(--border)}
+    .sec-title{font-size:28px;margin:0 0 12px}
+    .sec-lead{color:var(--muted);max-width:65ch;margin-bottom:26px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media (max-width:1000px){.grid-3{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:700px){.grid-3{grid-template-columns:1fr}}
+    .card{
+      background:linear-gradient(180deg,#11151d,#0d1016);border:1px solid var(--border);
+      border-radius:18px;padding:18px;box-shadow:var(--shadow);min-height:100%
+    }
+    .icon{
+      width:40px;height:40px;border-radius:12px;
+      background:linear-gradient(135deg, rgba(0,168,255,.25), rgba(76,210,255,.15));
+      display:grid;place-items:center;margin-bottom:10px;border:1px solid rgba(255,255,255,.1)
+    }
+    .card h3{margin:0 0 8px;font-size:18px}
+    .meta{color:#9aa3af;font-size:14px}
+    .tag{display:inline-flex;gap:6px;align-items:center;font-size:12px;color:#cbd5e1;background:#10131a;border:1px solid var(--border);padding:6px 10px;border-radius:999px}
+    .stack{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    /* PRICING */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media (max-width:1000px){.pricing{grid-template-columns:1fr}}
+    .price{
+      padding:22px;border-radius:18px;border:1px solid var(--border);background:#0f131a
+    }
+    .price h3{margin:0 0 6px}
+    .price .p{font-size:36px;font-weight:800;margin:4px 0 14px}
+    .price ul{margin:0;padding-left:18px;color:#cbd5e1}
+    /* FAQ */
+    details{background:#0f131a;border:1px solid var(--border);border-radius:12px;padding:14px}
+    details+details{margin-top:12px}
+    summary{cursor:pointer;font-weight:600}
+    /* CONTACT */
+    .contact{
+      display:grid;grid-template-columns:1.1fr .9fr;gap:22px
+    }
+    @media (max-width:900px){.contact{grid-template-columns:1fr}}
+    input,textarea{
+      width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);
+      background:#0c0f14;color:var(--text);outline:none
+    }
+    textarea{min-height:120px;resize:vertical}
+    .small{font-size:12px;color:#9aa3af}
+    footer{padding:32px 0;color:#94a3b8}
+    .foot{
+      display:flex;gap:18px;justify-content:space-between;align-items:center;flex-wrap:wrap
+    }
+    .foot .mini{display:flex;align-items:center;gap:10px}
+    /* Reveal anim */
+    .reveal{opacity:0;transform:translateY(14px);transition:all .5s}
+    .reveal.show{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header>
+    <div class="container nav" id="nav">
+      <div class="brand">
+        <div class="logo"><span>⚡</span></div>
+        <div>
+          <div style="font-weight:800">Mijesux</div>
+          <div style="font-size:12px;color:#9aa3af;margin-top:-4px">Plataforma modular para pymes</div>
+        </div>
+      </div>
+      <button class="menu-btn" aria-label="Abrir menú" onclick="toggleMenu()">☰</button>
+      <ul>
+        <li><a href="#funciones">Funciones</a></li>
+        <li><a href="#sectores">Sectores</a></li>
+        <li><a href="#precios">Precios</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a class="cta" href="#contacto">Probar demo</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <span class="eyebrow">Nuevo nombre · misma ambición</span>
+        <h1>Mijesux: todo lo que tu negocio necesita, conectado.</h1>
+        <p class="lead">
+          Controla <strong>stock</strong>, vende con <strong>TPV</strong>, recibe <strong>reservas</strong>, monta tu <strong>tienda online</strong>
+          y entiende tu negocio con <strong>analítica</strong>. Todo en una plataforma modular, rápida y segura.
+        </p>
+        <div class="btns">
+          <a href="#contacto" class="btn primary">Solicitar acceso a la demo</a>
+          <a href="#funciones" class="btn">Ver funcionalidades</a>
+        </div>
+        <div class="stack">
+          <span class="tag">⚙️ Backend: Spring Boot</span>
+          <span class="tag">🧩 Frontend: React</span>
+          <span class="tag">🗄️ DB: MySQL/MariaDB</span>
+          <span class="tag">🔐 JWT · RBAC</span>
+          <span class="tag">🚀 API REST</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <!-- Simple mock dashboard -->
+        <div class="mock" aria-label="Vista previa del panel de Mijesux">
+          <div class="top"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+          <div class="mock-body">
+            <div class="kpis">
+              <div class="kpi"><h4>Ventas (hoy)</h4><div class="v">1.240€</div><div class="meta">+12% vs ayer</div></div>
+              <div class="kpi"><h4>Reservas</h4><div class="v">36</div><div class="meta">Sáb 20:00 pico</div></div>
+              <div class="kpi"><h4>Stock bajo</h4><div class="v" style="color:var(--warn)">7</div><div class="meta">Avisos activos</div></div>
+              <div class="kpi"><h4>Ticket medio</h4><div class="v">18,90€</div><div class="meta">+0,9€ semana</div></div>
+            </div>
+            <div class="chart">Gráfico ventas 7 días</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="funciones">
+    <div class="container">
+      <h2 class="sec-title">Módulos que crecen contigo</h2>
+      <p class="sec-lead">Activa solo lo que necesitas ahora. Añade más cuando tu negocio lo pida.</p>
+
+      <div class="grid-3">
+        <article class="card reveal">
+          <div class="icon">📦</div>
+          <h3>Gestión de stock</h3>
+          <p class="meta">Entradas/salidas, lotes y variantes, alertas por mínimos, inventarios y proveedores.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon">🧾</div>
+          <h3>TPV / Punto de venta</h3>
+          <p class="meta">Ventas rápidas, tickets, descuentos, roles de personal y cierres de caja.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon">📅</div>
+          <h3>Reservas</h3>
+          <p class="meta">Agenda visual, aforos, turnos configurables, confirmaciones por email.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon">🛒</div>
+          <h3>Tienda online</h3>
+          <p class="meta">Catálogo, pasarelas de pago, envíos, cupones y sincronización con stock.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon">📈</div>
+          <h3>Analítica</h3>
+          <p class="meta">KPIs, comparativas, productos top, predicciones simples y exportación CSV.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon">👥</div>
+          <h3>Clientes & CRM</h3>
+          <p class="meta">Historial, preferencias, segmentación y campañas básicas.</p>
+        </article>
+      </div>
+
+      <div class="card reveal" style="margin-top:18px">
+        <div class="icon">🧩</div>
+        <h3>Integraciones</h3>
+        <p class="meta">Conecta con tu web actual (WordPress/PHP), lectores de código de barras, impresoras de tickets y más. API REST para que desarrolles lo que falte.</p>
+        <div class="stack">
+          <span class="tag">🔌 Webhooks</span>
+          <span class="tag">🧾 CSV/JSON</span>
+          <span class="tag">📤 Exportación</span>
+          <span class="tag">🛡️ Copias de seguridad</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTORS -->
+  <section id="sectores">
+    <div class="container">
+      <h2 class="sec-title">Hecho para tus sectores</h2>
+      <p class="sec-lead">Diseñado con casos reales de <strong>restauración</strong>, <strong>retail</strong> y <strong>servicios</strong>.</p>
+      <div class="grid-3">
+        <div class="card reveal">
+          <div class="icon">🍽️</div>
+          <h3>Restaurantes</h3>
+          <p class="meta">Reservas por turnos, mesas, menús y control de cocina.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon">🛍️</div>
+          <h3>Comercios</h3>
+          <p class="meta">Variantes, tallas/colores, etiquetas rápidas y devoluciones.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon">🧰</div>
+          <h3>Servicios</h3>
+          <p class="meta">Citas, recordatorios, paquetes y facturación simple.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="precios">
+    <div class="container">
+      <h2 class="sec-title">Precios simples</h2>
+      <p class="sec-lead">Empieza pequeño y escala sin complicaciones. Sin permanencia.</p>
+      <div class="pricing">
+        <div class="price reveal">
+          <h3>Starter</h3>
+          <div class="p">9€/mes</div>
+          <ul>
+            <li>1 módulo activo</li>
+            <li>1 usuario</li>
+            <li>Soporte por email</li>
+          </ul>
+          <div class="btns" style="margin-top:14px"><a class="btn" href="#contacto">Comenzar</a></div>
+        </div>
+        <div class="price reveal" style="border-color:rgba(0,168,255,.5)">
+          <h3>Pro</h3>
+          <div class="p">29€/mes</div>
+          <ul>
+            <li>Hasta 4 módulos</li>
+            <li>5 usuarios</li>
+            <li>Soporte prioritario</li>
+            <li>Exportación CSV</li>
+          </ul>
+          <div class="btns" style="margin-top:14px"><a class="btn primary" href="#contacto">Probar Pro</a></div>
+        </div>
+        <div class="price reveal">
+          <h3>Empresa</h3>
+          <div class="p">A medida</div>
+          <ul>
+            <li>Módulos ilimitados</li>
+            <li>Usuarios ilimitados</li>
+            <li>Integraciones y SLA</li>
+          </ul>
+          <div class="btns" style="margin-top:14px"><a class="btn" href="#contacto">Pide presupuesto</a></div>
+        </div>
+      </div>
+      <p class="small" style="margin-top:10px">*Precios orientativos. Impuestos no incluidos. Puedes cambiar de plan cuando quieras.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <h2 class="sec-title">Preguntas frecuentes</h2>
+      <div class="reveal">
+        <details>
+          <summary>¿Puedo usar solo un módulo (por ejemplo, Reservas)?</summary>
+          <p>Sí. Activas el módulo que quieras y el resto queda deshabilitado. Puedes añadir más cuando lo necesites.</p>
+        </details>
+        <details>
+          <summary>¿Necesito cambiar mi web actual?</summary>
+          <p>No. Mijesux expone una API y widgets que puedes incrustar en tu web. También podemos crear tu web si lo prefieres.</p>
+        </details>
+        <details>
+          <summary>¿Dónde se guardan mis datos?</summary>
+          <p>En servidores europeos con copias de seguridad programadas. Exporta tus datos cuando quieras (CSV/JSON).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contacto">
+    <div class="container contact">
+      <div class="reveal">
+        <h2 class="sec-title">Pide tu demo</h2>
+        <p class="sec-lead">Cuéntanos tu caso y te preparamos una demostración con tus datos de ejemplo.</p>
+       <form
+  action="https://formspree.io/f/mnnokvyr"
+  method="POST"
+>
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
+  <!-- your other form fields go here -->
+  <button type="submit">Send</button>
+</form>
+      </div>
+      <div class="reveal card">
+        <div class="icon">🔐</div>
+        <h3>Seguridad por defecto</h3>
+        <p class="meta">Autenticación JWT, roles y permisos (RBAC), cifrado en tránsito, registros de actividad y backups.</p>
+        <div class="icon" style="margin-top:14px">⚙️</div>
+        <h3>Tecnología</h3>
+        <p class="meta">Spring Boot · React · MySQL/MariaDB · API REST · Despliegue en contenedor.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot">
+      <div class="mini">
+        <div class="logo" style="width:28px;height:28px"><span>⚡</span></div>
+        <span>Mijesux © <span id="year"></span></span>
+      </div>
+      <div class="mini">
+        <a href="#faq">FAQ</a> · <a href="#contacto">Contacto</a> · <a href="#">Términos</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Menú móvil
+    function toggleMenu(){ document.getElementById('nav').classList.toggle('open'); }
+
+    // Animación de aparición al hacer scroll
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); obs.unobserve(e.target); }
+      })
+    }, {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+    // Simulación de envío (a integrar con backend o servicio)
+    function sendForm(ev){
+      ev.preventDefault();
+      const msg = document.getElementById('formMsg');
+      msg.textContent = '¡Gracias! Te contactaremos en breve para agendar la demo.';
+      // Aquí puedes hacer fetch() a tu endpoint, por ejemplo:
+      // fetch('/api/contacto', { method:'POST', body:new FormData(ev.target) })
+    }
+  </script>
+</body>
+</html>
