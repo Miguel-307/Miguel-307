@@ -48,7 +48,11 @@ function mostrar_tabla($datos) {
         $res.="<table border=1>";
         $res.="<tr><th>Id</th><th>Nombre</th><th>Teléfono</th><th>Modificar</th><th>Borrar</th></tr>";
         foreach($datos as $sh) {
-            $res.="<tr><td>".$sh[0]."</td><td>".$sh[1]."</td><td>".$sh[2]."</td><td><a href='formulariomodificar.php?id=".$sh[0]."'>Modificar</a></td><td><a href='borrar.php?id=".$sh[0]."'>Eliminar</a></td></tr>";
+            $res.="<tr><td>".$sh[0]."</td>
+            <td>".$sh[1]."</td>
+            <td>".$sh[2]."</td>
+            <td><a href='formulariomodificar.php?id=".$sh[0]."'>Modificar</a></td>
+            <td><a href='borrar.php?id=".$sh[0]."'>Eliminar</a></td></tr>";
         }
         $res.="</table><br>";
         $res.="<a href='formularioinsertar.php'>Nuevo registro</a>";
