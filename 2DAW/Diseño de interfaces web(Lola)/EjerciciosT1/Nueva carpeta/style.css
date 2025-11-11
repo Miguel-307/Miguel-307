@@ -1,0 +1,77 @@
+/* Centrar el formulario en pantalla */
+.centrado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+}
+
+/* Contenedor principal del formulario */
+.contact-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(20em, 100%), 1fr));
+  gap: 1.2rem;
+  background-color: #e9e9e9;
+  padding: 2rem 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  width: 95%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Cada grupo de campo */
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Etiquetas */
+label {
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+/* Campos de texto */
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  padding: 0.7rem;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+/* Efecto al enfocar */
+input:focus {
+  border-color: black;
+  outline: none;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón de envío */
+#boton {
+  background-color: #d9d9d9;
+  color: black;
+  border: 1px solid black;
+  padding: 0.9rem;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#boton:hover {
+  background-color: #222;
+  color: white;
+}
+
+/* La línea mágica: el botón ocupa todo el ancho */
+.grid-col-span2 {
+  grid-column: 1 / -1;
+}
