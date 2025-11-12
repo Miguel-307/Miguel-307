@@ -2,7 +2,7 @@
 $host = "localhost";
 $dbname = "northwind";
 $user = "root";
-$pass = "SQLcontraseña";
+$pass = "";
 
 try {
     $conexion = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
