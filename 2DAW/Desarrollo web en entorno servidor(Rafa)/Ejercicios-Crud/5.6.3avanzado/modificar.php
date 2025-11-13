@@ -2,7 +2,13 @@
 require_once "conexion.php";
 require_once "funciones.php";
 
-if (!isset($_SESSION['usuario'])) { header("Location: login.php"); exit; }
+if (!isset($_COOKIE['usuario'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$usuario = $_COOKIE['usuario'];
+
 
 $id = $_GET['id'] ?? null;
 if (!$id) die("ID inválido");

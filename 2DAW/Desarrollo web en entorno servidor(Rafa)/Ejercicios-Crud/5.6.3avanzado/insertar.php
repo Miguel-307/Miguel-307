@@ -1,8 +1,13 @@
 <?php
 require_once "conexion.php";
 require_once "funciones.php";
+if (!isset($_COOKIE['usuario'])) {
+    header("Location: login.php");
+    exit;
+}
 
-if (!isset($_SESSION['usuario'])) { header("Location: login.php"); exit; }
+$usuario = $_COOKIE['usuario'];
+
 
 if ($_POST) {
     insertar_producto($conexion, $_POST);

@@ -2,13 +2,18 @@
 require_once "conexion.php";
 require_once "funciones.php";
 
-if ($_POST) {
-    $user = $_POST['usuario'] ?? '';
-    $pass = $_POST['clave'] ?? '';
+if (!isset($_COOKIE['usuario'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$usuario = $_COOKIE['usuario'];
+
 
     $empleado = verificar_login($conexion, $user, $pass);
     if ($empleado) {
-        $_SESSION['usuario'] = $empleado['lastname'];
+        // Guardar cookie con el nombre de usuario por 1 hora
+        setcookie("usuario", $empleado['lastName'], time() + 3600, "/");
         header("Location: index.php");
         exit;
     } else {
