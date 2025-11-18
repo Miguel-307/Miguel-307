@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master de Formularios JS</title>
+    <style>
+        :root { --primary: #6c5ce7; --light: #f5f6fa; --dark: #2d3436; --success: #00b894; --danger: #d63031; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--light); padding: 20px; max-width: 1000px; margin: 0 auto; }
+        h1, h2 { color: var(--dark); border-bottom: 2px solid var(--primary); padding-bottom: 10px; }
+        
+        /* Layout */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        
+        /* Estilos de Formulario */
+        label { display: block; margin-top: 10px; font-weight: bold; color: #666; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; transition: 0.3s; }
+        
+        /* Efectos visuales para Focus/Blur */
+        input:focus { border-color: var(--primary); background-color: #eef; outline: none; }
+        
+        /* Botones de comandos */
+        .btn-cmd { background: var(--dark); color: white; border: none; padding: 5px 10px; margin: 5px 2px; border-radius: 4px; cursor: pointer; font-size: 0.85em; font-family: monospace; }
+        .btn-cmd:hover { background: #444; }
+        .btn-submit { background: var(--success); width: 100%; padding: 10px; margin-top: 15px; color: white; border: none; cursor: pointer; font-size: 1.1em; }
+        
+        /* Consola */
+        #consola { background: #1e272e; color: #00d2d3; padding: 15px; border-radius: 5px; height: 250px; overflow-y: auto; font-family: monospace; white-space: pre-wrap; border: 1px solid #ccc; }
+        .log-cmd { color: #ff9f43; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>📝 Laboratorio de Formularios y Eventos</h1>
+
+    <div class="grid">
+        
+        <div class="card">
+            <h2>1. Propiedades y Métodos</h2>
+            <form name="formMecanico" id="form-mecanico" action="#">
+                <label>Input de Texto (name="usuario"):</label>
+                <input type="text" name="usuario" id="inp-usuario" placeholder="Escribe algo...">
+                
+                <label>Checkbox (name="vip"):</label>
+                <div style="margin-top:5px">
+                    <input type="checkbox" name="vip" id="inp-vip" style="width:auto;"> Es VIP
+                </div>
+
+                <label>Select (name="ciudad"):</label>
+                <select name="ciudad" id="inp-ciudad">
+                    <option value="">-- Elige --</option>
+                    <option value="madrid">Madrid</option>
+                    <option value="bcn">Barcelona</option>
+                </select>
+            </form>
+
+            <hr>
+            <p><strong>🧪 Prueba los Comandos:</strong></p>
+            
+            <button class="btn-cmd" onclick="verAccesoForm()">document.forms['...']</button>
+            <button class="btn-cmd" onclick="verElementos()">form.elements</button>
+            <button class="btn-cmd" onclick="verLongitud()">form.length</button>
+            <br>
+            <button class="btn-cmd" onclick="verValor()">input.value</button>
+            <button class="btn-cmd" onclick="verTipo()">input.type</button>
+            <button class="btn-cmd" onclick="verChecked()">input.checked</button>
+            <br>
+            <button class="btn-cmd" onclick="probarFocus()">input.focus()</button>
+            <button class="btn-cmd" onclick="probarBlur()">input.blur()</button>
+            <button class="btn-cmd" onclick="toggleDisabled()">input.disabled = ...</button>
+            <br>
+            <button class="btn-cmd" onclick="resetearForm()" style="background:var(--danger)">form.reset()</button>
+            </div>
+
+        <div class="card">
+            <h2>2. Eventos (En vivo)</h2>
+            <p style="font-size:0.9em; color:#666;">Abre la consola abajo para ver qué ocurre.</p>
+            
+            <form id="form-eventos">
+                <label>Evento 'focus' y 'blur' (Entra y sal):</label>
+                <input type="text" id="ev-foco" placeholder="Haz clic aquí y fuera...">
+
+                <label>Evento 'input' (Escribe):</label>
+                <input type="text" id="ev-input" placeholder="Detecta cada tecla...">
+                <div id="feedback-input" style="font-size:0.8em; color:blue;"></div>
+
+                <label>Evento 'change' (Cambia y sal):</label>
+                <select id="ev-change">
+                    <option value="A">Opción A</option>
+                    <option value="B">Opción B</option>
+                </select>
+
+                <button type="submit" class="btn-submit">Enviar (submit)</button>
+                <p style="font-size:0.8em; text-align:center; margin-top:5px;">
+                    (Usa <code>preventDefault</code> para no recargar)
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <h3>📟 Consola de Salida</h3>
+    <div id="consola">Esperando acciones...</div>
+
+    <script>
+        // ==========================================
+        // UTILIDAD PARA LOGS
+        // ==========================================
+        function log(comando, resultado) {
+            const consola = document.getElementById('consola');
+            consola.innerHTML += `\n<span class="log-cmd">> ${comando}</span>\n  ↳ ${resultado}`;
+            consola.scrollTop = consola.scrollHeight;
+        }
+
+        // REFERENCIAS GLOBALES
+        // Acceso por nombre (document.forms['nombre'])
+        const form1 = document.forms['formMecanico']; 
+        const inpUser = form1.elements['usuario'];
+        const inpVip = form1.elements['vip'];
+
+        // ==========================================
+        // 1. PROPIEDADES Y MÉTODOS
+        // ==========================================
+
+        function verAccesoForm() {
+            // document.forms: Colección de formularios
+            log("document.forms['formMecanico']", "Formulario accedido correctamente.");
+            console.log(form1);
+        }
+
+        function verElementos() {
+            // form.elements: Colección de controles dentro del form
+            log("form.elements", `Hay ${form1.elements.length} controles accesibles.`);
+            console.log(form1.elements);
+        }
+
+        function verLongitud() {
+            // form.length: Número de controles
+            log("form.length", `El formulario tiene ${form1.length} elementos.`);
+        }
+
+        function verValor() {
+            // input.value: Obtiene el texto escrito
+            log("input.value", `Valor actual: "${inpUser.value}"`);
+        }
+
+        function verTipo() {
+            // input.type: Tipo de control (text, checkbox, etc.)
+            log("input.type", `Tipo del input: "${inpUser.type}"`);
+        }
+
+        function verChecked() {
+            // input.checked: Solo para checkbox/radio (true/false)
+            log("input.checked", `¿Está marcado?: ${inpVip.checked}`);
+        }
+
+        function probarFocus() {
+            // input.focus(): Pone el cursor dentro
+            inpUser.focus();
+            log("input.focus()", "El cursor está ahora en el campo 'Usuario'.");
+        }
+
+        function probarBlur() {
+            // input.blur(): Quita el cursor
+            inpUser.blur();
+            log("input.blur()", "Se ha retirado el foco del campo.");
+        }
+
+        function toggleDisabled() {
+            // input.disabled: Activa o desactiva el campo
+            inpUser.disabled = !inpUser.disabled; // Invertir estado
+            log("input.disabled", `Estado deshabilitado: ${inpUser.disabled}`);
+        }
+
+        function resetearForm() {
+            // form.reset(): Borra todo y vuelve a valores iniciales
+            form1.reset();
+            log("form.reset()", "Formulario reiniciado.");
+        }
+
+        // ==========================================
+        // 2. EVENTOS (addEventListener)
+        // ==========================================
+        
+        const inputFoco = document.getElementById('ev-foco');
+        const inputInput = document.getElementById('ev-input');
+        const selectChange = document.getElementById('ev-change');
+        const formEventos = document.getElementById('form-eventos');
+
+        // Evento FOCUS (Entrar)
+        inputFoco.addEventListener('focus', (e) => {
+            // e.target: El elemento que disparó el evento
+            e.target.style.backgroundColor = "#fab1a0";
+            log("Evento: focus", "Has entrado en el campo.");
+        });
+
+        // Evento BLUR (Salir)
+        inputFoco.addEventListener('blur', (e) => {
+            e.target.style.backgroundColor = ""; // Restaurar color
+            log("Evento: blur", "Has salido del campo.");
+        });
+
+        // Evento INPUT (Escribir en tiempo real)
+        inputInput.addEventListener('input', (e) => {
+            const texto = e.target.value;
+            document.getElementById('feedback-input').textContent = texto;
+            // No logueamos aquí para no saturar la consola
+        });
+
+        // Evento CHANGE (Cambiar valor y confirmar/salir)
+        selectChange.addEventListener('change', (e) => {
+            log("Evento: change", `Nuevo valor seleccionado: "${e.target.value}"`);
+        });
+
+        // Evento SUBMIT (Enviar formulario)
+        formEventos.addEventListener('submit', (e) => {
+            // IMPORTANTE: e.preventDefault() evita la recarga de la página
+            e.preventDefault();
+            
+            log("Evento: submit", "¡DETENIDO! Se ha evitado el envío real con preventDefault().");
+            log("Validación", "Aquí iría tu lógica de validación...");
+        });
+
+    </script>
+</body>
+</html>
