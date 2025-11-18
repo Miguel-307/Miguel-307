@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lenguaje de Marcas - Design Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Botón genérico estilo Teal */
+        .btn {
+            display: inline-block;
+            background-color: #1aaeb1;
+            color: white;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #148a8c;
+        }
+
+        /* --- HEADER / HERO --- */
+        header {
+            background-color: #2ebfb5; /* Color Turquesa */
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            letter-spacing: 2px;
+        }
+
+        header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 40px;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        nav ul li a:hover {
+            color: #125c5e;
+        }
+
+        /* --- PORTFOLIO SECTION --- */
+        .portfolio {
+            text-align: center;
+            padding: 60px 5%;
+            background-color: white;
+        }
+
+        .portfolio h2 {
+            font-size: 2.5rem;
+        }
+        
+        .section-subtitle {
+            color: #888;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 250px;
+            text-align: left;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border-bottom: 4px solid #1aaeb1; 
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* --- WELCOME SECTION --- */
+        .welcome {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 60px 20%;
+        }
+
+        .welcome h2 {
+            margin-bottom: 20px;
+        }
+        
+        .welcome p {
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        /* --- FORM SECTION (Lorem Ipsum) --- */
+        .contact-form-section {
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-container input, 
+        .form-container textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .form-container textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* --- FOOTER (Get in touch) --- */
+        footer {
+            background-color: #93a778; /* Verde Oliva */
+            color: white;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        footer h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        footer p {
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            padding: 0 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            color: white;
+            border-radius: 3px;
+            font-size: 1.2rem;
+        }
+        
+        .social-icons a:hover {
+            background-color: black;
+        }
+
+        .copyright {
+            background-color: #ff4500; /* Naranja fuerte */
+            padding: 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Lenguaje de marcas</h1>
+        <p class="subtitle">DESIGN BY XXXXXX</p>
+        
+        <nav>
+            <ul>
+                <li><a href="#">HOMEPAGE</a></li>
+                <li><a href="#">OUR CLIENTS</a></li>
+                <li><a href="#">ABOUT US</a></li>
+                <li><a href="#">CAREERS</a></li>
+                <li><a href="#">CONTACT US</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="portfolio">
+        <h2>Design Portfolio</h2>
+        <p class="section-subtitle">INTEGER SIT AMET PEDE VEL ARCU ALIQUET PRETIUM</p>
+
+        <div class="gallery">
+            <div class="card">
+                <img src="imagen2.jpg" alt="Comic Marvel">
+                <h3>LOREM IPSUM DOLOR</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <button class="btn">LOREM IPSUM</button>
+            </div>
+
+            <div class="card">
+                <img src="imagen2.jpg" alt="Comic Marvel">
+                <h3>LOREM IPSUM DOLOR</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <button class="btn">LOREM IPSUM</button>
+            </div>
+
+            <div class="card">
+                <img src="imagen1.jpg" alt="Dibujo Alien">
+                <h3>LOREM IPSUM DOLOR</h3>
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <button class="btn">LOREM IPSUM</button>
+            </div>
+
+            <div class="card">
+                <img src="imagen2.jpg" alt="Comic Marvel">
+                <h3>LOREM IPSUM DOLOR</h3>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <button class="btn">LOREM IPSUM</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="welcome">
+        <h2>Welcome to our website</h2>
+        <p class="section-subtitle" style="color: #666;">LOREM IPSUM DOLOR SIT AMET</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <button class="btn">LOREM IPSUM</button>
+    </section>
+
+    <section class="contact-form-section">
+        <h2>Lorem Ipsum</h2>
+        <p class="section-subtitle">NAM SED PURUS DONEC SED ANTE ULLAMCORPER</p>
+        
+        <form class="form-container">
+            <input type="text" placeholder="Name">
+            <input type="email" placeholder="Email">
+            <textarea placeholder="Message"></textarea>
+            <div style="text-align: center;">
+                <button type="submit" class="btn">LOREM IPSUM</button>
+            </div>
+        </form>
+    </section>
+
+    <footer>
+        <h2>Get in touch</h2>
+        <p>LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM.</p>
+        
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+            <a href="#"><i class="fab fa-google-plus-g"></i></a>
+        </div>
+
+        <div class="copyright">
+            © UNTITLED. ALL RIGHTS RESERVED. | PHOTOS BY XXXXXX | DESIGN BY XXX
+        </div>
+    </footer>
+
+</body>
+</html>
