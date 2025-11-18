@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Completo JavaScript (Temas 3-7)</title>
+    <style>
+        :root { --primary: #2c3e50; --secondary: #3498db; --accent: #e74c3c; --light: #ecf0f1; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; padding: 20px; color: #333; }
+        h1 { text-align: center; color: var(--primary); }
+        
+        /* Navegación */
+        .nav-tabs { display: flex; justify-content: center; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; }
+        .nav-btn { padding: 12px 20px; border: none; background: #ddd; cursor: pointer; font-weight: bold; border-radius: 5px 5px 0 0; transition: 0.3s; }
+        .nav-btn.active { background: var(--secondary); color: white; }
+        .nav-btn:hover:not(.active) { background: #ccc; }
+
+        /* Contenedores */
+        .tab-content { display: none; background: white; padding: 20px; border-radius: 0 0 8px 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); animation: fadeIn 0.5s; }
+        .tab-content.active { display: block; }
+        
+        /* Tarjetas de Ejercicio */
+        .card { border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px; background: #fff; border-left: 5px solid var(--secondary); }
+        .card h3 { margin-top: 0; color: var(--primary); }
+        .btn-run { background: var(--accent); color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        .btn-run:hover { background: #c0392b; }
+
+        /* Consola Visual */
+        .console-box { background: #2d2d2d; color: #0f0; font-family: 'Consolas', monospace; padding: 10px; border-radius: 4px; margin-top: 10px; min-height: 40px; white-space: pre-wrap; }
+        .code-snippet { background: #f4f4f4; padding: 10px; border-radius: 4px; font-family: monospace; color: #555; display: block; margin: 10px 0; border: 1px dashed #ccc; }
+
+        /* Elementos Interactivos Específicos */
+        .box-demo { width: 100px; height: 100px; background: var(--secondary); margin: 10px 0; transition: all 0.3s; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; }
+        .hidden { display: none; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <h1>📚 Master JavaScript: Temas 3 al 7</h1>
+    <p style="text-align:center">Selecciona un tema para ver los ejercicios extraídos de los PDFs.</p>
+
+    <div class="nav-tabs">
+        <button class="nav-btn active" onclick="openTab('tema3')">T3: Estructuras</button>
+        <button class="nav-btn" onclick="openTab('tema4')">T4: Funciones</button>
+        <button class="nav-btn" onclick="openTab('tema5')">T5: POO & JSON</button>
+        <button class="nav-btn" onclick="openTab('tema6')">T6: BOM & DOM</button>
+        <button class="nav-btn" onclick="openTab('tema7')">T7: Eventos</button>
+    </div>
+
+    <div id="tema3" class="tab-content active">
+        <h2>Tema 3: Arrays, Sets y Maps</h2>
+        
+        <div class="card">
+            <h3>3.1. Arrays y Métodos Avanzados</h3>
+            <p>Manipulación de listas usando <code>push</code>, <code>filter</code> y <code>map</code>.</p>
+            <code class="code-snippet">
+let nums = [1, 2, 3, 4, 5]; <br>
+// Filter: Solo pares<br>
+// Map: Multiplicar por 10
+            </code>
+            <button class="btn-run" onclick="ejecutarArrays()">Ejecutar Código</button>
+            <div id="out-arrays" class="console-box">// Resultado aquí...</div>
+        </div>
+
+        <div class="card">
+            <h3>3.2. Sets (Conjuntos)</h3>
+            <p>Los Sets almacenan valores únicos. Eliminan duplicados automáticamente.</p>
+            <button class="btn-run" onclick="ejecutarSets()">Probar Set</button>
+            <div id="out-sets" class="console-box">// Resultado aquí...</div>
+        </div>
+
+        <div class="card">
+            <h3>3.3. Maps (Diccionarios)</h3>
+            <p>Almacenan pares Clave-Valor de cualquier tipo.</p>
+            <button class="btn-run" onclick="ejecutarMaps()">Probar Map</button>
+            <div id="out-maps" class="console-box">// Resultado aquí...</div>
+        </div>
+    </div>
+
+    <div id="tema4" class="tab-content">
+        <h2>Tema 4: Funciones y Alcance</h2>
+
+        <div class="card">
+            <h3>4.1. Tipos de Funciones y Parámetros Rest</h3>
+            <p>Uso de funciones flecha y el operador Rest (<code>...</code>) para sumar infinitos números.</p>
+            <code class="code-snippet">const sumar = (...nums) => nums.reduce((a,b) => a+b);</code>
+            <button class="btn-run" onclick="ejecutarFunciones()">Sumar (10, 20, 30, 40)</button>
+            <div id="out-funcs" class="console-box">// Resultado...</div>
+        </div>
+
+        <div class="card">
+            <h3>4.2. Recursividad (Factorial)</h3>
+            <p>Una función que se llama a sí misma.</p>
+            <input type="number" id="input-fact" value="5" style="width:50px">
+            <button class="btn-run" onclick="ejecutarRecursividad()">Calcular Factorial</button>
+            <div id="out-rec" class="console-box">// Resultado...</div>
+        </div>
+
+        <div class="card">
+            <h3>4.3. Clausuras (Closures)</h3>
+            <p>Funciones que "recuerdan" el entorno donde fueron creadas (variables privadas).</p>
+            <button class="btn-run" onclick="usarContador()">Incrementar Contador Privado</button>
+            <div id="out-closure" class="console-box">Contador: 0</div>
+        </div>
+    </div>
+
+    <div id="tema5" class="tab-content">
+        <h2>Tema 5: Clases, Objetos y JSON</h2>
+
+        <div class="card">
+            <h3>5.1. Clases y Herencia</h3>
+            <p>Clase <code>Vehiculo</code> y subclase <code>Coche</code> que extiende su funcionalidad.</p>
+            <button class="btn-run" onclick="ejecutarPOO()">Instanciar Coche</button>
+            <div id="out-poo" class="console-box">// Info del objeto...</div>
+        </div>
+
+        <div class="card">
+            <h3>5.2. JSON (Intercambio de datos)</h3>
+            <p>Conversión de Objeto a String (<code>stringify</code>) y viceversa (<code>parse</code>).</p>
+            <button class="btn-run" onclick="ejecutarJSON()">Simular API</button>
+            <div id="out-json" class="console-box">// JSON...</div>
+        </div>
+    </div>
+
+    <div id="tema6" class="tab-content">
+        <h2>Tema 6: BOM y DOM</h2>
+
+        <div class="card">
+            <h3>6.1. BOM (Browser Object Model)</h3>
+            <p>Información del navegador y pantalla.</p>
+            <button class="btn-run" onclick="infoBOM()">Ver Info Navegador</button>
+            <div id="out-bom" class="console-box">// Info...</div>
+        </div>
+
+        <div class="card">
+            <h3>6.2. Temporizadores (SetTimeout / SetInterval)</h3>
+            <p>Cuenta atrás de 5 segundos.</p>
+            <button class="btn-run" onclick="iniciarCuenta()">Iniciar Cuenta</button>
+            <div id="out-timer" class="console-box">Esperando...</div>
+        </div>
+
+        <div class="card">
+            <h3>6.3. Manipulación del DOM</h3>
+            <p>Crear elementos HTML, cambiar estilos y atributos dinámicamente.</p>
+            <div id="zona-dom" style="border:1px dashed #ccc; padding:10px; margin:10px 0;">Zona vacía</div>
+            <button class="btn-run" onclick="manipularDOM()">Modificar Zona</button>
+        </div>
+    </div>
+
+    <div id="tema7" class="tab-content">
+        <h2>Tema 7: Gestión de Eventos</h2>
+
+        <div class="card">
+            <h3>7.1. Eventos de Ratón y Propagación</h3>
+            <p>Haz clic en la caja interior. Observa cómo el evento "burbujea" al padre si no lo detenemos.</p>
+            
+            <div id="padre" style="padding: 20px; background: #eee; border: 1px solid #999;">
+                Soy el PADRE
+                <div id="hijo" class="box-demo" style="background: var(--accent);">Soy el HIJO</div>
+            </div>
+            
+            <label><input type="checkbox" id="stopProp"> Detener Propagación (stopPropagation)</label>
+            <div id="out-events" class="console-box">Log de eventos...</div>
+        </div>
+
+        <div class="card">
+            <h3>7.2. Eventos de Teclado (Input)</h3>
+            <p>Escribe abajo. Se detectará cada tecla y se convertirá a mayúsculas en tiempo real.</p>
+            <input type="text" id="input-teclado" placeholder="Escribe aquí...">
+            <div id="out-teclado" class="console-box">Esperando teclas...</div>
+        </div>
+
+        <div class="card">
+            <h3>7.3. Prevenir Default (Formularios)</h3>
+            <p>Intenta enviar el formulario vacío. JavaScript lo interceptará.</p>
+            <form id="miFormulario">
+                <input type="text" id="campo-nombre" placeholder="Nombre obligatorio">
+                <button type="submit" class="btn-run">Enviar</button>
+            </form>
+            <div id="out-form" class="console-box">Estado: Esperando envío...</div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // UTILIDADES (Sistema de Pestañas)
+        // ==========================================
+        function openTab(tabId) {
+            // Ocultar todos los contenidos
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+            
+            // Mostrar el seleccionado
+            document.getElementById(tabId).classList.add('active');
+            // Activar botón (buscando por texto aproximado o índice, simple hack para este ejemplo)
+            event.target.classList.add('active');
+        }
+
+        function log(id, msg, append = false) {
+            const el = document.getElementById(id);
+            if (append) el.innerHTML += "<br>" + msg;
+            else el.innerHTML = msg;
+        }
+
+        // ==========================================
+        // TEMA 3: ESTRUCTURAS DE DATOS
+        // ==========================================
+        function ejecutarArrays() {
+            // 1. Creación
+            let numeros = [1, 2, 3, 4, 5];
+            
+            // 2. filter: Crea nuevo array con elementos que cumplen condición
+            let pares = numeros.filter(n => n % 2 === 0); // [2, 4]
+            
+            // 3. map: Transforma cada elemento
+            let multiplicados = numeros.map(n => n * 10); // [10, 20...]
+            
+            // 4. reduce: Acumula a un solo valor
+            let sumaTotal = numeros.reduce((total, n) => total + n, 0); // 15
+
+            let resultado = `Original: [${numeros}]
+Pares (filter): [${pares}]
+Multiplicados x10 (map): [${multiplicados}]
+Suma Total (reduce): ${sumaTotal}`;
+            
+            log('out-arrays', resultado);
+        }
+
+        function ejecutarSets() {
+            // Set: Colección de valores únicos
+            let listaDuplicada = [1, 2, 2, 3, 3, 3, 4];
+            let miSet = new Set(listaDuplicada); // Elimina duplicados
+            
+            miSet.add(5); // Añadir
+            miSet.delete(1); // Eliminar
+            let existeDos = miSet.has(2); // true
+
+            // Spread operator (...) para volver a array
+            let arrayLimpio = [...miSet];
+
+            log('out-sets', `Entrada: [${listaDuplicada}]
+Set (únicos): {${arrayLimpio.join(', ')}}
+¿Existe el 2?: ${existeDos}
+Tamaño: ${miSet.size}`);
+        }
+
+        function ejecutarMaps() {
+            // Map: Clave -> Valor (Cualquier tipo de dato como clave)
+            let inventario = new Map();
+            
+            inventario.set('manzanas', 10);
+            inventario.set('peras', 20);
+            inventario.set(true, 'Es verdad'); // Booleano como clave
+
+            let hayManzanas = inventario.get('manzanas');
+            
+            // Iteración
+            let texto = "";
+            inventario.forEach((valor, clave) => {
+                texto += `Clave: ${clave} -> Valor: ${valor} <br>`;
+            });
+
+            log('out-maps', `Valor de 'manzanas': ${hayManzanas}<br>--- Contenido ---<br>${texto}`);
+        }
+
+        // ==========================================
+        // TEMA 4: FUNCIONES
+        // ==========================================
+        function ejecutarFunciones() {
+            // Función Flecha con Rest Parameters (...)
+            // Recibe cualquier cantidad de argumentos y los mete en un array 'nums'
+            const sumarTodo = (...nums) => {
+                return nums.reduce((a, b) => a + b, 0);
+            };
+
+            let res = sumarTodo(10, 20, 30, 40);
+            log('out-funcs', `Llamada: sumarTodo(10, 20, 30, 40)
+Resultado: ${res}
+Tipo de función: Arrow Function con Rest Params`);
+        }
+
+        // Función recursiva clásica
+        function factorial(n) {
+            if (n <= 1) return 1; // Caso base
+            return n * factorial(n - 1); // Llamada recursiva
+        }
+
+        function ejecutarRecursividad() {
+            let num = parseInt(document.getElementById('input-fact').value);
+            let res = factorial(num);
+            log('out-rec', `Factorial de ${num} es: ${res}`);
+        }
+
+        // Clausura (Closure): Variable privada
+        const crearContador = () => {
+            let cuenta = 0; // Privada
+            return () => {
+                cuenta++;
+                return cuenta;
+            };
+        };
+        const miContador = crearContador(); // Inicialización
+
+        function usarContador() {
+            let valorActual = miContador();
+            log('out-closure', `Valor del contador protegido: ${valorActual}`);
+        }
+
+        // ==========================================
+        // TEMA 5: POO (Programación Orientada a Objetos)
+        // ==========================================
+        class Vehiculo {
+            constructor(marca) {
+                this.marca = marca;
+            }
+            moverse() {
+                return "El vehículo se mueve.";
+            }
+        }
+
+        // Herencia
+        class Coche extends Vehiculo {
+            constructor(marca, modelo) {
+                super(marca); // Llama al constructor padre
+                this.modelo = modelo;
+            }
+            // Polimorfismo (Sobreescritura)
+            moverse() {
+                return `El ${this.marca} ${this.modelo} arranca motor y se mueve rápido.`;
+            }
+        }
+
+        function ejecutarPOO() {
+            let miCoche = new Coche("Toyota", "Corolla");
+            log('out-poo', `Objeto creado: ${miCoche.marca} ${miCoche.modelo}
+Método moverse(): "${miCoche.moverse()}"
+Es instancia de Vehiculo: ${miCoche instanceof Vehiculo}`);
+        }
+
+        function ejecutarJSON() {
+            // Objeto JS
+            let usuario = { nombre: "Ana", edad: 30, admin: true };
+            
+            // Serialización (JS -> String JSON)
+            let jsonString = JSON.stringify(usuario);
+            
+            // Deserialización (String JSON -> Objeto JS)
+            let objetoNuevo = JSON.parse(jsonString);
+
+            log('out-json', `<b>Objeto Original:</b> {nombre: "Ana"...}
+<b>JSON String (para enviar):</b> '${jsonString}'
+<b>Propiedad 'admin' recuperada:</b> ${objetoNuevo.admin}`);
+        }
+
+        // ==========================================
+        // TEMA 6: BOM & DOM
+        // ==========================================
+        function infoBOM() {
+            let w = window.innerWidth;
+            let h = window.innerHeight;
+            let nav = navigator.userAgent;
+            let loc = window.location.href;
+
+            log('out-bom', `Ancho Ventana: ${w}px
+Alto Ventana: ${h}px
+URL Actual: ${loc}
+Navegador: ${nav}`);
+        }
+
+        let intervalo;
+        function iniciarCuenta() {
+            let contador = 5;
+            const display = document.getElementById('out-timer');
+            display.innerHTML = `Cuenta atrás: ${contador}`;
+            
+            // Limpiar intervalo previo si existe para no solapar
+            if(intervalo) clearInterval(intervalo);
+
+            // setInterval (BOM)
+            intervalo = setInterval(() => {
+                contador--;
+                display.innerHTML = `Cuenta atrás: ${contador}`;
+                if(contador <= 0) {
+                    clearInterval(intervalo);
+                    display.innerHTML = "¡TIEMPO TERMINADO! 🚀";
+                }
+            }, 1000);
+        }
+
+        function manipularDOM() {
+            const zona = document.getElementById('zona-dom');
+            
+            // 1. Crear elemento
+            const nuevoParrafo = document.createElement('p');
+            nuevoParrafo.textContent = "¡Hola! Soy un elemento creado dinámicamente.";
+            nuevoParrafo.style.color = "#e74c3c";
+            nuevoParrafo.style.fontWeight = "bold";
+            
+            // 2. Limpiar y añadir (Manipulación)
+            zona.innerHTML = ""; // Limpia lo anterior
+            zona.appendChild(nuevoParrafo);
+            
+            // 3. Modificar atributos
+            zona.style.backgroundColor = "#e8f5e9";
+            zona.style.border = "2px solid #2e7d32";
+        }
+
+        // ==========================================
+        // TEMA 7: EVENTOS
+        // ==========================================
+        
+        // Event Bubbling & StopPropagation
+        document.getElementById('padre').addEventListener('click', function() {
+            log('out-events', "Click en PADRE detectado", true);
+        });
+
+        document.getElementById('hijo').addEventListener('click', function(e) {
+            log('out-events', "Click en HIJO detectado"); // Resetea el log
+            
+            const check = document.getElementById('stopProp');
+            if(check.checked) {
+                e.stopPropagation(); // DETIENE que el evento suba al padre
+                log('out-events', "🛑 Propagación detenida (El padre no se entera)", true);
+            } else {
+                log('out-events', "⬆️ El evento sube (Burbujeo)...", true);
+            }
+        });
+
+        // Evento de Teclado
+        document.getElementById('input-teclado').addEventListener('keyup', function(e) {
+            const texto = e.target.value;
+            const tecla = e.key;
+            document.getElementById('out-teclado').innerHTML = 
+                `Tecla: <b>${tecla}</b> <br> Valor actual: ${texto.toUpperCase()}`;
+        });
+
+        // Prevenir envío de formulario (preventDefault)
+        document.getElementById('miFormulario').addEventListener('submit', function(e) {
+            e.preventDefault(); // EVITA que la página se recargue
+            
+            const nombre = document.getElementById('campo-nombre').value;
+            const salida = document.getElementById('out-form');
+            
+            if(nombre.trim() === "") {
+                salida.style.color = "red";
+                salida.innerHTML = "❌ Error: El nombre no puede estar vacío.";
+            } else {
+                salida.style.color = "green";
+                salida.innerHTML = `✅ Enviado correctamente (simulado). Nombre: ${nombre}`;
+            }
+        });
+
+    </script>
+</body>
+</html>

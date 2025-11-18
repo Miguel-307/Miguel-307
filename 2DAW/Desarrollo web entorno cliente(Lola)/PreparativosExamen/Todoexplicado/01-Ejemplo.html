@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Guía Maestra JavaScript Interactiva</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; display: flex; gap: 20px; }
+        .panel { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); flex: 1; }
+        h2 { border-bottom: 2px solid #333; padding-bottom: 10px; color: #2c3e50; }
+        button { padding: 8px 12px; cursor: pointer; background: #3498db; color: white; border: none; border-radius: 4px; margin: 5px 0; }
+        button:hover { background: #2980b9; }
+        input { padding: 8px; width: 80%; margin-bottom: 10px; }
+        
+        /* Para demos del DOM */
+        .caja { padding: 20px; border: 2px dashed #ccc; margin: 10px 0; transition: all 0.3s; }
+        .resaltado { background-color: #f1c40f; color: black; font-weight: bold; }
+        
+        /* Consola visual */
+        #consola-visual { background: #222; color: #0f0; padding: 15px; font-family: monospace; height: 300px; overflow-y: scroll; }
+        
+        /* Para demo de eventos */
+        #zona-padre { background: #e74c3c; padding: 20px; color: white; }
+        #zona-hijo { background: #8e44ad; padding: 20px; margin-top: 10px; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="panel">
+        <h2>1. BOM & DOM (Interfaz)</h2>
+        <p id="reloj">Cargando hora...</p>
+        <p>Info Navegador: <span id="info-nav"></span></p>
+        
+        <h3>Gestión de Estudiantes (POO + Forms)</h3>
+        <form id="form-estudiante">
+            <input type="text" id="nombre" placeholder="Nombre del estudiante" required>
+            <input type="number" id="nota" placeholder="Nota (0-10)" required>
+            <button type="submit">Guardar Estudiante (JSON)</button>
+        </form>
+
+        <h3>Manipulación DOM</h3>
+        <button id="btn-crear">Crear Elemento</button>
+        <button id="btn-estilo">Cambiar Estilo Caja</button>
+        <div id="contenedor-cajas">
+            <div class="caja" data-tipo="prueba">Caja Original</div>
+        </div>
+
+        <h3>Eventos (Burbujeo)</h3>
+        <div id="zona-padre">
+            Soy el PADRE (Click aquí)
+            <div id="zona-hijo">Soy el HIJO (StopPropagation)</div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>2. Estructuras & Lógica</h2>
+        <button onclick="demoArrays()">Ejecutar Demo Arrays</button>
+        <button onclick="demoSetsMaps()">Ejecutar Demo Sets/Maps</button>
+        <button onclick="demoMath()">Demo Math/Random</button>
+        
+        <h3>Salida (Logs):</h3>
+        <div id="consola-visual">Esperando acciones...</div>
+    </div>
+
+<script>
+    // ============================================================
+    // FUNCIÓN AUXILIAR PARA IMPRIMIR EN PANTALLA
+    // ============================================================
+    function log(texto) {
+        const consola = document.getElementById('consola-visual');
+        consola.innerHTML += `> ${texto}<br>`;
+        consola.scrollTop = consola.scrollHeight; // Auto-scroll
+    }
+
+    // ============================================================
+    // TEMA 6: BOM (Browser Object Model)
+    // ============================================================
+    // window.innerWidth: Para saber el ancho de la ventana
+    log(`Ancho ventana: ${window.innerWidth}px`);
+
+    // navigator.userAgent: Información del sistema
+    document.getElementById('info-nav').textContent = navigator.userAgent;
+
+    // setInterval: Ejecuta una función repetidamente (Reloj)
+    setInterval(() => {
+        // TEMA 5: Date (Fechas)
+        const ahora = new Date();
+        document.getElementById('reloj').textContent = 
+            `Hora: ${ahora.getHours()}:${ahora.getMinutes()}:${ahora.getSeconds()}`;
+    }, 1000); // Cada 1000ms (1 segundo)
+
+    // ============================================================
+    // TEMA 5: POO (Clases) y TEMA 4 (Funciones)
+    // ============================================================
+    
+    // class: Definimos una plantilla
+    class Persona {
+        constructor(nombre) {
+            this.nombre = nombre; // this referencia al objeto actual
+        }
+    }
+
+    // extends: Herencia (Estudiante hereda de Persona)
+    class Estudiante extends Persona {
+        constructor(nombre, nota) {
+            super(nombre); // super llama al constructor padre
+            this.nota = nota;
+        }
+
+        aprobo() {
+            return this.nota >= 5;
+        }
+    }
+
+    // ============================================================
+    // TEMA 7: EVENTOS Y FORMULARIOS
+    // ============================================================
+    const formulario = document.getElementById('form-estudiante');
+
+    // addEventListener: Escucha el evento 'submit'
+    formulario.addEventListener('submit', (e) => {
+        // e.preventDefault: EVITA que la página se recargue al enviar
+        e.preventDefault();
+
+        const nombre = document.getElementById('nombre').value;
+        const nota = parseFloat(document.getElementById('nota').value);
+
+        // Instancia de clase (new)
+        const nuevoEstudiante = new Estudiante(nombre, nota);
+
+        // TEMA 5: JSON
+        // stringify: Convierte objeto a texto para guardar/enviar
+        const jsonEstudiante = JSON.stringify(nuevoEstudiante);
+        log(`Estudiante guardado (JSON): ${jsonEstudiante}`);
+        
+        // parse: Convierte texto JSON a objeto real para usarlo
+        const objRecuperado = JSON.parse(jsonEstudiante);
+        log(`Recuperado: ${objRecuperado.nombre} - Nota: ${objRecuperado.nota}`);
+        
+        formulario.reset(); // Limpia el formulario
+    });
+
+    // Eventos de Teclado (keydown)
+    document.getElementById('nombre').addEventListener('keydown', (e) => {
+        // e.key: Nos dice qué tecla se pulsó
+        if(e.key === 'a') log("¡Has pulsado la 'a'!");
+    });
+
+    // ============================================================
+    // TEMA 6: DOM (Manipulación)
+    // ============================================================
+    
+    // querySelector: Selecciona el primer elemento que coincida
+    const contenedor = document.querySelector('#contenedor-cajas');
+
+    document.getElementById('btn-crear').addEventListener('click', () => {
+        // createElement: Crea una etiqueta en memoria
+        const nuevaCaja = document.createElement('div');
+        
+        // textContent: Añade texto sin interpretar HTML
+        nuevaCaja.textContent = "Nueva Caja Dinámica";
+        
+        // classList.add: Añade clases CSS
+        nuevaCaja.classList.add('caja');
+        
+        // appendChild: Inserta el elemento en el padre
+        contenedor.appendChild(nuevaCaja);
+        log("DOM: Elemento creado y añadido.");
+    });
+
+    document.getElementById('btn-estilo').addEventListener('click', () => {
+        // querySelectorAll: Selecciona TODOS los elementos (NodeList)
+        const cajas = document.querySelectorAll('.caja');
+        
+        // forEach: Recorre la lista de nodos
+        cajas.forEach(caja => {
+            // classList.toggle: Alterna la clase (pone/quita)
+            caja.classList.toggle('resaltado');
+        });
+        log("DOM: Estilos alternados.");
+    });
+
+    // ============================================================
+    // TEMA 7: PROPAGACIÓN DE EVENTOS (Bubbling)
+    // ============================================================
+    document.getElementById('zona-padre').addEventListener('click', () => {
+        log("EVENTO: Click detectado en PADRE");
+    });
+
+    document.getElementById('zona-hijo').addEventListener('click', (e) => {
+        // stopPropagation: Evita que el evento suba al padre
+        e.stopPropagation(); 
+        log("EVENTO: Click en HIJO (Propagación detenida)");
+    });
+
+    // ============================================================
+    // TEMA 3: ESTRUCTURAS DE DATOS (Arrays)
+    // ============================================================
+    // Función flecha asignada a variable (Expresión)
+    const demoArrays = () => {
+        log("--- DEMO ARRAYS ---");
+        let frutas = ["Manzana", "Pera"];
+        
+        // push: Añade al final
+        frutas.push("Uva"); 
+        // unshift: Añade al principio
+        frutas.unshift("Fresa"); 
+        
+        log(`Lista: ${frutas.join(', ')}`); // join: Une en string
+
+        // indexOf: Busca posición
+        log(`Posición de Uva: ${frutas.indexOf("Uva")}`);
+
+        // filter: Crea nuevo array con condición
+        let frutasConP = frutas.filter(f => f.includes('P'));
+        log(`Frutas con 'P': ${frutasConP}`);
+
+        // map: Transforma cada elemento (A mayúsculas)
+        let mayusculas = frutas.map(f => f.toUpperCase());
+        log(`Mayúsculas: ${mayusculas}`);
+    };
+
+    // ============================================================
+    // TEMA 3: SETS Y MAPS
+    // ============================================================
+    function demoSetsMaps() {
+        log("--- DEMO SETS & MAPS ---");
+        
+        // SET: No permite duplicados
+        let unicos = new Set([1, 2, 2, 3, 3, 3]);
+        unicos.add(4);
+        unicos.delete(1);
+        // size: Tamaño del set
+        log(`Set (sin duplicados): ${[...unicos]} (Tamaño: ${unicos.size})`); // ... Spread operator
+        
+        // MAP: Clave -> Valor
+        let diccionario = new Map();
+        diccionario.set("clave1", "Valor Secreto");
+        diccionario.set(true, "Es verdadero"); // Clave booleana
+        
+        log(`Map valor 'clave1': ${diccionario.get("clave1")}`);
+        log(`¿Existe clave true?: ${diccionario.has(true)}`);
+    }
+
+    // ============================================================
+    // TEMA 5: MATH (Predefinidos)
+    // ============================================================
+    function demoMath() {
+        // Math.random: 0 a 1
+        // Math.floor: Redondea abajo
+        let aleatorio = Math.floor(Math.random() * 100); 
+        
+        // Math.max: El mayor
+        let maximo = Math.max(10, 50, 5, 100);
+        
+        log(`Aleatorio (0-99): ${aleatorio}`);
+        log(`Máximo de (10,50,5,100): ${maximo}`);
+    }
+
+</script>
+</body>
+</html>
