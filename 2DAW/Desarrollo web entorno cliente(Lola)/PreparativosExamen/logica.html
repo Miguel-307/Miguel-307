@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Entrenamiento por Niveles</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #f4f4f4; }
+        section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; border-left: 5px solid; }
+        
+        /* Colores por nivel */
+        .nivel-1 { border-color: #2ecc71; } /* Verde */
+        .nivel-2 { border-color: #f1c40f; } /* Amarillo */
+        .nivel-3 { border-color: #e74c3c; } /* Rojo */
+        
+        button { cursor: pointer; padding: 5px 10px; }
+        .rojo { color: red; font-weight: bold; }
+        .verde { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>🏋️ Entrenamiento JS por Niveles</h1>
+
+    <section class="nivel-1">
+        <h2>🟢 Nivel 1: Lógica (Vocales)</h2>
+        <p>Escribe una frase y mira la consola o el resultado abajo.</p>
+        <input type="text" id="inputFrase" placeholder="Hola Mundo">
+        <button onclick="contarVocales()">Contar</button>
+        <p>Vocales encontradas: <span id="resVocales">0</span></p>
+    </section>
+
+    <section class="nivel-2">
+        <h2>🟡 Nivel 2: DOM (El Like)</h2>
+        <button id="btnLike" style="font-size: 1.2em;">🤍 Me gusta</button>
+        <span>Contador: <strong id="contadorLikes">0</strong></span>
+    </section>
+
+    <section class="nivel-3">
+        <h2>🔴 Nivel 3: POO + DOM (Notas)</h2>
+        <form id="formNotas">
+            <input type="text" id="nombreAlum" placeholder="Nombre" required>
+            <input type="number" id="notaAlum" placeholder="Nota" required min="0" max="10">
+            <button type="submit">Añadir Alumno</button>
+        </form>
+        <ul id="listaAlumnos"></ul>
+    </section>
+
+    <script>
+        // ==========================================
+        // 🟢 NIVEL 1: LÓGICA PURA
+        // ==========================================
+        function contarVocales() {
+            const frase = document.getElementById("inputFrase").value.toLowerCase();
+            const vocales = ['a', 'e', 'i', 'o', 'u'];
+            let contador = 0;
+
+            // Opción A: Bucle for clásico (Sintaxis segura)
+            for (let i = 0; i < frase.length; i++) {
+                if (vocales.includes(frase[i])) {
+                    contador++;
+                }
+            }
+            
+            // Opción B (Más pro): frase.split('').forEach(...)
+
+            document.getElementById("resVocales").innerText = contador;
+        }
+
+        // ==========================================
+        // 🟡 NIVEL 2: DOM Y EVENTOS
+        // ==========================================
+        const btn = document.getElementById("btnLike");
+        const contadorVis = document.getElementById("contadorLikes");
+
+        // Sintaxis: elemento.addEventListener('evento', funcion)
+        btn.addEventListener("click", () => {
+            // 1. Cambiar contador
+            contadorVis.innerText = "1";
+            
+            // 2. Cambiar estilos y texto
+            btn.style.color = "red";
+            btn.innerText = "❤️ Te gusta";
+            
+            // 3. Desactivar (Propiedad booleana, sin comillas)
+            btn.disabled = true; 
+        });
+
+        // ==========================================
+        // 🔴 NIVEL 3: POO (CLASES) + DOM
+        // ==========================================
+        
+        // 1. Definir la Clase
+        class Alumno {
+            constructor(nombre, nota) {
+                this.nombre = nombre;
+                this.nota = parseFloat(nota);
+            }
+            
+            // Método para formatear el texto
+            getInfo() {
+                return `${this.nombre} - Nota: ${this.nota}`;
+            }
+        }
+
+        // 2. Gestionar el Formulario
+        const form = document.getElementById("formNotas");
+        const lista = document.getElementById("listaAlumnos");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault(); // ¡CRUCIAL! Evita recarga
+
+            // Capturar valores
+            const nombre = document.getElementById("nombreAlum").value;
+            const nota = document.getElementById("notaAlum").value;
+
+            // Instanciar Objeto
+            const nuevoAlumno = new Alumno(nombre, nota);
+
+            // Crear elemento HTML (<li>)
+            const item = document.createElement("li");
+            item.textContent = nuevoAlumno.getInfo();
+
+            // Lógica de color según nota
+            if (nuevoAlumno.nota < 5) {
+                item.className = "rojo"; // Usamos clase CSS definida arriba
+                item.textContent += " (Suspenso)";
+            } else {
+                item.className = "verde";
+                item.textContent += " (Aprobado)";
+            }
+
+            // Añadir a la lista
+            lista.appendChild(item);
+
+            // Limpiar formulario
+            form.reset();
+        });
+
+    </script>
+</body>
+</html>

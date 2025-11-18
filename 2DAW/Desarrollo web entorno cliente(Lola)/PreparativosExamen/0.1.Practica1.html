@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gimnasio de Sintaxis JS</title>
+    <style>
+        body { font-family: 'Segoe UI', monospace; background: #202124; color: #e8eaed; padding: 20px; max-width: 800px; margin: 0 auto; }
+        h1 { text-align: center; color: #8ab4f8; }
+        .intro { text-align: center; margin-bottom: 30px; color: #9aa0a6; }
+        
+        .tarjeta { background: #303134; border: 1px solid #5f6368; border-radius: 8px; padding: 20px; margin-bottom: 20px; position: relative; }
+        .titulo-reto { color: #f28b82; font-weight: bold; margin-bottom: 10px; }
+        .descripcion { margin-bottom: 15px; font-style: italic; color: #bdc1c6; }
+        
+        .codigo-incompleto { background: #000; padding: 15px; border-radius: 5px; font-size: 1.1em; line-height: 1.6; border-left: 4px solid #f28b82; }
+        .hueco { color: #f28b82; font-weight: bold; border-bottom: 2px solid #f28b82; display: inline-block; min-width: 30px; text-align: center; cursor: help; }
+        
+        .solucion { display: none; margin-top: 15px; background: #1e3a29; padding: 15px; border-radius: 5px; border-left: 4px solid #81c995; }
+        .codigo-correcto { font-family: monospace; color: #81c995; white-space: pre-wrap; }
+        
+        button { background: #8ab4f8; color: #202124; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        button:hover { background: #aecbfa; }
+
+    </style>
+</head>
+<body>
+
+    <h1>🏋️‍♀️ Gimnasio de Sintaxis y Errores Tontos</h1>
+    <p class="intro">No escribas todo. Solo detecta qué falta en los huecos (___).<br>Estos son los fallos que siempre nos bloquean.</p>
+
+    <div class="tarjeta">
+        <div class="titulo-reto">1. Seleccionar un elemento por ID</div>
+        <div class="descripcion">El fallo clásico: ¿Es Element o Elements? ¿Es ById o ByID?</div>
+        
+        <div class="codigo-incompleto">
+            const titulo = document.get<span class="hueco">_______</span>By<span class="hueco">__</span>("miTitulo");
+        </div>
+        
+        <button onclick="ver(1)">Ver Solución</button>
+        <div id="sol-1" class="solucion">
+            <div class="codigo-correcto">const titulo = document.getElementById("miTitulo");</div>
+            [cite_start]<p>👉 <strong>Clave:</strong> Es 'Element' (singular) y 'Id' (I mayúscula, d minúscula). [cite: 304]</p>
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <div class="titulo-reto">2. Escuchar un Clic</div>
+        <div class="descripcion">Olvidamos cómo se escribe el "escuchador".</div>
+        
+        <div class="codigo-incompleto">
+            boton.<span class="hueco">___</span>Event<span class="hueco">________</span>("click", () => { ... });
+        </div>
+        
+        <button onclick="ver(2)">Ver Solución</button>
+        <div id="sol-2" class="solucion">
+            <div class="codigo-correcto">boton.addEventListener("click", () => { ... });</div>
+            <p>👉 <strong>Clave:</strong> 'add', luego 'Event', luego 'Listener'. [cite_start]Todo junto, camelCase. [cite: 145]</p>
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <div class="titulo-reto">3. Recorrer lista para crear HTML</div>
+        <div class="descripcion">Queremos hacer algo por cada elemento. ¿Cuál es el método?</div>
+        
+        <div class="codigo-incompleto">
+            lista.for<span class="hueco">____</span>( item => { ... });
+        </div>
+        
+        <button onclick="ver(3)">Ver Solución</button>
+        <div id="sol-3" class="solucion">
+            <div class="codigo-correcto">lista.forEach( item => { ... });</div>
+            <p>👉 <strong>Clave:</strong> La E de 'Each' es mayúscula. [cite_start]No es map, map es para transformar, forEach es para recorrer. [cite: 654]</p>
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <div class="titulo-reto">4. Convertir Objeto a Texto</div>
+        <div class="descripcion">Tienes un objeto y quieres enviarlo o guardarlo.</div>
+        
+        <div class="codigo-incompleto">
+            let texto = JSON.<span class="hueco">_________</span>(miObjeto);
+        </div>
+        
+        <button onclick="ver(4)">Ver Solución</button>
+        <div id="sol-4" class="solucion">
+            <div class="codigo-correcto">let texto = JSON.stringify(miObjeto);</div>
+            <p>👉 <strong>Clave:</strong> stringify (hacer string). [cite_start]Si fuera al revés (texto a objeto) sería parse. [cite: 569]</p>
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <div class="titulo-reto">5. Herencia de Clases</div>
+        <div class="descripcion">Quieres que Perro herede de Animal.</div>
+        
+        <div class="codigo-incompleto">
+            class Perro <span class="hueco">_______</span> Animal { ... }
+        </div>
+        
+        <button onclick="ver(5)">Ver Solución</button>
+        <div id="sol-5" class="solucion">
+            <div class="codigo-correcto">class Perro extends Animal { ... }</div>
+            <p>👉 <strong>Clave:</strong> extends (extiende). [cite_start]Es la palabra mágica para la herencia. [cite: 406]</p>
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <div class="titulo-reto">6. Evitar recarga al enviar</div>
+        <div class="descripcion">El formulario se envía y la página se pone blanca. ¡Falta una línea!</div>
+        
+        <div class="codigo-incompleto">
+            form.addEventListener("submit", (e) => {<br>
+            &nbsp;&nbsp;e.prevent<span class="hueco">_______</span><span class="hueco">__</span>;<br>
+            });
+        </div>
+        
+        <button onclick="ver(6)">Ver Solución</button>
+        <div id="sol-6" class="solucion">
+            <div class="codigo-correcto">e.preventDefault();</div>
+            <p>👉 <strong>Clave:</strong> Default (con D mayúscula) y <strong>¡LOS PARÉNTESIS ()!</strong>. [cite_start]Es un método, si no pones (), no hace nada. [cite: 83]</p>
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <div class="titulo-reto">7. Escribir texto dentro de un DIV</div>
+        <div class="descripcion">Tienes el elemento seleccionado en 'caja'. ¿Cómo le metes texto?</div>
+        
+        <div class="codigo-incompleto">
+            caja.text<span class="hueco">_______</span> = "Hola";
+        </div>
+        
+        <button onclick="ver(7)">Ver Solución</button>
+        <div id="sol-7" class="solucion">
+            <div class="codigo-correcto">caja.textContent = "Hola";</div>
+            <p>👉 <strong>Clave:</strong> textContent (Contenido de texto). [cite_start]También vale innerText, pero cuidado con innerHTML (ese es para meter etiquetas). [cite: 298]</p>
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <div class="titulo-reto">8. Ejecutar algo cada 1 segundo</div>
+        <div class="descripcion">Un reloj o cuenta atrás. ¿Cuál de los dos 'Set' era?</div>
+        
+        <div class="codigo-incompleto">
+            set<span class="hueco">________</span>( () => console.log("Hola"), 1000);
+        </div>
+        
+        <button onclick="ver(8)">Ver Solución</button>
+        <div id="sol-8" class="solucion">
+            <div class="codigo-correcto">setInterval( ... , 1000);</div>
+            <p>👉 <strong>Clave:</strong> Interval (Intervalo/Repetitivo). [cite_start]Timeout es para una sola vez (Tiempo fuera). [cite: 5801]</p>
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <div class="titulo-reto">9. Quedarse solo con los aprobados</div>
+        <div class="descripcion">Tienes notas [5, 3, 8, 9]. Quieres un nuevo array solo con los > 5.</div>
+        
+        <div class="codigo-incompleto">
+            let aprobados = notas.<span class="hueco">______</span>( n => n >= 5 );
+        </div>
+        
+        <button onclick="ver(9)">Ver Solución</button>
+        <div id="sol-9" class="solucion">
+            <div class="codigo-correcto">let aprobados = notas.filter( n => n >= 5 );</div>
+            <p>👉 <strong>Clave:</strong> filter (Filtro). [cite_start]Devuelve un array nuevo más pequeño. [cite: 654]</p>
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <div class="titulo-reto">10. Encontrar un objeto específico</div>
+        <div class="descripcion">Tienes una lista de alumnos. Quieres encontrar al que se llama "Pepe". (Solo el primero).</div>
+        
+        <div class="codigo-incompleto">
+            let pepe = alumnos.<span class="hueco">____</span>( a => a.nombre === "Pepe");
+        </div>
+        
+        <button onclick="ver(10)">Ver Solución</button>
+        <div id="sol-10" class="solucion">
+            <div class="codigo-correcto">let pepe = alumnos.find( a => a.nombre === "Pepe");</div>
+            <p>👉 <strong>Clave:</strong> find (Encontrar). Devuelve el objeto, no un array. [cite_start]Si usaras filter, te devolvería un array con un solo Pepe dentro. [cite: 654]</p>
+        </div>
+    </div>
+
+    <script>
+        function ver(id) {
+            const solucion = document.getElementById('sol-' + id);
+            if (solucion.style.display === 'block') {
+                solucion.style.display = 'none';
+            } else {
+                solucion.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
