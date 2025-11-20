@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Envíos</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 400px; margin: 0 auto; }
+        form { border: 1px solid #ddd; padding: 20px; border-radius: 8px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+        .radio-group { margin-top: 10px; }
+        button { width: 100%; padding: 10px; background: #28a745; color: white; border: none; margin-top: 20px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #218838; }
+        #resultado { margin-top: 20px; font-size: 1.2em; font-weight: bold; text-align: center; color: #333; }
+    </style>
+</head>
+<body>
+
+    <h1>🚚 Calcular Envío</h1>
+    
+    <form id="shippingForm">
+        <label for="peso">Peso del paquete (kg):</label>
+        <input type="number" id="peso" placeholder="Ej: 2.5" step="0.1">
+
+        <label for="destino">Destino:</label>
+        <select id="destino">
+            <option value="">-- Elige destino --</option>
+            <option value="nacional">Nacional (+0€)</option>
+            <option value="europa">Europa (+10€)</option>
+            <option value="internacional">Internacional (+20€)</option>
+        </select>
+
+        <label>Tipo de envío:</label>
+        <div class="radio-group">
+            <input type="radio" name="tipo" value="standard" checked> Estándar
+            <input type="radio" name="tipo" value="express"> Express (+20%)
+        </div>
+
+        <button type="submit">Calcular Precio</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script src="3index.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscador Empleados</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; background-color: #f4f4f4; }
+        h1 { text-align: center; color: #333; }
+        
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            font-size: 16px; 
+            margin-bottom: 20px; 
+            box-sizing: border-box; 
+            border: 2px solid #ddd; 
+            border-radius: 5px; 
+            outline: none;
+        }
+        input:focus { border-color: #2196F3; }
+
+        .card { 
+            border: 1px solid #ccc; 
+            padding: 15px; 
+            margin-bottom: 10px; 
+            border-radius: 5px; 
+            background: white; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 { margin: 0 0 5px 0; color: #2c3e50; }
+        .role { color: #666; font-style: italic; font-size: 0.9em; }
+        
+        /* Mensaje cuando no hay resultados */
+        .no-results { text-align: center; color: #777; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <h1>👥 Directorio de Personal</h1>
+    
+    <input type="text" id="buscador" placeholder="Escribe un nombre para buscar...">
+    
+    <div id="lista-empleados"></div>
+
+    <script>
+        // 1. DATOS (JSON String simulando servidor)
+        const jsonEmpleados = `[
+            {"id": 1, "nombre": "Carlos Ruiz", "puesto": "Frontend Developer"},
+            {"id": 2, "nombre": "Ana Gómez", "puesto": "Backend Developer"},
+            {"id": 3, "nombre": "Beatriz Silva", "puesto": "Designer"},
+            {"id": 4, "nombre": "David Meca", "puesto": "Manager"},
+            {"id": 5, "nombre": "Antonio Recio", "puesto": "RRHH"},
+            {"id": 6, "nombre": "Carmen Mola", "puesto": "CEO"}
+        ]`;
+
+        // 2. VARIABLES Y REFERENCIAS
+        // Convertimos el texto JSON a Array de objetos real
+        const empleados = JSON.parse(jsonEmpleados);
+        
+        const inputBuscador = document.getElementById("buscador");
+        const contenedor = document.getElementById("lista-empleados");
+
+        // 3. FUNCIÓN PARA PINTAR (RENDERIZAR)
+        // Recibe un array 'lista' como parámetro para poder pintar CUALQUIER lista (la completa o la filtrada)
+        function mostrarEmpleados(lista) {
+            // A. Limpiar lo que había antes
+            contenedor.innerHTML = "";
+
+            // B. Comprobar si la lista está vacía
+            if (lista.length === 0) {
+                contenedor.innerHTML = "<p class='no-results'>No se encontraron coincidencias.</p>";
+                return;
+            }
+
+            // C. Recorrer y crear HTML
+            lista.forEach(empleado => {
+                // Creamos el div de la tarjeta
+                const tarjeta = document.createElement("div");
+                tarjeta.classList.add("card");
+
+                // Llenamos el HTML interno
+                tarjeta.innerHTML = `
+                    <h3>${empleado.nombre}</h3>
+                    <span class="role">${empleado.puesto}</span>
+                `;
+
+                // Añadimos al contenedor principal
+                contenedor.appendChild(tarjeta);
+            });
+        }
+
+        // 4. EVENTO DE BÚSQUEDA (INPUT)
+        // El evento 'input' se dispara cada vez que escribes o borras una letra
+        inputBuscador.addEventListener("input", (e) => {
+            
+            // A. Obtener lo que ha escrito el usuario (en minúsculas)
+            const textoUsuario = e.target.value.toLowerCase();
+
+            // B. FILTRAR el array original
+            const empleadosFiltrados = empleados.filter(empleado => {
+                // Convertimos el nombre del empleado a minúsculas también para comparar
+                const nombreMinusculas = empleado.nombre.toLowerCase();
+                
+                // .includes() devuelve true si el textoUsuario está dentro del nombre
+                return nombreMinusculas.includes(textoUsuario);
+            });
+
+            // C. Volver a pintar usando SOLO el array filtrado
+            mostrarEmpleados(empleadosFiltrados);
+        });
+
+        // 5. INICIALIZACIÓN
+        // Al cargar la página, mostramos todos
+        mostrarEmpleados(empleados);
+
+    </script>
+</body>
+</html>

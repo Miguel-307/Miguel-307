@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cronómetro</title>
+    <style>
+        body { font-family: monospace; text-align: center; padding: 50px; background: #333; color: white; }
+        #display { font-size: 4rem; margin-bottom: 20px; border: 2px solid #fff; display: inline-block; padding: 10px 30px; border-radius: 10px; }
+        button { font-size: 1.2rem; padding: 10px 20px; cursor: pointer; border: none; border-radius: 5px; margin: 5px; }
+        #btnStart { background: #2ecc71; color: white; }
+        #btnStop { background: #e74c3c; color: white; }
+        #btnReset { background: #3498db; color: white; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+    <div id="display">0</div>
+    <br>
+    <button id="btnStart">Start</button>
+    <button id="btnStop" disabled>Stop</button>
+    <button id="btnReset" disabled>Reset</button>
+
+    <script src="4index.js"></script>
+</body>
+</html>
