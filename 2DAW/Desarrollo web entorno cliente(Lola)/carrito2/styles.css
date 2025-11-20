@@ -4,17 +4,17 @@ body, h1, h2, ul, li, button {
     padding: 0;
     font-family: Arial, sans-serif;
     box-sizing: border-box;
-  }
-  
-  /* Header */
-  header {
+}
+
+/* Header */
+header {
     position: relative;
     padding: 20px;
     background-color: #f8f9fa;
     border-bottom: 1px solid #ddd;
-  }
-  
-  #cart-icon {
+}
+
+#cart-icon {
     font-size: 20px;
     position: absolute;
     top: 10px;
@@ -23,21 +23,26 @@ body, h1, h2, ul, li, button {
     display: flex;
     align-items: center;
     gap: 5px;
-  }
-  
-  #cart-count {
+    user-select: none; /* Evita que se seleccione el texto al hacer click rápido */
+}
+
+#cart-count {
     background: red;
     color: white;
     border-radius: 50%;
     padding: 2px 6px;
     font-size: 12px;
-  }
-  
-  /* Carrito desplegable */
-  #cart-dropdown {
-    display: none;
+}
 
-   /*AÑADE AQUI EL CODIGO NECESARIO PARA AJUSTAR LA POSICIÓN DEL DESPLEGABLE*/
+/* Carrito desplegable */
+#cart-dropdown {
+    display: none; /* Se controla con JS */
+
+    /* --- CÓDIGO AÑADIDO PARA POSICIONAR EL DESPLEGABLE --- */
+    position: absolute;
+    top: 50px;       /* Justo debajo del icono del carrito */
+    right: 10px;     /* Alineado a la derecha */
+    /* ----------------------------------------------------- */
 
     width: 300px;
     background: white;
@@ -45,59 +50,86 @@ body, h1, h2, ul, li, button {
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 10;
-  }
-  
-  #cart-items {
+}
+
+#cart-items {
     max-height: 200px;
     overflow-y: auto;
     list-style: none;
     padding: 10px;
-  }
-  
-  #checkout-button {
+}
+
+#checkout-button {
     background-color: #28a745;
     color: white;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    float: right;
-  }
-  
-  #checkout-button:hover {
+    width: 100%; /* Para que ocupe todo el ancho disponible */
+    margin-top: 10px;
+}
+
+#checkout-button:hover {
     background-color: #218838;
-  }
-  
-  /* Lista de productos */
-  #product-list {
+}
+
+/* Lista de productos */
+#product-list {
     list-style: none;
     padding: 20px;
-   /*AÑADE EL CODIGO NECESARIO PARA QUE LOS PRODUCTOS DEL CARRITO FORMEN UNA REJILLA RESPONSIVE*/
 
-  }
-  
-  .product-item {
+    /* --- CÓDIGO AÑADIDO PARA LA REJILLA RESPONSIVE --- */
+    display: grid;
+    /* Crea columnas automáticas con un mínimo de 200px y máximo de 1fr */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    /* ------------------------------------------------ */
+}
+
+.product-item {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     text-align: center;
-  }
-  
-  .product-item button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-item h3 {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.product-item p {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.product-item button {
     background: #007bff;
     color: white;
     border: none;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .product-item button:hover {
-    background: #0056b3;
-  }
-  .producto-carrito{
-  /*AÑADE EL CODIGO NECESARIO PARA QUE LOS ARTÍCULOS DEL CARRITO ESTE ALINEADOS */
+    transition: background 0.3s;
+}
 
-    padding: 5px 2px;   
+.product-item button:hover {
+    background: #0056b3;
+}
+
+.producto-carrito {
+    /* --- CÓDIGO AÑADIDO PARA ALINEAR ARTÍCULOS DEL CARRITO --- */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    /* --------------------------------------------------------- */
+    
+    padding: 8px 2px;
     font-size: small;
-  }
+}

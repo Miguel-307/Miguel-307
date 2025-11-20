@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestor de Inventario (Combo)</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; background-color: #f8f9fa; }
+        h1 { color: #2c3e50; text-align: center; }
+        
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        
+        form { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 10px; align-items: end; }
+        input { padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px 15px; background: #27ae60; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #2ecc71; }
+        button.delete { background: #e74c3c; padding: 5px 10px; font-size: 0.9em; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #34495e; color: white; }
+        
+        .total-box { text-align: right; font-size: 1.2em; font-weight: bold; margin-top: 10px; color: #2c3e50; }
+        #json-output { background: #222; color: #0f0; padding: 10px; font-family: monospace; margin-top: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+    <h1>📦 Gestor de Inventario</h1>
+
+    <div class="card">
+        <h3>Nuevo Producto</h3>
+        <form id="form-inventario">
+            <input type="text" id="nombre" placeholder="Nombre (Ej: Silla)" required>
+            <input type="number" id="cantidad" placeholder="Cant." min="1" required>
+            <input type="number" id="precio" placeholder="Precio €" step="0.01" required>
+            <button type="submit">➕ Añadir</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h3>Listado de Existencias</h3>
+        <table id="tabla-productos">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unit.</th>
+                    <th>Valor Total</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-inventario">
+                </tbody>
+        </table>
+        
+        <div class="total-box">
+            Valor del Almacén: <span id="valor-almacen">0.00</span> €
+        </div>
+
+        <button onclick="exportarJSON()" style="background: #3498db; margin-top: 15px;">💾 Simular Guardado (JSON)</button>
+        <div id="json-output"></div>
+    </div>
+
+    <script>
+        // --- 1. POO: Definimos la CLASE ---
+        class Producto {
+            constructor(id, nombre, cantidad, precio) {
+                this.id = id;
+                this.nombre = nombre;
+                this.cantidad = parseInt(cantidad);
+                this.precio = parseFloat(precio);
+            }
+
+            // Método para calcular valor de este lote
+            obtenerValorLote() {
+                return this.cantidad * this.precio;
+            }
+        }
+
+        // --- 2. ESTADO: El Array Global ---
+        // Empezamos con un par de datos de prueba
+        let inventario = [
+            new Producto(1, "Monitor", 5, 120),
+            new Producto(2, "Ratón", 10, 15.50)
+        ];
+
+        // --- 3. FUNCIONES (Lógica) ---
+
+        function renderizar() {
+            const tbody = document.getElementById("tbody-inventario");
+            const totalSpan = document.getElementById("valor-almacen");
+            
+            // A. Limpiar el DOM anterior
+            tbody.innerHTML = "";
+
+            // B. Recorrer Array (forEach) y Crear DOM
+            inventario.forEach(prod => {
+                const tr = document.createElement("tr");
+                
+                // Usamos el método de la clase prod.obtenerValorLote()
+                tr.innerHTML = `
+                    <td>${prod.nombre}</td>
+                    <td>${prod.cantidad}</td>
+                    <td>${prod.precio.toFixed(2)} €</td>
+                    <td><strong>${prod.obtenerValorLote().toFixed(2)} €</strong></td>
+                    <td>
+                        <button class="delete" onclick="eliminarProducto(${prod.id})">🗑️</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // C. Calcular Total Global (reduce)
+            // Esto suma todos los valores de lote de cada producto
+            const totalAlmacen = inventario.reduce((total, prod) => total + prod.obtenerValorLote(), 0);
+            totalSpan.textContent = totalAlmacen.toFixed(2);
+        }
+
+        function eliminarProducto(id) {
+            // Filter: Creamos un nuevo array SIN el producto que queremos borrar
+            inventario = inventario.filter(prod => prod.id !== id);
+            // Volvemos a pintar
+            renderizar();
+        }
+
+        function exportarJSON() {
+            // JSON: Convertimos el array de objetos a texto
+            const json = JSON.stringify(inventario, null, 2);
+            const caja = document.getElementById("json-output");
+            caja.style.display = "block";
+            caja.innerText = "Enviando al servidor:\n" + json;
+        }
+
+        // --- 4. EVENTOS ---
+
+        document.getElementById("form-inventario").addEventListener("submit", (e) => {
+            e.preventDefault(); // Evitar recarga
+
+            // Capturar valores
+            const nombre = document.getElementById("nombre").value;
+            const cant = document.getElementById("cantidad").value;
+            const prec = document.getElementById("precio").value;
+            
+            // Generar ID único (basado en la fecha actual ms)
+            const id = Date.now();
+
+            // Instanciar Objeto (POO)
+            const nuevoProd = new Producto(id, nombre, cant, prec);
+
+            // Añadir al Array
+            inventario.push(nuevoProd);
+
+            // Actualizar Pantalla
+            renderizar();
+            
+            // Limpiar formulario
+            e.target.reset();
+        });
+
+        // --- 5. INICIALIZACIÓN ---
+        renderizar(); // Pintar los datos iniciales al cargar
+
+    </script>
+</body>
+</html>

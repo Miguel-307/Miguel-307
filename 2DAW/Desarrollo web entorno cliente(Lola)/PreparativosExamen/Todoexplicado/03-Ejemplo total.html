@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Completo JavaScript (Temas 2-7)</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e67e22;
+            --bg: #f4f7f6;
+            --text: #333;
+            --code-bg: #282c34;
+            --code-text: #abb2bf;
+        }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; height: 100vh; color: var(--text); background: var(--bg); }
+        
+        /* SIDEBAR */
+        nav { width: 250px; background: var(--primary); color: white; display: flex; flex-direction: column; padding: 20px 0; overflow-y: auto; flex-shrink: 0; }
+        nav h2 { text-align: center; margin-bottom: 20px; font-size: 1.2rem; border-bottom: 1px solid #34495e; padding-bottom: 10px; }
+        .nav-item { padding: 12px 20px; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; }
+        .nav-item:hover { background: #34495e; }
+        .nav-item.active { background: #34495e; border-left-color: var(--secondary); font-weight: bold; }
+        .sub-nav { font-size: 0.9em; padding-left: 15px; color: #bdc3c7; margin-top: 5px; }
+
+        /* CONTENIDO PRINCIPAL */
+        main { flex: 1; padding: 40px; overflow-y: auto; }
+        section { display: none; animation: fadeIn 0.5s; }
+        section.active { display: block; }
+
+        /* ESTILOS TEXTO */
+        h1 { color: var(--secondary); border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+        h2 { color: var(--primary); margin-top: 30px; }
+        h3 { color: var(--accent); margin-top: 20px; }
+        p { line-height: 1.6; }
+        ul { line-height: 1.6; }
+
+        /* CAJAS DE CÓDIGO Y DEMO */
+        .code-box { background: var(--code-bg); color: var(--code-text); padding: 15px; border-radius: 6px; font-family: 'Consolas', monospace; overflow-x: auto; margin: 10px 0; }
+        .demo-area { background: white; border: 1px solid #ddd; padding: 20px; border-radius: 6px; margin-top: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .demo-btn { background: var(--secondary); color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+        .demo-btn:hover { background: #2980b9; }
+        .output { background: #e8f6f3; border-left: 4px solid #1abc9c; padding: 10px; margin-top: 10px; font-family: monospace; font-weight: bold; display: none; }
+        
+        /* Elementos Específicos de Demos */
+        .caja-dom { width: 100px; height: 100px; background: #ddd; display: flex; align-items: center; justify-content: center; transition: 0.3s; margin: 10px 0; }
+        .resaltado { background: var(--accent) !important; color: white; transform: scale(1.1); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h2>📘 JS Master Guide</h2>
+        <div class="nav-item active" onclick="showTab('intro')">🏠 Inicio</div>
+        <div class="nav-item" onclick="showTab('tema2')">T2: Control de Flujo</div>
+        <div class="nav-item" onclick="showTab('tema3')">T3: Estructuras Datos</div>
+        <div class="nav-item" onclick="showTab('tema4')">T4: Funciones</div>
+        <div class="nav-item" onclick="showTab('tema5')">T5: POO y Objetos</div>
+        <div class="nav-item" onclick="showTab('tema6')">T6: BOM y DOM</div>
+        <div class="nav-item" onclick="showTab('tema7')">T7: Eventos</div>
+    </nav>
+
+    <main>
+
+        <section id="intro" class="active">
+            <h1>Bienvenido a la Guía Maestra</h1>
+            <p>Esta aplicación web contiene <strong>absolutamente todo el temario</strong> extraído de tus PDFs.</p>
+            <p>Usa el menú de la izquierda para navegar por los temas. En cada sección encontrarás:</p>
+            <ul>
+                <li>Explicación teórica resumida.</li>
+                <li>Sintaxis y comandos clave.</li>
+                <li><strong>Ejemplos interactivos</strong> que puedes ejecutar en tiempo real.</li>
+            </ul>
+            <div class="demo-area">
+                <h3>Prueba de funcionamiento</h3>
+                <p>Pulsa el botón para verificar que JavaScript está activo.</p>
+                <button class="demo-btn" onclick="alert('¡Todo listo! Empieza a estudiar.')">Probar Sistema</button>
+            </div>
+        </section>
+
+        <section id="tema2">
+            <h1>Tema 2: Control de Flujo</h1>
+            
+            <h2>Condicionales</h2>
+            <p>Permiten tomar decisiones en el código.</p>
+            <ul>
+                <li><code>if (condicion) { ... } else { ... }</code></li>
+                <li><code>switch (valor) { case x: ... break; }</code></li>
+                <li>Ternario: <code>condicion ? valorSi : valorNo</code></li>
+            </ul>
+            
+            <div class="demo-area">
+                <h3>Demo: Switch</h3>
+                <input type="text" id="t2-dia" placeholder="Escribe un día (lunes...)" style="padding:5px;">
+                <button class="demo-btn" onclick="demoSwitch()">Planificar</button>
+                <div id="out-t2" class="output"></div>
+            </div>
+
+            <h2>Bucles</h2>
+            <p>Repiten bloques de código.</p>
+            <ul>
+                <li><code>for (let i=0; i&lt;n; i++)</code>: Bucle contador clásico.</li>
+                <li><code>while (condicion)</code>: Repite mientras sea true.</li>
+                <li><code>do...while</code>: Ejecuta al menos una vez.</li>
+            </ul>
+        </section>
+
+        <section id="tema3">
+            <h1>Tema 3: Estructuras de Datos</h1>
+
+            <h2>1. Arrays (Listas)</h2>
+            <p>Colecciones ordenadas de elementos.</p>
+            <div class="code-box">
+let frutas = ["Manzana", "Pera"];
+frutas.push("Uva"); // Añadir al final
+let filtro = frutas.filter(f => f.length > 4); // Filtrar
+            </div>
+            <div class="demo-area">
+                <button class="demo-btn" onclick="demoArrays()">Ejecutar Operaciones Array</button>
+                <div id="out-t3-arr" class="output"></div>
+            </div>
+
+            <h2>2. Sets (Conjuntos)</h2>
+            <p>Colecciones de valores únicos. No admite duplicados.</p>
+            <div class="code-box">let unicos = new Set([1, 2, 2, 3]); // {1, 2, 3}</div>
+
+            <h2>3. Maps (Diccionarios)</h2>
+            <p>Pares Clave-Valor. La clave puede ser cualquier tipo.</p>
+            <div class="code-box">
+let mapa = new Map();
+mapa.set("admin", true);
+mapa.get("admin"); // true
+            </div>
+            
+            <div class="demo-area">
+                <button class="demo-btn" onclick="demoSetMap()">Probar Set y Map</button>
+                <div id="out-t3-sm" class="output"></div>
+            </div>
+        </section>
+
+        <section id="tema4">
+            <h1>Tema 4: Funciones</h1>
+
+            <h2>Tipos de Declaración</h2>
+            <ul>
+                <li><strong>Declarativa:</strong> <code>function suma(a,b) { return a+b; }</code> (Tiene Hoisting).</li>
+                <li><strong>Expresiva:</strong> <code>const suma = function(a,b) { ... }</code>.</li>
+                <li><strong>Flecha (Arrow):</strong> <code>const suma = (a,b) => a+b;</code>.</li>
+            </ul>
+
+            <h2>Características Avanzadas</h2>
+            <ul>
+                <li><strong>Parámetros Rest:</strong> <code>function(...nums)</code> agrupa infinitos argumentos.</li>
+                <li><strong>Recursividad:</strong> Función que se llama a sí misma (ej: factorial).</li>
+                <li><strong>Clausuras (Closures):</strong> Funciones que recuerdan su entorno léxico (variables privadas).</li>
+            </ul>
+
+            <div class="demo-area">
+                <h3>Demo: Recursividad & Rest</h3>
+                <p>Calcularemos la suma de (1, 2, 3, 4, 5) usando Rest y un Factorial recursivo.</p>
+                <input type="number" id="t4-fact" value="5" style="width:50px">
+                <button class="demo-btn" onclick="demoFunciones()">Ejecutar</button>
+                <div id="out-t4" class="output"></div>
+            </div>
+        </section>
+
+        <section id="tema5">
+            <h1>Tema 5: POO y Objetos Predefinidos</h1>
+
+            <h2>Clases y Herencia</h2>
+            <p>Plantillas para crear objetos. Usan <code>constructor</code>, <code>extends</code> y <code>super</code>.</p>
+            <div class="code-box">
+class Animal { constructor(n) { this.nombre = n; } }
+class Perro extends Animal {
+    ladrar() { return this.nombre + " dice guau"; }
+}
+            </div>
+
+            <h2>JSON</h2>
+            <p>Intercambio de datos.</p>
+            <ul>
+                <li><code>JSON.stringify(obj)</code>: Objeto a Texto.</li>
+                <li><code>JSON.parse(txt)</code>: Texto a Objeto.</li>
+            </ul>
+
+            <h2>Objetos Nativos</h2>
+            <ul>
+                <li><strong>Math:</strong> <code>random()</code>, <code>floor()</code>, <code>max()</code>.</li>
+                <li><strong>Date:</strong> <code>new Date()</code>, <code>getFullYear()</code>.</li>
+                <li><strong>RegExp:</strong> Patrones de búsqueda (ej: email). Método <code>test()</code>.</li>
+            </ul>
+
+            <div class="demo-area">
+                <button class="demo-btn" onclick="demoPOO()">Instanciar Clase y JSON</button>
+                <div id="out-t5" class="output"></div>
+            </div>
+        </section>
+
+        <section id="tema6">
+            <h1>Tema 6: BOM y DOM</h1>
+
+            <h2>BOM (Browser Object Model)</h2>
+            <p>Interactúa con el navegador.</p>
+            <ul>
+                <li><code>window.innerWidth</code>: Ancho ventana.</li>
+                <li><code>navigator.userAgent</code>: Datos del navegador.</li>
+                <li><code>location.href</code>: URL actual.</li>
+                <li><code>setInterval(func, ms)</code>: Temporizador repetitivo.</li>
+            </ul>
+
+            <h2>DOM (Document Object Model)</h2>
+            <p>Manipula el HTML y CSS.</p>
+            <ul>
+                <li><strong>Selección:</strong> <code>getElementById</code>, <code>querySelector</code>, <code>querySelectorAll</code>.</li>
+                <li><strong>Creación:</strong> <code>createElement</code>, <code>appendChild</code>.</li>
+                <li><strong>Estilos:</strong> <code>elem.style.color</code>, <code>elem.classList.add()</code>.</li>
+                <li><strong>Atributos:</strong> <code>getAttribute</code>, <code>dataset</code> (data-*).</li>
+                <li><strong>Cookies:</strong> <code>document.cookie</code>.</li>
+            </ul>
+
+            <div class="demo-area">
+                <h3>Laboratorio DOM</h3>
+                <div id="caja-demo" class="caja-dom">Caja</div>
+                <button class="demo-btn" onclick="manipularDOM()">Modificar Caja</button>
+                <button class="demo-btn" onclick="crearElemento()">Crear Nuevo Elemento</button>
+                <div id="contenedor-nuevos"></div>
+            </div>
+        </section>
+
+        <section id="tema7">
+            <h1>Tema 7: Eventos</h1>
+            <p>Interacción con el usuario. Se usa <code>addEventListener('evento', funcion)</code>.</p>
+
+            <h2>Tipos Comunes</h2>
+            <ul>
+                <li>Ratón: <code>click</code>, <code>mouseover</code>, <code>mouseout</code>.</li>
+                <li>Teclado: <code>keydown</code>, <code>keyup</code> (propiedad <code>e.key</code>).</li>
+                <li>Formulario: <code>submit</code>, <code>change</code>, <code>focus</code>, <code>blur</code>.</li>
+            </ul>
+
+            <h2>Propagación y Control</h2>
+            <ul>
+                <li><code>e.preventDefault()</code>: Evita la acción por defecto (ej: enviar form).</li>
+                <li><code>e.stopPropagation()</code>: Evita que el evento suba al padre (burbujeo).</li>
+                <li><code>e.target</code>: El elemento que originó el evento.</li>
+            </ul>
+
+            <div class="demo-area">
+                <h3>Prueba de Eventos</h3>
+                <input type="text" id="input-evento" placeholder="Escribe aquí (keydown)...">
+                <p id="feedback-evento" style="color: blue; font-weight: bold;"></p>
+                
+                <form id="form-demo" style="border:1px dashed #ccc; padding:10px; margin-top:10px;">
+                    Campo Obligatorio: <input type="text" id="campo-obl">
+                    <button type="submit" class="demo-btn">Enviar (submit)</button>
+                </form>
+                <div id="out-t7" class="output"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- NAVEGACIÓN ---
+        function showTab(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function log(id, msg) {
+            const el = document.getElementById(id);
+            el.style.display = "block";
+            el.innerHTML = msg;
+        }
+
+        // --- TEMA 2: SWITCH ---
+        function demoSwitch() {
+            const dia = document.getElementById('t2-dia').value.toLowerCase();
+            let plan = "";
+            switch(dia) {
+                case "lunes": plan = "Gimnasio"; break;
+                case "viernes": plan = "Fiesta"; break;
+                case "domingo": plan = "Dormir"; break;
+                default: plan = "Estudiar JS";
+            }
+            log('out-t2', `Plan para ${dia}: ${plan}`);
+        }
+
+        // --- TEMA 3: ESTRUCTURAS ---
+        function demoArrays() {
+            let arr = [10, 20, 30, 40];
+            arr.push(50);
+            let filtrado = arr.filter(n => n > 25);
+            let mapa = arr.map(n => n * 2);
+            log('out-t3-arr', `Original+Push: ${arr} <br> Filtrado (>25): ${filtrado} <br> Map (x2): ${mapa}`);
+        }
+
+        function demoSetMap() {
+            // Set
+            let set = new Set([1, 1, 2, 3]);
+            // Map
+            let map = new Map();
+            map.set("clave", "Valor Secreto");
+            log('out-t3-sm', `Set (sin duplicados): ${[...set]} <br> Map get('clave'): ${map.get("clave")}`);
+        }
+
+        // --- TEMA 4: FUNCIONES ---
+        function demoFunciones() {
+            // Arrow + Rest
+            const sumar = (...nums) => nums.reduce((a,b) => a+b, 0);
+            // Recursividad
+            const factorial = n => (n<=1) ? 1 : n * factorial(n-1);
+            
+            let val = document.getElementById('t4-fact').value;
+            log('out-t4', `Suma Rest (1..5): ${sumar(1,2,3,4,5)} <br> Factorial ${val}: ${factorial(val)}`);
+        }
+
+        // --- TEMA 5: POO ---
+        class Usuario {
+            constructor(n, e) { this.nombre = n; this.edad = e; }
+            saludar() { return `Hola, soy ${this.nombre}`; }
+        }
+
+        function demoPOO() {
+            const user = new Usuario("Carlos", 30);
+            const json = JSON.stringify(user);
+            const azar = Math.floor(Math.random() * 100);
+            
+            log('out-t5', `Método: ${user.saludar()} <br> JSON: ${json} <br> Random (0-99): ${azar}`);
+        }
+
+        // --- TEMA 6: DOM ---
+        function manipularDOM() {
+            const caja = document.getElementById('caja-demo');
+            // Toggle clase y estilos directos
+            caja.classList.toggle('resaltado');
+            if(caja.style.borderRadius === "50%") {
+                caja.style.borderRadius = "0";
+                caja.textContent = "Caja";
+            } else {
+                caja.style.borderRadius = "50%";
+                caja.textContent = "Círculo";
+            }
+        }
+
+        function crearElemento() {
+            const nuevo = document.createElement('div');
+            nuevo.textContent = "Nuevo Item " + (document.querySelectorAll('#contenedor-nuevos div').length + 1);
+            nuevo.style.border = "1px solid #ccc";
+            nuevo.style.padding = "5px";
+            nuevo.style.marginTop = "5px";
+            document.getElementById('contenedor-nuevos').appendChild(nuevo);
+        }
+
+        // --- TEMA 7: EVENTOS ---
+        document.getElementById('input-evento').addEventListener('input', (e) => {
+            document.getElementById('feedback-evento').textContent = "Escribiendo: " + e.target.value;
+        });
+
+        document.getElementById('form-demo').addEventListener('submit', (e) => {
+            e.preventDefault(); // Evita recarga
+            const valor = document.getElementById('campo-obl').value;
+            if(valor === "") {
+                log('out-t7', "<span style='color:red'>❌ Error: preventDefault() ejecutado. Campo vacío.</span>");
+            } else {
+                log('out-t7', "<span style='color:green'>✅ Enviado correctamente.</span>");
+            }
+        });
+
+    </script>
+</body>
+</html>
