@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7.19 - Visor Numérico</title>
+    <style>
+        #visor-container {
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+            border-radius: 8px;
+        }
+        
+        #visor-imagen {
+            max-width: 100%;
+            max-height: 380px;
+            display: none; 
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6 font-sans">
+
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Ejercicio 7.19</h1>
+        </header>
+
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4 text-blue-600">Visor Numérico</h2>
+            <p class="mb-4 text-sm text-gray-500">Pulsa las teclas <strong>0-9</strong> para ver una imagen. Cualquier otra tecla limpia el visor.</p>
+            
+            <div id="visor-container">
+                <img id="visor-imagen" src="" alt="Imagen numérica">
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const rutasImagenes = {
+            '0': 'img0.png',
+            '1': 'img1.png',
+            '2': 'img2.png',
+            '3': 'img3.png',
+            '4': 'img4.png',
+            '5': 'img5.png',
+            '6': 'img6.png',
+            '7': 'img7.png',
+            '8': 'img8.png',
+            '9': 'img9.png'
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('keydown', gestionarEjercicio719);
+        });
+
+        function gestionarEjercicio719(evento) {
+            const tecla = evento.key;
+            const imagenEl = document.getElementById('visor-imagen');
+            if (tecla >= '0' && tecla <= '9') {
+                mostrarImagen(imagenEl, rutasImagenes[tecla]);
+            } else {
+                ocultarImagen(imagenEl);
+            }
+        }
+
+        function mostrarImagen(elemento, ruta) {
+            if(ruta) {
+                elemento.src = ruta;
+                elemento.style.display = 'block';
+            }
+        }
+
+        function ocultarImagen(elemento) {
+            elemento.src = '';
+            elemento.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

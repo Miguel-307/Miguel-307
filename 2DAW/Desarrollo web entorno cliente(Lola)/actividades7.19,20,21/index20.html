@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7.20 - Caja Roja</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #zona-juego {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background-color: #f3f4f6;
+            border: 2px dashed #cbd5e1;
+            overflow: hidden;
+        }
+
+        #caja-roja {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: top 0.1s, left 0.1s;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6 font-sans">
+
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Ejercicio 7.20</h1>
+        </header>
+
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4 text-red-600">Mover la Caja</h2>
+            <p class="mb-4 text-sm text-gray-500">Usa las <strong>flechas del teclado</strong> para mover la caja roja 10px.</p>
+            
+            <div id="zona-juego">
+                <div id="caja-roja"></div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let posicionCaja = { x: 0, y: 0 };
+        const VELOCIDAD = 10; // px por movimiento
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('keydown', gestionarEjercicio720);
+        });
+
+        function gestionarEjercicio720(evento) {
+            const tecla = evento.key;
+            let seMovio = false;
+
+            switch(tecla) {
+                case 'ArrowUp':
+                    posicionCaja.y = calcularNuevaPosicion(posicionCaja.y, -VELOCIDAD);
+                    seMovio = true;
+                    break;
+                case 'ArrowDown':
+                    posicionCaja.y = calcularNuevaPosicion(posicionCaja.y, VELOCIDAD);
+                    seMovio = true;
+                    break;
+                case 'ArrowLeft':
+                    posicionCaja.x = calcularNuevaPosicion(posicionCaja.x, -VELOCIDAD);
+                    seMovio = true;
+                    break;
+                case 'ArrowRight':
+                    posicionCaja.x = calcularNuevaPosicion(posicionCaja.x, VELOCIDAD);
+                    seMovio = true;
+                    break;
+            }
+
+            if (seMovio) {
+                evento.preventDefault(); 
+                aplicarMovimientoCaja();
+            }
+        }
+
+        function calcularNuevaPosicion(actual, cambio) {
+            return actual + cambio;
+        }
+
+        function aplicarMovimientoCaja() {
+            const caja = document.getElementById('caja-roja');
+            const zona = document.getElementById('zona-juego');
+            
+            const limiteAncho = zona.clientWidth - 50; 
+            const limiteAlto = zona.clientHeight - 50;
+
+            if (posicionCaja.x < 0) posicionCaja.x = 0;
+            if (posicionCaja.y < 0) posicionCaja.y = 0;
+            if (posicionCaja.x > limiteAncho) posicionCaja.x = limiteAncho;
+            if (posicionCaja.y > limiteAlto) posicionCaja.y = limiteAlto;
+
+            caja.style.left = `${posicionCaja.x}px`;
+            caja.style.top = `${posicionCaja.y}px`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clínica JS</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; }
+        form { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        input { padding: 8px; margin: 5px; width: 40%; }
+        button { padding: 8px 15px; cursor: pointer; background: #28a745; color: white; border: none; }
+        ul { list-style: none; padding: 0; }
+        li { border-bottom: 1px solid #eee; padding: 10px; display: flex; justify-content: space-between; }
+        .urgente { color: red; font-weight: bold; }
+        .btn-borrar { background: #dc3545; font-size: 0.8em; margin-left: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>🏥 Gestión de Urgencias</h1>
+
+    <form id="formPaciente">
+        <input type="text" id="nombre" placeholder="Nombre Paciente" required>
+        <input type="number" id="edad" placeholder="Edad" required>
+        <input type="text" id="sintoma" placeholder="Síntoma" required>
+        <button type="submit">Registrar</button>
+    </form>
+
+    <h3>Sala de Espera:</h3>
+    <ul id="listaPacientes"></ul>
+
+    <script>
+       // 1. CLASE PACIENTE
+class Paciente {
+    constructor(nombre, edad, sintoma) {
+        // Generamos un ID único con la fecha actual para poder borrarlo luego
+        this.id = Date.now(); 
+        this.nombre = nombre;
+        this.edad = parseInt(edad);
+        this.sintoma = sintoma;
+    }
+}
+
+// 2. ARRAY Y REFERENCIAS
+let pacientes = []; // Array para guardar los objetos
+const formulario = document.getElementById("formPaciente");
+const lista = document.getElementById("listaPacientes");
+
+// 3. FUNCIÓN RENDERIZAR (Pintar en pantalla)
+function renderizar() {
+    // A. Limpiar lista para no duplicar
+    lista.innerHTML = "";
+
+    // B. Recorrer array
+    pacientes.forEach(paciente => {
+        // Crear LI
+        const li = document.createElement("li");
+
+        // Lógica Extra: Si es mayor de 80, clase urgente
+        if (paciente.edad > 80) {
+            li.classList.add("urgente"); // Añade clase CSS roja
+            li.innerHTML = `🚨 <strong>${paciente.nombre}</strong> (${paciente.edad} años): ${paciente.sintoma}`;
+        } else {
+            li.innerHTML = `<strong>${paciente.nombre}</strong> (${paciente.edad} años): ${paciente.sintoma}`;
+        }
+
+        // Botón de borrar
+        const btnBorrar = document.createElement("button");
+        btnBorrar.textContent = "Atendido";
+        btnBorrar.classList.add("btn-borrar");
+
+        // Evento para borrar ESTE paciente concreto
+        btnBorrar.addEventListener("click", () => {
+            eliminarPaciente(paciente.id);
+        });
+
+        // Juntar todo
+        li.appendChild(btnBorrar);
+        lista.appendChild(li);
+    });
+}
+
+// Función auxiliar para eliminar
+function eliminarPaciente(idParaBorrar) {
+    // Filter crea un nuevo array con todos MENOS el que coincide con el ID
+    pacientes = pacientes.filter(p => p.id !== idParaBorrar);
+    renderizar(); // Volver a pintar la lista actualizada
+}
+
+// 4. EVENTO SUBMIT
+formulario.addEventListener("submit", (e) => {
+    e.preventDefault(); // ¡Vital para que no recargue!
+
+    // Capturar valores
+    const nombre = document.getElementById("nombre").value;
+    const edad = document.getElementById("edad").value;
+    const sintoma = document.getElementById("sintoma").value;
+
+    // Crear objeto
+    const nuevoPaciente = new Paciente(nombre, edad, sintoma);
+
+    // Guardar en array
+    pacientes.push(nuevoPaciente);
+
+    // Pintar
+    renderizar();
+
+    // Limpiar formulario
+    formulario.reset();
+});
+    </script>
+</body>
+</html>

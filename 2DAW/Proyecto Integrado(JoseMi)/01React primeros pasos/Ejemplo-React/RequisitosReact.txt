@@ -1,0 +1,13 @@
+Crear proyecto:
+# Para crear el proyecto
+npm create vite@latest
+
+#  Ejecutar para ver el puerto
+npm run dev 
+http://localhost:5173/
+
+Tema dependencias:
+pnpm i -> instala las dependencias
+
+Para usar PropTypes en proyecto con Vite es necesario también lanzar:
+npm install prop-types --save (para el uso de PropTypes)

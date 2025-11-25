@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con Enlaces</title>
+    <style>
+        /* Estilos básicos para presentación */
+        form {
+            font-family: sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+        .acciones {
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
+        }
+        a {
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+        }
+        a:hover {
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="miFormulario">
+        <label for="email">Correo Electrónico:</label><br>
+        <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com">
+
+        <div class="acciones">
+            <a href="#" id="linkEnviar">Enviar Formulario</a>
+            
+            <a href="#" id="linkReset">Reiniciar</a>
+        </div>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const formulario = document.getElementById('miFormulario');
+            const btnEnviar = document.getElementById('linkEnviar');
+            const btnReset = document.getElementById('linkReset');
+
+            btnEnviar.addEventListener('click', (e) => {
+
+                e.preventDefault();
+                Submit();
+            });
+
+            btnReset.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                formulario.reset();
+            });
+
+        });
+    </script>
+
+</body>
+</html>
