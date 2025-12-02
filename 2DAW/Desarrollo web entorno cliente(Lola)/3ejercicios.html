@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios JS Básicos</title>
+    <style>
+        /* CSS MÍNIMO Y NECESARIO */
+        body { font-family: sans-serif; padding: 20px; }
+        section { border-bottom: 2px solid black; padding-bottom: 20px; margin-bottom: 20px; }
+        
+        /* 7.23: Necesitamos posición relativa en el padre y absoluta en la caja */
+        #zona-juego {
+            position: relative;
+            width: 100%;       /* Ocupa el ancho disponible */
+            height: 400px;     /* Alto fijo para que no se mueva la página */
+            border: 1px solid black;
+            background-color: #ccc;
+        }
+        #caja-elusiva {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            color: white;
+            text-align: center;
+            line-height: 100px; /* Centrar texto verticalmente */
+        }
+
+        /* 7.25: Estilos para las barras */
+        .barra {
+            height: 40px;
+            margin-bottom: 10px;
+            color: white;
+            font-weight: bold;
+        }
+        #barra-verde { background-color: green; width: 10px; }
+        #barra-roja { background-color: red; width: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>Ejercicios Unidad 7</h1>
+
+    <!-- EJERCICIO 7.23 -->
+    <section>
+        <h2>7.23. Caja Elusiva</h2>
+        <p>Intenta tocar la caja azul.</p>
+        
+        <div id="zona-juego">
+            <div id="caja-elusiva">100x100</div>
+        </div>
+    </section>
+
+    <!-- EJERCICIO 7.24 -->
+    <section>
+        <h2>7.24. Borrar Vocales</h2>
+        <p>Haz clic en los botones para borrar vocales del texto.</p>
+        
+        <p id="texto-parrafo">
+            Este es un párrafo con mucho texto para probar el ejercicio. 
+            El veloz murciélago hindú comía feliz cardillo y kiwi. 
+            La cigüeña tocaba el saxofón detrás del palenque de paja.
+        </p>
+
+        <!-- Contenedor para delegación de eventos -->
+        <div id="botonera">
+            <button data-vocal="a">Borrar A</button>
+            <button data-vocal="e">Borrar E</button>
+            <button data-vocal="i">Borrar I</button>
+            <button data-vocal="o">Borrar O</button>
+            <button data-vocal="u">Borrar U</button>
+            <button id="btn-reset">Restaurar</button>
+        </div>
+    </section>
+
+    <!-- EJERCICIO 7.25 -->
+    <section>
+        <h2>7.25. Carrera de Teclas</h2>
+        <p>Pulsa <b>'A'</b> (Verde) vs <b>'Ñ'</b> (Rojo). Gana quien llegue a 500px.</p>
+        
+        <div>
+            <div id="barra-verde" class="barra">Verde</div>
+            <div id="barra-roja" class="barra">Rojo</div>
+        </div>
+        <h3 id="mensaje-ganador"></h3>
+    </section>
+
+    <script>
+        
+        function iniciarCaja() {
+            const caja = document.getElementById('caja-elusiva');
+            const zona = document.getElementById('zona-juego');
+
+           
+            function aleatorio(min, max) {
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
+
+            
+            function moverCaja() {
+               
+                const anchoMax = zona.offsetWidth - 100;
+                const altoMax = zona.offsetHeight - 100;
+
+                const x = aleatorio(0, anchoMax);
+                const y = aleatorio(0, altoMax);
+
+                caja.style.left = x + 'px';
+                caja.style.top = y + 'px';
+            }
+
+
+            caja.addEventListener('mouseenter', moverCaja);
+        }
+
+
+        function iniciarVocales() {
+            const botonera = document.getElementById('botonera');
+            const parrafo = document.getElementById('texto-parrafo');
+            const textoOriginal = parrafo.innerText;
+
+            function borrarVocal(texto, vocal) {
+               
+                let regex = new RegExp(vocal, 'gi'); 
+                return texto.replace(regex, '');
+            }
+
+           
+            botonera.addEventListener('click', function(evento) {
+
+                if (evento.target.dataset.vocal) {
+                    let vocal = evento.target.dataset.vocal;
+                    let textoActual = parrafo.innerText;
+                    parrafo.innerText = borrarVocal(textoActual, vocal);
+                }
+                
+               
+                if (evento.target.id === 'btn-reset') {
+                    parrafo.innerText = textoOriginal;
+                }
+            });
+        }
+
+       
+        function iniciarCarrera() {
+
+            let anchoVerde = 10;
+            let anchoRojo = 10;
+            let juegoActivo = true;
+
+            const verde = document.getElementById('barra-verde');
+            const rojo = document.getElementById('barra-roja');
+            const mensaje = document.getElementById('mensaje-ganador');
+
+
+            function actualizarPantalla() {
+                verde.style.width = anchoVerde + 'px';
+                rojo.style.width = anchoRojo + 'px';
+            }
+
+
+            function comprobarGanador() {
+                if (anchoVerde >= 500) {
+                    mensaje.innerText = "¡GANA VERDE!";
+                    mensaje.style.color = "green";
+                    juegoActivo = false;
+                } else if (anchoRojo >= 500) {
+                    mensaje.innerText = "¡GANA ROJO!";
+                    mensaje.style.color = "red";
+                    juegoActivo = false;
+                }
+            }
+
+       
+            window.addEventListener('keydown', function(evento) {
+                if (juegoActivo === false) return; 
+
+                let tecla = evento.key.toLowerCase();
+
+                if (tecla === 'a') {
+                    anchoVerde += 5; 
+                    actualizarPantalla();
+                    comprobarGanador();
+                } else if (tecla === 'ñ') {
+                    anchoRojo += 5; 
+                    actualizarPantalla();
+                    comprobarGanador();
+                }
+            });
+        }
+
+       
+        window.onload = function() {
+            iniciarCaja();
+            iniciarVocales();
+            iniciarCarrera();
+        };
+
+    </script>
+</body>
+</html>

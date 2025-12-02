@@ -1,0 +1,279 @@
+:root {
+    --white: #ffffff;
+    --white-shade: #ffffffaa;
+    --gray: #7d7f7d;
+    --gray-tint: #a8a8a8;
+    --black-tint: #242424;
+    --black: #333333;
+    --green: #939e77;
+    --orange: #ff4400;
+
+    --letter_spacing: 0.2rem;
+    --vertical_padding: 8em;
+    --horizontal_padding: 10rem;
+    --content_margin_bottom: 2em;
+
+    --header_bgColor: #3a929a;
+    --header_title_font_size: 2.5rem;
+    --header_subtitle_color: #9fc9ca;
+    --header_subtitle_span_color: #eaeaea;
+    --footer_text_color: #e3e3e36f;
+    --footer_text_span_color: #e3e3e3b6;
+
+
+    --btn_bgColor: #01838c;
+    --btn_fgColor: #fffef6;
+    --btn_vertical_padding: 1em;
+    --btn_horizontal_padding: 2em;
+
+    --title_font_size: 2rem;
+    --subtitle_font_size: 0.8em;
+    --subtitle_letter_spacing: 2px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.btn {
+    background: var(--btn_bgColor);
+    color: var(--btn_fgColor);
+    padding: var(--btn_vertical_padding) var(--btn_horizontal_padding);
+    letter-spacing: var(--subtitle_letter_spacing);
+}
+
+header {
+    background: var(--header_bgColor);
+    color: var(--white);
+
+    display: grid;
+    padding: 8em 0;
+
+    .header__title {
+        font-size: var(--header_title_font_size);
+        text-align: center;
+    }
+    
+    .header__subtitle {
+        color: var(--header_subtitle_color);
+        text-align: center;
+        font-weight: normal;
+        font-size: 1rem;
+        margin-bottom: 5em;
+        text-transform: uppercase;
+    
+        span {
+            color: var(--header_subtitle_span_color);
+        }
+    }
+
+    .header__navbar{
+        .navbar__menu {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2em;
+            list-style: none;
+            letter-spacing: var(--letter_spacing);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+    }
+}
+
+.portfolio {
+    display: grid;
+    gap: 3em;
+    padding: var(--vertical_padding) var(--horizontal_padding);
+
+    .portfolio__title {
+        font-size: var(--title_font_size);
+        text-align: center;
+    }
+
+    .portfolio__subtitle {
+        text-align: center;
+        text-transform: uppercase;
+        color: var(--gray);
+        font-weight: normal;
+        font-size: var(--subtitle_font_size);
+        letter-spacing: var(--subtitle_letter_spacing);
+    }
+
+    .portfolio__comics {
+        display: grid;
+        gap: 1em;
+
+        grid-template-columns: repeat(4, 1fr);
+
+        .comic {
+            display: grid;
+            gap: 3em;
+            text-align: center;
+    
+            .comic__img {
+                display: block;
+                width: 100%;
+            }
+    
+            figcaption {
+                display: grid;
+                gap: 1em;
+            }
+    
+            .comic__title {
+                text-transform: uppercase;
+                color: var(--gray);
+                font-size: 0.8em;
+            }
+    
+            .comic__description {
+                color: var(--gray-tint);
+                font-size: 0.8em;
+                line-height: 1.9em;
+                margin-bottom: var(--content_margin_bottom);
+            }
+    
+            .comic__btn {
+                justify-self: center;
+                font-size: 0.8rem;
+                padding: 1.5em 2.3em;
+            }
+        }
+    }
+}
+
+.welcome {
+    display: grid;
+
+    background: var(--black-tint);
+    padding: var(--vertical_padding) var(--horizontal_padding);
+
+    .welcome__title {
+        font-size: var(--title_font_size);
+        color: var(--white);
+        text-align: center;
+    }
+
+    .welcome__subtitle {
+        color: var(--gray);
+        text-transform: uppercase;
+        font-weight: normal;
+        text-align: center;
+        font-size: var(--subtitle_font_size);
+        letter-spacing: var(--subtitle_letter_spacing);
+        margin-bottom: var(--content_margin_bottom);
+    }
+
+    .welcome__description {
+        color: var(--gray);
+        text-align: center;
+        margin-bottom: var(--content_margin_bottom);
+    }
+
+    .welcome__btn {
+        justify-self: center;
+        padding: 1.5em 3em;
+        font-size: 0.9em;
+        color: var(--white-shade);
+    }
+}
+
+.form {
+    display: grid;
+    padding: var(--vertical_padding) var(--horizontal_padding);
+    justify-content: center;
+
+    .form__title {
+        font-size: var(--title_font_size);
+        text-align: center;
+    }
+    
+    .form__subtitle {
+        font-size: var(--subtitle_font_size);
+        text-align: center;
+        font-weight: normal;
+        color: var(--gray);
+        text-transform: uppercase;
+        margin-bottom: var(--content_margin_bottom);
+    }
+
+    /* No se me ocurría un nombre para esta clase */
+    form {
+        display: grid;
+        
+        input, textarea {
+            padding: 1em;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid var(--gray-tint);
+            margin-bottom: var(--content_margin_bottom);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 10em;
+        }
+
+        button {
+            justify-self: center;
+            border: none;
+        }
+    }
+}
+
+.contact {
+    display: grid;
+    padding: var(--vertical_padding) var(--horizontal_padding);
+    background: var(--green);
+
+    .contact__title {
+        text-align: center;
+        color: var(--white);
+        font-size: var(--title_font_size);
+    }
+
+    .contact__subtitle {
+        font-size: var(--subtitle_font_size);
+        color: var(--white-shade);
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 5em;
+    }
+
+    .contact__social {
+        justify-self: center;
+
+        .social {
+            background: var(--black);
+            width: 1em;
+            height: auto;
+            padding: 1em;
+        }
+    }
+}
+
+.copyright {
+    background: var(--orange);
+    padding: var(--vertical_padding) var(--horizontal_padding);
+
+    p {
+        text-align: center;
+        color: var(--footer_text_color);
+        span {
+            color: var(--footer_text_span_color);
+        }
+    }
+}
